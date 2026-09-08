@@ -1,0 +1,4 @@
+HouseholdID,Members,Emails,PlusOneAllowed,AttendingChurch,AttendingReception,AttendingMembers,PlusOneName,DietaryNotes,RespondedAt
+H001,"Juan Dela Cruz, Maria Dela Cruz","juan@example.com, maria@example.com",FALSE,,,,,,
+H002,Ana Reyes,ana@example.com,TRUE,,,,,,
+H003,"Pedro Santos, Lisa Santos, Miguel Santos",,FALSE,,,,,,
