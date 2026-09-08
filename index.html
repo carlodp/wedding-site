@@ -13,6 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Great+Vibes&family=Allura&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
 <style>
   html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #C08290 rgba(246,237,233,0.08); }
   ::-webkit-scrollbar { width: 1px; height: 1px; }
@@ -47,13 +49,34 @@
   @media (max-width: 860px) {
     #v2-bottom { display: flex !important; }
     #v2-brandmeta { display: none !important; }
-    #v2-menu > div { grid-template-columns: minmax(0,1fr) !important; align-content: space-between !important; gap: clamp(22px,4vh,36px) !important; padding: clamp(88px,13vh,120px) clamp(22px,6vw,40px) clamp(28px,5vh,48px) !important; }
+    #v2-cue { display: none !important; }
+    #v2-sound { bottom: calc(120px + env(safe-area-inset-bottom)) !important; left: 14px !important; font-size: 8.5px !important; padding: 9px 12px !important; min-height: 36px !important; }
+    #v2-menu { height: 100svh !important; max-height: 100svh !important; overflow: hidden !important; }
+    #v2-menu > div:last-child { height: 100% !important; min-height: 0 !important; overflow: hidden !important; grid-template-columns: minmax(0,1fr) !important; grid-template-rows: minmax(0,auto) minmax(0,auto) !important; align-content: space-between !important; gap: clamp(10px,2svh,28px) !important; padding: max(62px,8.5svh) clamp(22px,6vw,40px) calc(clamp(12px,2.2svh,26px) + env(safe-area-inset-bottom)) !important; }
+    #v2-menu > div:last-child > div:first-child > p:first-child { margin-bottom: clamp(6px,1.4svh,18px) !important; }
+    #v2-menu a[data-menu-link] { padding: clamp(5px,1.05svh,14px) 0 !important; }
+    #v2-menuside > div:first-child p:nth-child(2) { font-size: clamp(17px,2.5svh,24px) !important; }
+    #v2-menuside a[href="#rsvp"] { padding: clamp(11px,1.7svh,17px) 26px !important; }
     #v2-menu > div > div:first-child { width: 100%; }
     #v2-menu a[data-menu-link] { width: 100%; }
-    #v2-menu a[data-menu-link] [data-menu-title] { font-size: clamp(30px,8.6vw,44px) !important; }
-    #v2-menuside { display: flex !important; justify-content: flex-start !important; gap: 18px !important; }
+    #v2-menu a[data-menu-link] [data-menu-title] { font-size: clamp(22px,3.6svh,42px) !important; }
+    #v2-menuside { display: flex !important; justify-content: flex-start !important; gap: clamp(9px,1.5svh,18px) !important; }
     #v2-menuside > div:first-child p:last-child { font-size: 12.5px !important; }
     #v2-herotext { max-width: 100% !important; }
+    #top > div:first-child { bottom: 47% !important; }
+    #top > div:nth-child(2) { bottom: 47% !important; background: linear-gradient(180deg,rgba(41,0,7,0.72) 0%,rgba(41,0,7,0.16) 34%,rgba(41,0,7,0.1) 62%,rgba(41,0,7,0.5) 100%) !important; }
+    #top > div:nth-child(3) { top: 47% !important; height: 53% !important; box-sizing: border-box !important; align-items: center !important; padding-bottom: calc(66px + env(safe-area-inset-bottom)) !important; }
+    #v2-herotext [data-hero-last] { display: block !important; }
+    #top > div:nth-child(3) h1 { line-height: 1.02 !important; }
+    #v2-heroimg { object-position: 58% 24% !important; }
+    #top > div:nth-child(3) h1 { font-size: clamp(34px,10.4vw,64px) !important; }
+    #top > div:nth-child(3) > div { padding: 0 18px !important; }
+    #v2-herotext > p:first-child { font-size: 10px !important; letter-spacing: 0.3em !important; margin-bottom: 12px !important; }
+    #v2-herotext > div { margin: 18px auto 14px !important; }
+    #v2-herotext > p:nth-of-type(2) { font-size: clamp(10px,3vw,13px) !important; letter-spacing: 0.2em !important; }
+    #v2-herotext > p:nth-of-type(3) { font-size: clamp(9px,2.6vw,12px) !important; letter-spacing: 0.14em !important; margin-top: 8px !important; }
+    #v2-herotext { text-align: center !important; }
+    #v2-herotext > div { margin-left: auto !important; margin-right: auto !important; }
     #v2-motes > div:nth-child(n+7) { display: none; }
     [data-petals] > div:nth-child(n+4) { display: none; }
     body { padding-bottom: 66px; }
@@ -74,7 +97,7 @@
   @keyframes v2blink { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
   @keyframes v2eq { 0%,100% { height: 4px; } 50% { height: 12px; } }
   @media (max-width: 860px) { #v2-cta { display: none !important; } }
-  @media (max-width: 860px) { #v2-sound { bottom: calc(66px + env(safe-area-inset-bottom)) !important; } }
+  @media (max-width: 860px) { #v2-sound { bottom: calc(120px + env(safe-area-inset-bottom)) !important; } }
   @keyframes v2menuin { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   @keyframes v2spine { from { transform: scaleY(0); } to { transform: scaleY(1); } }
   @keyframes v2drawx { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -83,6 +106,10 @@
   @keyframes v2sway { 0%,100% { transform: translate3d(0,0,0) rotate(0deg); } 50% { transform: translate3d(14px,-10px,0) rotate(8deg); } }
   @keyframes v2shimmer { 0% { transform: translateX(-120%); } 100% { transform: translateX(820%); } }
   @keyframes v2petal { 0% { transform: translate3d(0,110%,0) rotate(0deg) scale(0.8); opacity: 0; } 10% { opacity: 1; } 45% { transform: translate3d(46px,-10%,0) rotate(180deg) scale(1.15); } 85% { opacity: 0.85; } 100% { transform: translate3d(-56px,-125%,0) rotate(420deg) scale(0.9); opacity: 0; } }
+  @keyframes v2monofill { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes v2monodrift { 0%, 100% { transform: translate3d(0,0,0) rotate(-3.5deg) scale(1); } 50% { transform: translate3d(0,-26px,0) rotate(3.5deg) scale(1.05); } }
+  @keyframes v2monobreathe { 0%, 100% { opacity: 0.035; } 50% { opacity: 0.085; } }
+  @keyframes v2monoturn { from { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.06); } to { transform: rotate(360deg) scale(1); } }
   @media (prefers-reduced-motion: reduce) { #v2-pre { display: none !important; } }
 </style>
 </helmet>
@@ -90,9 +117,11 @@
 <div style="max-width:100%;overflow-x:hidden;background:#3b000a;font-family:'Jost',system-ui,sans-serif">
 
   <div id="v2-pre" style="position:fixed;inset:0;z-index:300;background:#3b000a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;animation:v2preout .8s ease 3.1s forwards">
-    <div style="position:relative;width:min(52vw,300px);aspect-ratio:745/783">
-      <div style="position:absolute;inset:0;background-image:url('assets/monogram-ivory.png');background-size:contain;background-repeat:no-repeat;background-position:center;-webkit-mask-image:linear-gradient(100deg,#000 0 33%,rgba(0,0,0,0) 47%,rgba(0,0,0,0) 100%);mask-image:linear-gradient(100deg,#000 0 33%,rgba(0,0,0,0) 47%,rgba(0,0,0,0) 100%);-webkit-mask-size:320% 100%;mask-size:320% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:100% 0;mask-position:100% 0;animation:v2write 2.5s cubic-bezier(.5,.1,.35,.98) forwards"></div>
-      <div style="position:absolute;left:1%;top:58%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#F6EDE9;box-shadow:0 0 18px 6px rgba(246,237,233,0.45);opacity:0;animation:v2nib 2.5s cubic-bezier(.5,.1,.35,.98) forwards"></div>
+    <div style="position:relative;width:min(58vw,320px);aspect-ratio:1/1">
+      <svg viewBox="0 0 1080 1080" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+        <path id="v2-mono-draw" d="M571.52,548.5c4.72-.53,10.7.81,15.18-.03,6.57-1.23,16.86-25.72,20.78-32.14,53.39-87.44,168.94-206.09,276-217.46,101.46-10.78,92.96,70.26,41.37,127.3-66.72,73.78-164.49,105.69-260.19,122.19-7.21,1.24-26.59,1.36-30.98,6.06-3.41,3.65-9.34,18.35-11.88,23.83-25.93,55.79-44.81,125.76-24.75,186.12,6.38,19.21,19.51,40.9,35.96,52.61,22.94-10.43,45.19-22.36,68.45-32.11,58.65-24.57,120.62-40.71,184.7-36.93,24.26-40.86,43.25-113.01,5.61-151.23-55.55-56.42-165.55,15.27-147.57,86.68.99,3.95,6.86,13.08,1.99,15.28-27.57-11.77-19.03-48.58-7.69-69.9,25.58-48.1,98.92-80.04,147.81-47.76,48.95,32.33,38.67,105.47,18.66,152.01-1.25,2.9-9.16,15.26-7.96,16.51,57.96,7.43,129.36,35.93,122.89,106.32-3.76,40.83-42.83,69.96-78.89,82.5-83.05,28.88-175.09,6.91-254.69-22.48-3.32-1.23-19.32-8.92-20.84-7.59l16.77,27.53c23.04,46.55-3.97,104.45-57.13,110.04-16.97,1.79-50.69-9.4-55.61-27.74-2.26-8.44,2.55-16.9,11.29-12.61,5.16,2.53,5.62,16.08,19.48,21.52,27,10.6,54.95-14.22,61.62-39.65,12.49-47.65-24.58-84.7-61.69-107.1-5.17-3.12-24.08-13.95-28.68-15.1-5.55-1.39-23.29,11.3-29.28,14.48-84.43,44.88-185.79,89.41-283.28,63.98-101.58-26.5-116.83-132.63-16.85-174.86,67.49-28.51,157.71-11.6,223.88,14.18,41.07,16,80.1,38.42,118.27,60.18l32.22-17.53c-7.96-7.63-17.92-14.57-25.01-22.9-47.91-56.24-46.5-136.14-23.54-202.9,1.86-5.42,18.5-41.75,16.81-43.37-6.6.71-14.99-2.65-19.12,4.02l-25.17,63.47c-6.14,4.28-12.9,7.6-19.65,10.78-5.77,2.72-21.19,9.72-26.77,10.3-2.79.29-2.14-.86-1.67-3.01l32.15-78.85-1.5-4.14c-14.49.32-29.02-.19-43.51.01-40.16.55-78.89,1-118.89-5.38-10.54-1.68-20.82-5.86-31.59-6.26-53.55,54.67-135.91,121.49-218.22,102.57-28.92-6.65-58.96-27.54-49.26-61.68,5.9-20.77,40.54-24.34,42.9-.62,1.69,17.02-22.68,15-20.92,29.94,2.49,21.12,41.57,28.1,58.63,27.45,58.36-2.24,115.5-43.14,156.16-82.03,2.85-2.72,17.9-17.1,17.92-19.15s-.91-2.17-2.34-3.02c-4.75-2.85-12.52-4.69-17.83-7.3-144.32-71.14-73.79-241.5,69.65-249.64,39.47-2.24,76.03,8.89,108.31,30.72,3.81,2.58,12.74,12.33,16.56,10.1,33.24-47.39,67.78-94.64,104.78-139.28,42.04-50.73,105.93-121.32,168.04-145.5,9.7-3.78,36.95-14.1,28.63,6.14-71.28,151.83-143.2,304.01-205.51,459.88-2.01,5.02-16.6,40.92-15.01,42.53ZM768.67,49.85c-5.11-3.83-43.76,21.24-50.16,25.89-54.46,39.54-103.4,99.96-144.88,152.78-26.09,33.22-50.76,67.65-75.52,101.81-2.3,6.54,7.53,13.13,11.18,18.15,27.21,37.36,39.69,75.02,41.08,121.31.15,4.97,1.98,9.46,0,15.22,2.27,2.61,6.96-8.99,7.55-10.3,5.55-12.29,9.66-25.51,14.94-37.98,56.31-133.02,115.61-266.48,195.82-386.89ZM379.13,473.89c35.92-44.46,68.46-91.7,102.37-137.69-73.18-72.67-200.65-46.77-236.06,50.99-21.82,60.23,6.16,119.1,64.53,143.03,4.17,1.71,14.17,6.33,17.71,3.33,17.28-19.76,34.99-39.28,51.45-59.66ZM916.31,420.97c19.62-22.15,48.01-63.56,32.07-93.79-16.39-31.09-67.44-18.54-93.04-7.5-78.33,33.75-160.77,127.49-203.33,200.16-1.68,2.87-11.84,20.63-10.35,22.05,97.33-10.07,208.29-45.99,274.65-120.92ZM491.81,345.22c-1.59-.64-3.12-.89-4.72-.14-45.88,65.95-93.74,130.81-147.78,190.2-3.11,5.33,6.81,6.51,10.95,7.58,46.56,12.01,109.1,11.01,157.04,8.24,4.53-.26,19.09,1.34,21.24-1.25,1.03-1.24,7.24-20.7,7.98-23.77,11.47-47.72,2.04-108.45-22.65-150.75-2.52-4.32-19.37-29.03-22.06-30.11ZM878.48,757.51c-41.01-2.8-78.84,5.09-117.75,16.53-33.18,9.76-86.03,29.37-114.72,48.01-6.46,4.2.7,6.96,5.33,9.75,63.58,38.35,145.97,15.39,196.16-33.88,3.42-3.35,34.04-37.61,30.97-40.41ZM987.76,793.81c-16.21-15.49-42.19-25.81-63.97-30.67-6.08-1.36-26.49-5.28-31.39-4.35-3.56.67-9.21,12.17-12.04,15.8-57.96,74.26-141.85,107.85-232.98,69.13-5.47-2.33-16.15-9.66-20.94-9.65-4.19,0-18.52,7.83-22.71,10.52-1.81,1.16-7.62,3.87-7.05,6.16,44.07,33.13,93.47,58.83,146.59,74.36,71,20.76,176.79,32.57,237.74-18.16,36.81-30.64,42.27-79.2,6.75-113.13ZM300.01,767.15c-135.41,5.37-163.22,144.22-25.42,171.45,63.98,12.64,135.88-6.98,194.38-32.96,30.63-13.6,60.13-30.52,89.29-46.95-18.56-11.59-38.29-22.2-57.91-32.03-46.56-23.33-94.5-43.75-145.47-55.63l-38.08-4.26-16.8.38Z" fill="none" stroke="#F6EDE9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(246,237,233,0.35))"></path>
+        <path id="v2-mono-fill" d="M571.52,548.5c4.72-.53,10.7.81,15.18-.03,6.57-1.23,16.86-25.72,20.78-32.14,53.39-87.44,168.94-206.09,276-217.46,101.46-10.78,92.96,70.26,41.37,127.3-66.72,73.78-164.49,105.69-260.19,122.19-7.21,1.24-26.59,1.36-30.98,6.06-3.41,3.65-9.34,18.35-11.88,23.83-25.93,55.79-44.81,125.76-24.75,186.12,6.38,19.21,19.51,40.9,35.96,52.61,22.94-10.43,45.19-22.36,68.45-32.11,58.65-24.57,120.62-40.71,184.7-36.93,24.26-40.86,43.25-113.01,5.61-151.23-55.55-56.42-165.55,15.27-147.57,86.68.99,3.95,6.86,13.08,1.99,15.28-27.57-11.77-19.03-48.58-7.69-69.9,25.58-48.1,98.92-80.04,147.81-47.76,48.95,32.33,38.67,105.47,18.66,152.01-1.25,2.9-9.16,15.26-7.96,16.51,57.96,7.43,129.36,35.93,122.89,106.32-3.76,40.83-42.83,69.96-78.89,82.5-83.05,28.88-175.09,6.91-254.69-22.48-3.32-1.23-19.32-8.92-20.84-7.59l16.77,27.53c23.04,46.55-3.97,104.45-57.13,110.04-16.97,1.79-50.69-9.4-55.61-27.74-2.26-8.44,2.55-16.9,11.29-12.61,5.16,2.53,5.62,16.08,19.48,21.52,27,10.6,54.95-14.22,61.62-39.65,12.49-47.65-24.58-84.7-61.69-107.1-5.17-3.12-24.08-13.95-28.68-15.1-5.55-1.39-23.29,11.3-29.28,14.48-84.43,44.88-185.79,89.41-283.28,63.98-101.58-26.5-116.83-132.63-16.85-174.86,67.49-28.51,157.71-11.6,223.88,14.18,41.07,16,80.1,38.42,118.27,60.18l32.22-17.53c-7.96-7.63-17.92-14.57-25.01-22.9-47.91-56.24-46.5-136.14-23.54-202.9,1.86-5.42,18.5-41.75,16.81-43.37-6.6.71-14.99-2.65-19.12,4.02l-25.17,63.47c-6.14,4.28-12.9,7.6-19.65,10.78-5.77,2.72-21.19,9.72-26.77,10.3-2.79.29-2.14-.86-1.67-3.01l32.15-78.85-1.5-4.14c-14.49.32-29.02-.19-43.51.01-40.16.55-78.89,1-118.89-5.38-10.54-1.68-20.82-5.86-31.59-6.26-53.55,54.67-135.91,121.49-218.22,102.57-28.92-6.65-58.96-27.54-49.26-61.68,5.9-20.77,40.54-24.34,42.9-.62,1.69,17.02-22.68,15-20.92,29.94,2.49,21.12,41.57,28.1,58.63,27.45,58.36-2.24,115.5-43.14,156.16-82.03,2.85-2.72,17.9-17.1,17.92-19.15s-.91-2.17-2.34-3.02c-4.75-2.85-12.52-4.69-17.83-7.3-144.32-71.14-73.79-241.5,69.65-249.64,39.47-2.24,76.03,8.89,108.31,30.72,3.81,2.58,12.74,12.33,16.56,10.1,33.24-47.39,67.78-94.64,104.78-139.28,42.04-50.73,105.93-121.32,168.04-145.5,9.7-3.78,36.95-14.1,28.63,6.14-71.28,151.83-143.2,304.01-205.51,459.88-2.01,5.02-16.6,40.92-15.01,42.53ZM768.67,49.85c-5.11-3.83-43.76,21.24-50.16,25.89-54.46,39.54-103.4,99.96-144.88,152.78-26.09,33.22-50.76,67.65-75.52,101.81-2.3,6.54,7.53,13.13,11.18,18.15,27.21,37.36,39.69,75.02,41.08,121.31.15,4.97,1.98,9.46,0,15.22,2.27,2.61,6.96-8.99,7.55-10.3,5.55-12.29,9.66-25.51,14.94-37.98,56.31-133.02,115.61-266.48,195.82-386.89ZM379.13,473.89c35.92-44.46,68.46-91.7,102.37-137.69-73.18-72.67-200.65-46.77-236.06,50.99-21.82,60.23,6.16,119.1,64.53,143.03,4.17,1.71,14.17,6.33,17.71,3.33,17.28-19.76,34.99-39.28,51.45-59.66ZM916.31,420.97c19.62-22.15,48.01-63.56,32.07-93.79-16.39-31.09-67.44-18.54-93.04-7.5-78.33,33.75-160.77,127.49-203.33,200.16-1.68,2.87-11.84,20.63-10.35,22.05,97.33-10.07,208.29-45.99,274.65-120.92ZM491.81,345.22c-1.59-.64-3.12-.89-4.72-.14-45.88,65.95-93.74,130.81-147.78,190.2-3.11,5.33,6.81,6.51,10.95,7.58,46.56,12.01,109.1,11.01,157.04,8.24,4.53-.26,19.09,1.34,21.24-1.25,1.03-1.24,7.24-20.7,7.98-23.77,11.47-47.72,2.04-108.45-22.65-150.75-2.52-4.32-19.37-29.03-22.06-30.11ZM878.48,757.51c-41.01-2.8-78.84,5.09-117.75,16.53-33.18,9.76-86.03,29.37-114.72,48.01-6.46,4.2.7,6.96,5.33,9.75,63.58,38.35,145.97,15.39,196.16-33.88,3.42-3.35,34.04-37.61,30.97-40.41ZM987.76,793.81c-16.21-15.49-42.19-25.81-63.97-30.67-6.08-1.36-26.49-5.28-31.39-4.35-3.56.67-9.21,12.17-12.04,15.8-57.96,74.26-141.85,107.85-232.98,69.13-5.47-2.33-16.15-9.66-20.94-9.65-4.19,0-18.52,7.83-22.71,10.52-1.81,1.16-7.62,3.87-7.05,6.16,44.07,33.13,93.47,58.83,146.59,74.36,71,20.76,176.79,32.57,237.74-18.16,36.81-30.64,42.27-79.2,6.75-113.13ZM300.01,767.15c-135.41,5.37-163.22,144.22-25.42,171.45,63.98,12.64,135.88-6.98,194.38-32.96,30.63-13.6,60.13-30.52,89.29-46.95-18.56-11.59-38.29-22.2-57.91-32.03-46.56-23.33-94.5-43.75-145.47-55.63l-38.08-4.26-16.8.38Z" fill="#F6EDE9" style="opacity:0;animation:v2monofill 1.1s ease 1.85s forwards"></path>
+      </svg>
     </div>
     <div style="text-align:center;opacity:0;animation:v2fadeup 1s ease 2.1s forwards">
       <p style="margin:0;font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,28px);letter-spacing:0.04em;color:#F6EDE9">Carlo <span style="color:#C08290">&amp;</span> Alexandra</p>
@@ -140,14 +169,14 @@
     </div>
     <div style="position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:clamp(14px,3vw,30px)">
       <img id="v2-lb-img" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block;box-shadow:0 30px 90px rgba(0,0,0,0.55)">
-      <button data-lb="prev" aria-label="Previous" style="position:absolute;left:clamp(8px,2vw,22px);top:50%;transform:translateY(-50%);width:48px;height:48px;background:rgba(41,0,7,0.6);border:1px solid rgba(246,237,233,0.35);color:#F6EDE9;font-family:'Playfair Display',serif;font-size:24px;cursor:pointer" style-hover="background:#C08290;color:#3b000a">‹</button>
-      <button data-lb="next" aria-label="Next" style="position:absolute;right:clamp(8px,2vw,22px);top:50%;transform:translateY(-50%);width:48px;height:48px;background:rgba(41,0,7,0.6);border:1px solid rgba(246,237,233,0.35);color:#F6EDE9;font-family:'Playfair Display',serif;font-size:24px;cursor:pointer" style-hover="background:#C08290;color:#3b000a">›</button>
+      <button data-lb="prev" aria-label="Previous" style="position:absolute;left:clamp(8px,2vw,22px);top:50%;transform:translateY(-50%);width:48px;height:48px;display:flex;align-items:center;justify-content:center;line-height:1;padding:0 0 4px;background:rgba(41,0,7,0.6);border:1px solid rgba(246,237,233,0.35);color:#F6EDE9;font-family:'Playfair Display',serif;font-size:24px;cursor:pointer" style-hover="background:#C08290;color:#3b000a">‹</button>
+      <button data-lb="next" aria-label="Next" style="position:absolute;right:clamp(8px,2vw,22px);top:50%;transform:translateY(-50%);width:48px;height:48px;display:flex;align-items:center;justify-content:center;line-height:1;padding:0 0 4px;background:rgba(41,0,7,0.6);border:1px solid rgba(246,237,233,0.35);color:#F6EDE9;font-family:'Playfair Display',serif;font-size:24px;cursor:pointer" style-hover="background:#C08290;color:#3b000a">›</button>
     </div>
     <div id="v2-lb-thumbs" style="display:flex;gap:8px;overflow-x:auto;padding:14px clamp(16px,4vw,28px) calc(14px + env(safe-area-inset-bottom));border-top:1px solid rgba(246,237,233,0.14)"></div>
   </div>
 
   <div id="v2-menu" style="position:fixed;inset:0;z-index:200;background:#3b000a;display:none;overflow-y:auto;overflow-x:hidden">
-    <div aria-hidden="true" style="position:absolute;right:-8%;bottom:-14%;width:min(58vw,620px);aspect-ratio:745/783;background:#F6EDE9;opacity:0.055;-webkit-mask-image:url('assets/monogram-ivory.png');mask-image:url('assets/monogram-ivory.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;animation:v2bob 14s ease-in-out infinite"></div>
+    <div aria-hidden="true" style="position:absolute;right:-8%;bottom:-14%;width:min(58vw,620px);aspect-ratio:1/1;background:#F6EDE9;opacity:0.055;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;animation:v2bob 14s ease-in-out infinite"></div>
     <div style="position:relative;min-height:100%;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-content:center;padding:clamp(84px,10vh,120px) clamp(22px,6vw,80px) clamp(36px,6vh,64px)">
       <div style="display:flex;flex-direction:column">
         <p style="margin:0 0 clamp(14px,2vh,26px);font-size:10px;letter-spacing:0.42em;text-transform:uppercase;color:#C08290">Where to</p>
@@ -197,14 +226,15 @@
       <div style="font-family:'Playfair Display',serif;font-size:17px;color:#F6EDE9;line-height:1.1">Carlo <span style="color:#C08290">&amp;</span> Alexandra</div>
       <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(246,237,233,0.6);margin-top:3px">09 · 01 · 2027 · Malolos</div>
     </div>
-    <a href="#rsvp" style="position:relative;overflow:hidden;isolation:isolate;flex:0 0 auto;font-size:10px;letter-spacing:0.26em;text-transform:uppercase;background:#C08290;color:#3b000a;padding:14px 20px;font-weight:500;min-height:44px;display:flex;align-items:center" style-before="content:'';position:absolute;top:0;bottom:0;left:0;width:44%;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0) 100%);animation:v2sweep 4.6s ease-in-out infinite">RSVP</a>
+    <a href="#rsvp" style="position:relative;overflow:hidden;isolation:isolate;flex:0 0 auto;min-width:150px;justify-content:center;font-size:10px;letter-spacing:0.26em;text-transform:uppercase;background:#C08290;color:#3b000a;padding:14px 28px;font-weight:500;min-height:46px;display:flex;align-items:center" style-before="content:'';position:absolute;top:0;bottom:0;left:0;width:44%;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0) 100%);animation:v2sweep 4.6s ease-in-out infinite">RSVP</a>
   </div>
 
   <div id="v2-topscrim" aria-hidden="true" style="position:fixed;top:0;left:0;right:0;height:132px;z-index:56;pointer-events:none;background:linear-gradient(180deg,rgba(24,0,4,0.72) 0%,rgba(24,0,4,0.34) 52%,rgba(24,0,4,0) 100%)"></div>
 
   <audio id="v2-audio" src="assets/mirrors-bg.mp3" loop="loop" preload="auto"></audio>
 
-  <button id="v2-sound" aria-label="Turn music on" style="position:fixed;bottom:clamp(18px,3vw,30px);left:clamp(18px,3vw,34px);z-index:58;display:flex;align-items:center;gap:10px;background:rgba(24,0,4,0.5);border:1px solid rgba(246,237,233,0.28);color:#F6EDE9;font-family:inherit;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;padding:11px 15px;cursor:pointer;min-height:42px;backdrop-filter:blur(10px);transition:background .4s ease,border-color .4s ease,color .4s ease,opacity .5s ease" style-hover="background:#C08290;color:#3b000a;border-color:#C08290">
+  <button id="v2-sound" aria-label="Turn music on" style="position:fixed;overflow:hidden;isolation:isolate;bottom:clamp(18px,3vw,30px);left:clamp(18px,3vw,34px);z-index:58;display:flex;align-items:center;gap:10px;background:rgba(24,0,4,0.5);border:1px solid rgba(246,237,233,0.28);color:#F6EDE9;font-family:inherit;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;padding:11px 15px;cursor:pointer;min-height:42px;backdrop-filter:blur(10px);transition:background .4s ease,border-color .4s ease,color .4s ease,opacity .5s ease" style-hover="background:#C08290;color:#3b000a;border-color:#C08290">
+    <span id="v2-sound-prog" aria-hidden="true" style="position:absolute;left:0;top:0;bottom:0;width:0%;z-index:-1;background:rgba(192,130,144,0.42);transition:width .25s linear"></span>
     <span style="display:flex;align-items:flex-end;gap:2px;height:12px">
       <span data-eq style="display:block;width:2px;height:5px;background:currentColor;transition:height .3s ease"></span>
       <span data-eq style="display:block;width:2px;height:11px;background:currentColor;transition:height .3s ease"></span>
@@ -214,7 +244,7 @@
   </button>
 
   <a href="#top" id="v2-brand" style="position:fixed;top:clamp(16px,2.4vw,26px);left:clamp(18px,3vw,34px);z-index:58;display:flex;align-items:center;gap:12px;text-decoration:none">
-    <span style="font-family:'Allura',cursive;font-size:clamp(30px,3.4vw,40px);line-height:1;color:#F6EDE9;text-shadow:0 2px 18px rgba(24,0,4,0.7);white-space:nowrap;display:inline-flex;align-items:baseline;gap:0.16em"><span>C</span><span style="color:#C08290">&amp;</span><span style="margin-left:-0.06em">A</span></span>
+    <span aria-label="Carlo and Alexandra" style="display:block;width:clamp(42px,4.4vw,54px);aspect-ratio:1/1;background:#F6EDE9;filter:drop-shadow(0 2px 14px rgba(24,0,4,0.75));-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center"></span>
     <span id="v2-brandmeta" style="display:flex;flex-direction:column;gap:3px;padding-left:12px;border-left:1px solid rgba(192,130,144,0.5);transition:opacity .5s ease">
       <span style="font-size:9px;letter-spacing:0.34em;text-transform:uppercase;color:#C08290;white-space:nowrap">09 · 01 · 2027</span>
       <span style="font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(246,237,233,0.62);white-space:nowrap">Malolos, Bulacan</span>
@@ -240,8 +270,8 @@
     <div style="position:absolute;inset:0;display:flex;align-items:center;pointer-events:none">
       <div style="width:100%;padding:0 26px 0 clamp(26px,4vw,64px)">
         <div id="v2-herotext" style="max-width:min(66%,900px);min-width:0;text-align:left">
-          <p style="margin:0 0 18px;font-size:11px;letter-spacing:0.42em;text-transform:uppercase;color:#C08290;animation:v2fadeup 1.1s cubic-bezier(.22,1,.36,1) 3.2s both">We are getting married</p>
-          <h1 style="margin:0;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(44px,10.5vw,148px);line-height:0.94;color:transparent;background-image:linear-gradient(100deg,#E8CBD2 0%,#F6EDE9 26%,#FFFFFF 42%,#FFFFFF 50%,#F6D9E0 58%,#E8CBD2 74%,#F6EDE9 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;animation:v2sheen 5.5s linear 3.6s infinite,v2fadeup 1.2s cubic-bezier(.22,1,.36,1) 3.35s both;filter:drop-shadow(0 2px 24px rgba(41,0,7,0.6))">Carlo <span style="color:#C08290">&amp;</span> Alexandra</h1>
+          <p style="margin:0 0 20px;font-size:clamp(12px,1.15vw,15px);font-weight:500;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2;text-shadow:0 2px 14px rgba(24,0,4,0.8);animation:v2fadeup 1.1s cubic-bezier(.22,1,.36,1) 3.2s both">We are getting married</p>
+          <h1 style="margin:0;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(44px,10.5vw,148px);line-height:0.94;color:transparent;background-image:linear-gradient(100deg,#E8CBD2 0%,#F6EDE9 26%,#FFFFFF 42%,#FFFFFF 50%,#F6D9E0 58%,#E8CBD2 74%,#F6EDE9 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;animation:v2sheen 5.5s linear 3.6s infinite,v2fadeup 1.2s cubic-bezier(.22,1,.36,1) 3.35s both;filter:drop-shadow(0 2px 24px rgba(41,0,7,0.6))">Carlo <span style="color:#C08290">&amp;</span> <span data-hero-last>Alexandra</span></h1>
           <div style="width:96px;height:1px;background:#C08290;margin:28px 0 20px;transform-origin:left center;animation:v2breathe 6s ease-in-out 4.4s infinite,v2fadeup 1s cubic-bezier(.22,1,.36,1) 3.55s both"></div>
           <p style="margin:0;font-size:13px;letter-spacing:0.32em;text-transform:uppercase;color:#F6EDE9;animation:v2fadeup 1.1s cubic-bezier(.22,1,.36,1) 3.7s both">Saturday · 9 January 2027</p>
           <p style="margin:10px 0 0;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(246,237,233,0.7);animation:v2fadeup 1.1s cubic-bezier(.22,1,.36,1) 3.85s both">Barasoain Church · Malolos, Bulacan</p>
@@ -260,12 +290,12 @@
       <div style="position:absolute;left:81%;bottom:-6vh;width:4.4px;height:4.4px;border-radius:50%;background:#FFF6F2;opacity:0;box-shadow:0 0 14px 4px rgba(244,221,226,0.5);animation:v2mote 15s linear 2.6s infinite"></div>
       <div style="position:absolute;left:90%;bottom:-6vh;width:3.8px;height:3.8px;border-radius:50%;background:#FFF6F2;opacity:0;box-shadow:0 0 14px 4px rgba(244,221,226,0.5);animation:v2mote 13s linear 8.2s infinite"></div>
     </div>
-    <a href="#story" id="v2-cue" aria-label="Scroll to our story" style="position:absolute;left:50%;bottom:clamp(26px,4vh,44px);transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:12px;text-decoration:none;animation:v2fadeup 1.2s cubic-bezier(.22,1,.36,1) 4.1s both">
-      <span style="font-size:9px;letter-spacing:0.42em;text-transform:uppercase;color:rgba(246,237,233,0.72)">Scroll</span>
-      <span style="position:relative;display:block;width:1px;height:clamp(46px,7vh,66px);background:rgba(246,237,233,0.24);overflow:hidden">
+    <a href="#story" id="v2-cue" aria-label="Scroll to our story" style="position:absolute;left:0;right:0;bottom:clamp(26px,4vh,44px);z-index:3;display:flex;flex-direction:column;align-items:center;gap:12px;text-decoration:none;pointer-events:none;animation:v2fadeup 1.2s cubic-bezier(.22,1,.36,1) 4.1s both">
+      <span style="font-size:9px;letter-spacing:0.42em;text-indent:0.42em;text-transform:uppercase;color:rgba(246,237,233,0.72)"";>Scroll</span>
+      <span style="position:relative;display:block;width:1px;height:clamp(46px,7vh,66px);background:rgba(246,237,233,0.24);overflow:hidden;pointer-events:auto">
         <span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(192,130,144,0) 0%,#C08290 50%,rgba(192,130,144,0) 100%);animation:v2cuedrop 2.4s cubic-bezier(.5,0,.5,1) infinite"></span>
       </span>
-      <span style="position:relative;display:flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid rgba(192,130,144,0.7);border-radius:50%;animation:v2cuebob 2.4s ease-in-out infinite">
+      <span style="position:relative;display:flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid rgba(192,130,144,0.7);border-radius:50%;pointer-events:auto;animation:v2cuebob 2.4s ease-in-out infinite">
         <span aria-hidden="true" style="position:absolute;inset:-1px;border:1px solid #C08290;border-radius:50%;animation:v2cuering 2.4s ease-out infinite"></span>
         <span aria-hidden="true" style="display:block;width:7px;height:7px;border-right:1px solid #F6EDE9;border-bottom:1px solid #F6EDE9;transform:rotate(45deg) translate(-1px,-1px)"></span>
       </span>
@@ -284,7 +314,8 @@
     </div>
   </section>
 
-  <section id="story" style="max-width:1180px;margin:0 auto;padding:clamp(64px,9vw,104px) clamp(20px,5vw,26px) 0;text-align:center">
+  <section id="story" style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(64px,9vw,104px) clamp(20px,5vw,26px) 0;text-align:center">
+    <div aria-hidden="true" style="position:absolute;left:calc(50% - 50vw - 8vw);top:2%;width:min(58vw,540px);aspect-ratio:1/1;pointer-events:none;background:#F6EDE9;opacity:0.05;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;animation:v2monodrift 26s ease-in-out infinite, v2monobreathe 13s ease-in-out infinite"></div>
     <p data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0 0 18px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290;animation:v2blink 5.5s ease-in-out infinite">Our Story</p>
     <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0 auto;max-width:20ch;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(32px,5vw,62px);line-height:1.1">It started as a joke</h2>
     <p data-reveal data-delay="120" style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:26px auto 0;max-width:60ch;font-size:17px;line-height:1.85;color:rgba(246,237,233,0.78);font-weight:300;text-wrap:pretty">It began as a joke at our expense in a college hallway in 2012 — teasing that pushed two strangers into conversation. Ten years, one forced reintroduction and a proposal later, we would love you there when we make it permanent.</p>
@@ -415,7 +446,8 @@
   </section>
 
 
-  <section id="entourage" style="border-top:1px solid rgba(246,237,233,0.16)">
+  <section id="entourage" style="position:relative;overflow:hidden;border-top:1px solid rgba(246,237,233,0.16)">
+    <div aria-hidden="true" style="position:absolute;right:-14%;bottom:-8%;width:min(52vw,480px);aspect-ratio:1/1;pointer-events:none;background:#C08290;opacity:0.05;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;animation:v2monodrift 32s ease-in-out infinite reverse, v2monobreathe 17s ease-in-out infinite"></div>
     <div style="max-width:1180px;margin:0 auto;padding:clamp(64px,9vw,104px) clamp(20px,5vw,26px)">
       <p data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0 0 18px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290;animation:v2blink 5.5s ease-in-out infinite">The Entourage</p>
       <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0 0 10px;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(32px,5vw,62px);line-height:1.08">The people walking with us</h2>
@@ -543,7 +575,8 @@
   </section>
 
   
-  <section id="day" style="border-top:1px solid rgba(246,237,233,0.16);background:linear-gradient(180deg,#3b000a 0%,#4a000f 46%,#2a0007 100%)">
+  <section id="day" style="position:relative;overflow:hidden;border-top:1px solid rgba(246,237,233,0.16);background:linear-gradient(180deg,#3b000a 0%,#4a000f 46%,#2a0007 100%)">
+    <div aria-hidden="true" style="position:absolute;left:50%;top:12%;margin-left:min(-26vw,-240px);width:min(52vw,480px);aspect-ratio:1/1;pointer-events:none;background:#F6EDE9;opacity:0.05;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;animation:v2monoturn 90s linear infinite, v2monobreathe 21s ease-in-out infinite"></div>
     <div style="max-width:1180px;margin:0 auto;padding:96px 26px;text-align:center">
       <p data-reveal style="opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);margin:0 0 18px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290;animation:v2blink 5.5s ease-in-out infinite">The Day</p>
       <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);margin:0 0 48px;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(32px,5vw,62px)">How the ninth unfolds</h2>
@@ -606,7 +639,7 @@
         </sc-for>
       </div>
       <div data-reveal style="opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);margin:72px auto 0;max-width:860px;background:#EBD5DA;color:#2E0008;position:relative;isolation:isolate;overflow:hidden;padding:clamp(34px,5vw,58px) clamp(26px,5vw,64px);text-align:center;box-shadow:0 24px 60px rgba(24,0,4,0.4)">
-        <div aria-hidden="true" style="position:absolute;z-index:-1;right:-14%;top:-18%;width:min(60%,420px);aspect-ratio:745/783;background:#2E0008;opacity:0.11;-webkit-mask-image:url('assets/monogram-ivory.png');mask-image:url('assets/monogram-ivory.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;animation:v2rot linear both;animation-timeline:view();animation-range:cover"></div>
+        <div aria-hidden="true" style="position:absolute;z-index:-1;right:-14%;top:-18%;width:min(60%,420px);aspect-ratio:1/1;background:#2E0008;opacity:0.11;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;animation:v2rot linear both;animation-timeline:view();animation-range:cover"></div>
         <p style="margin:0 0 16px;font-size:11px;letter-spacing:0.42em;text-transform:uppercase;color:#8A3A4A">A note from us</p>
         <h3 style="margin:0;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(30px,4.4vw,50px);line-height:1.05">{{ giftTitle }}</h3>
         <div style="width:64px;height:2px;background:#8A3A4A;margin:24px auto 26px"></div>
@@ -617,7 +650,8 @@
     </div>
   </section>
 
-  <section id="rsvp" style="position:relative">
+  <section id="rsvp" style="position:relative;overflow:hidden">
+    <div aria-hidden="true" style="position:absolute;right:-8%;top:-10%;width:min(40vw,360px);aspect-ratio:1/1;pointer-events:none;background:#C08290;opacity:0.05;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;animation:v2monodrift 28s ease-in-out infinite reverse, v2monobreathe 19s ease-in-out infinite"></div>
     <div style="max-width:1180px;margin:0 auto;padding:clamp(64px,9vw,104px) clamp(20px,5vw,26px);text-align:center">
       <p data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0 0 18px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290;animation:v2blink 5.5s ease-in-out infinite">RSVP</p>
       <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(34px,5.6vw,72px);line-height:1.06">Kindly reply by<br><span style="font-style:italic;color:#C08290">30 November 2026</span></h2>
@@ -638,7 +672,8 @@
     </div>
   </section>
 
-  <section id="faq" style="background:#650015;border-top:1px solid rgba(246,237,233,0.16)">
+  <section id="faq" style="position:relative;overflow:hidden;background:#650015;border-top:1px solid rgba(246,237,233,0.16)">
+    <div aria-hidden="true" style="position:absolute;left:-10%;bottom:-14%;width:min(44vw,400px);aspect-ratio:1/1;pointer-events:none;background:#F6EDE9;opacity:0.05;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;animation:v2monodrift 24s ease-in-out infinite, v2monobreathe 15s ease-in-out infinite"></div>
     <div style="max-width:900px;margin:0 auto;padding:clamp(60px,8vw,88px) clamp(20px,5vw,26px)">
       <p data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0 0 18px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290;text-align:center">Questions</p>
       <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0 0 44px;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(30px,4.6vw,54px);text-align:center">Before you ask</h2>
@@ -655,7 +690,7 @@
 
   <footer style="border-top:1px solid rgba(246,237,233,0.16);text-align:center">
     <div style="max-width:1180px;margin:0 auto;padding:clamp(48px,7vw,64px) clamp(20px,5vw,26px)">
-      <div style="font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,58px);color:#C08290">A &amp; C</div>
+      <div aria-label="Alexandra and Carlo" style="width:clamp(74px,9vw,104px);aspect-ratio:1/1;margin:0 auto;background:#C08290;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center"></div>
       <p style="margin:14px 0 0;font-size:11px;letter-spacing:0.32em;text-transform:uppercase;opacity:0.7">09 · 01 · 2027 — Malolos, Bulacan</p>
       <p style="margin:22px 0 0;font-size:14px;font-weight:300;opacity:0.7">Anything we have not answered — <a href="mailto:hello@example.com">hello@example.com</a></p>
       <p style="margin:26px 0 0;font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:#C08290;animation:v2pulse 4s ease-in-out infinite">Alexandra &amp; Carlo</p>
@@ -887,7 +922,8 @@ class Component extends DCLogic {
     const start = () => {
       wantOn = true;
       paint(true);
-      return audio.play().then(() => { if (wantOn) fade(0.42, 2600); return true; }).catch(() => { wantOn = false; paint(false); return false; });
+      audio.volume = 0.12;
+      return audio.play().then(() => { if (wantOn) fade(0.42, 900); return true; }).catch(() => { wantOn = false; paint(false); return false; });
     };
     let kick = null;
     const dropKick = () => {
@@ -925,6 +961,14 @@ class Component extends DCLogic {
         fade(0, 500);
       }
     });
+    const prog = document.getElementById("v2-sound-prog");
+    if (prog) {
+      audio.addEventListener("timeupdate", () => {
+        if (!audio.duration || audio.paused) return;
+        prog.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+      });
+      audio.addEventListener("pause", () => { prog.style.width = "0%"; });
+    }
     paint(false);
     // try straight away; the preloader lift and the first tap are the fallbacks
     this.startMusic();
@@ -932,6 +976,16 @@ class Component extends DCLogic {
   preloader() {
     const el = document.getElementById("v2-pre");
     if (!el) return;
+    const ink = document.getElementById("v2-mono-draw");
+    if (ink && ink.getTotalLength) {
+      const L = ink.getTotalLength();
+      ink.style.strokeDasharray = L;
+      ink.style.strokeDashoffset = L;
+      requestAnimationFrame(() => {
+        ink.style.transition = "stroke-dashoffset 2.45s cubic-bezier(.5,.08,.35,1)";
+        ink.style.strokeDashoffset = "0";
+      });
+    }
     el.style.display = "flex";
     el.style.animation = "none";
     void el.offsetWidth;
@@ -941,7 +995,6 @@ class Component extends DCLogic {
     const done = () => {
       el.style.display = "none";
       document.body.style.overflow = prev;
-      if (this.startMusic) this.startMusic();
     };
     const t = setTimeout(done, 4000);
     el.addEventListener("click", () => { clearTimeout(t); done(); });
@@ -1352,8 +1405,14 @@ class Component extends DCLogic {
       const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       if (bar) bar.style.width = clamp(y / max, 0, 1) * 100 + "%";
       if (heroText) {
-        heroText.style.transform = "translate3d(0," + y * 0.16 + "px,0)";
-        heroText.style.opacity = String(clamp(1 - y / 620, 0, 1));
+        const narrow = window.matchMedia("(max-width: 860px)").matches;
+        if (narrow) {
+          heroText.style.transform = "none";
+          heroText.style.opacity = "1";
+        } else {
+          heroText.style.transform = "translate3d(0," + y * 0.16 + "px,0)";
+          heroText.style.opacity = String(clamp(1 - y / 620, 0, 1));
+        }
       }
       if (heroTint) heroTint.style.opacity = String(clamp(1 + y / 900, 1, 1.6));
       const vh = window.innerHeight;
@@ -1481,7 +1540,7 @@ class Component extends DCLogic {
     if (burger && menu) {
       const bars = Array.from(burger.querySelectorAll("[data-bar]"));
       const rows = Array.from(menu.querySelectorAll("[data-menu-link], #v2-menuside, #v2-menu p:first-of-type"));
-      const wipe = menu.firstElementChild;
+      const wipe = null;
       rows.forEach((el) => {
         el.style.animation = "none";
         el.style.willChange = "opacity,transform";
@@ -1517,8 +1576,7 @@ class Component extends DCLogic {
             if (painted || gen !== menuGen || !open) return;
             painted = true;
             menu.style.clipPath = "inset(0 0 0% 0)";
-            if (wipe) { wipe.style.opacity = "1"; wipe.style.transform = "none"; }
-            rows.forEach((el, n) => {
+                  rows.forEach((el, n) => {
               const d = (0.18 + n * 0.07).toFixed(2);
               el.style.transition = "opacity .6s cubic-bezier(.22,1,.36,1) " + d + "s,transform .7s cubic-bezier(.22,1,.36,1) " + d + "s,color .4s ease,padding-left .5s cubic-bezier(.22,1,.36,1)";
               rest(el, true);
