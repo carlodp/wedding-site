@@ -392,60 +392,52 @@
       <div style="position:absolute;left:68%;top:0;width:9px;height:9px;border-radius:50% 0 50% 50%;background:rgba(244,221,226,0.8);opacity:0;animation:v2petal 21s linear 4.4s infinite"></div>
       <div style="position:absolute;left:84%;top:0;width:13px;height:13px;border-radius:50% 0 50% 50%;background:rgba(244,221,226,0.8);opacity:0;animation:v2petal 16s linear 7.6s infinite"></div>
     </div>
-    <div style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(60px,8vw,88px) clamp(20px,5vw,26px);text-align:center">
-      <p data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0 0 18px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290;animation:v2blink 5.5s ease-in-out infinite">Guest Guide</p>
-      <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(32px,5vw,62px);line-height:1.1">Semi-formal, <span style="font-style:italic;color:#C08290">strictly black</span></h2>
-      <p data-reveal data-delay="100" style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:24px auto 0;max-width:56ch;font-size:16px;line-height:1.85;color:rgba(246,237,233,0.76);font-weight:300;text-wrap:pretty">Semi-formal black attire for every guest, ladies and gentlemen alike. Burgundy, mauve and gray are reserved for the wedding party.</p>
-      <div style="margin-top:clamp(38px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;text-align:left">
-        <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;border:1px solid rgba(246,237,233,0.28);background:rgba(24,0,4,0.3);padding:clamp(24px,4vw,34px)">
-          <div style="display:flex;align-items:baseline;gap:12px;padding-bottom:16px;border-bottom:2px solid #C08290">
-            <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#C08290">I</span>
-            <h3 style="margin:0;font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#F6EDE9;font-weight:500">What to wear · Ladies</h3>
-          </div>
-          <ul style="margin:24px 0 0;padding:0;list-style:none;display:grid;gap:20px">
+    <div style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(60px,8vw,88px) clamp(20px,5vw,26px)">
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;padding-bottom:22px;border-bottom:2px solid #C08290">
+        <h2 style="margin:0;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(32px,4.6vw,60px);line-height:1.05">Semi-formal, <span style="font-style:italic;color:#C08290">strictly black</span></h2>
+        <p style="margin:0;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290;animation:v2blink 5.5s ease-in-out infinite">Dress code · Guests</p>
+      </div>
+
+      <div style="margin-top:clamp(26px,3.4vw,42px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:2px">
+        <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;background:#F6EDE9;color:#2a0008;padding:clamp(26px,3.4vw,44px)">
+          <p style="margin:0 0 26px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#8C2338">Yes — please wear</p>
+          <p style="margin:0 0 8px;font-family:'Playfair Display',serif;font-style:italic;font-size:24px;color:#650015">Ladies</p>
+          <ul style="margin:0 0 30px;padding:0;list-style:none;display:grid;gap:14px">
             <sc-for list="{{ ladies }}" as="l" hint-placeholder-count="3">
-              <li style="display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start">
-                <span aria-hidden="true" style="font-size:15px;color:#C08290;line-height:1.6">✓</span>
-                <span style="font-size:17px;line-height:1.65;color:#F6EDE9;font-weight:300;text-wrap:pretty">{{ l }}</span>
-              </li>
+              <li style="font-size:19px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:14px;color:#2a0008;text-wrap:pretty">{{ l }}</li>
             </sc-for>
           </ul>
-        </div>
-        <div data-reveal data-delay="90" style="opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;border:1px solid rgba(246,237,233,0.28);background:rgba(24,0,4,0.3);padding:clamp(24px,4vw,34px)">
-          <div style="display:flex;align-items:baseline;gap:12px;padding-bottom:16px;border-bottom:2px solid #C08290">
-            <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#C08290">II</span>
-            <h3 style="margin:0;font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#F6EDE9;font-weight:500">What to wear · Gentlemen</h3>
-          </div>
-          <ul style="margin:24px 0 0;padding:0;list-style:none;display:grid;gap:20px">
+          <p style="margin:0 0 8px;font-family:'Playfair Display',serif;font-style:italic;font-size:24px;color:#650015">Gentlemen</p>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:14px">
             <sc-for list="{{ gentlemen }}" as="g" hint-placeholder-count="3">
-              <li style="display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start">
-                <span aria-hidden="true" style="font-size:15px;color:#C08290;line-height:1.6">✓</span>
-                <span style="font-size:17px;line-height:1.65;color:#F6EDE9;font-weight:300;text-wrap:pretty">{{ g }}</span>
-              </li>
+              <li style="font-size:19px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:14px;color:#2a0008;text-wrap:pretty">{{ g }}</li>
             </sc-for>
           </ul>
         </div>
-      </div>
 
-      <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;margin-top:24px;border:1px solid #C08290;background:rgba(24,0,4,0.4);padding:clamp(24px,4vw,34px);text-align:left">
-        <div style="display:flex;align-items:baseline;gap:12px;padding-bottom:16px;border-bottom:2px solid #C08290">
-          <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#C08290">III</span>
-          <h3 style="margin:0;font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#C08290;font-weight:500">Please avoid</h3>
+        <div data-reveal data-delay="110" style="opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;background:#3b000a;padding:clamp(26px,3.4vw,44px);display:flex;flex-direction:column">
+          <p style="margin:0 0 26px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#C08290">No — please avoid</p>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:22px">
+            <li style="display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start"><span aria-hidden="true" style="font-family:'Playfair Display',serif;font-size:24px;color:#C08290;line-height:1">✕</span><span><span style="display:block;font-family:'Playfair Display',serif;font-size:clamp(22px,2.2vw,26px);line-height:1.25;color:#F6EDE9">White, ivory or cream</span><span style="display:block;margin-top:5px;font-size:14px;font-weight:300;color:rgba(246,237,233,0.66)">Reserved for the bride</span></span></li>
+            <li style="display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start"><span aria-hidden="true" style="font-family:'Playfair Display',serif;font-size:24px;color:#C08290;line-height:1">✕</span><span><span style="display:block;font-family:'Playfair Display',serif;font-size:clamp(22px,2.2vw,26px);line-height:1.25;color:#F6EDE9">Burgundy, mauve or gray</span><span style="display:block;margin-top:5px;font-size:14px;font-weight:300;color:rgba(246,237,233,0.66)">Worn by the wedding party</span></span></li>
+            <li style="display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start"><span aria-hidden="true" style="font-family:'Playfair Display',serif;font-size:24px;color:#C08290;line-height:1">✕</span><span><span style="display:block;font-family:'Playfair Display',serif;font-size:clamp(22px,2.2vw,26px);line-height:1.25;color:#F6EDE9">Denim, shorts, rubber shoes</span><span style="display:block;margin-top:5px;font-size:14px;font-weight:300;color:rgba(246,237,233,0.66)">Semi-formal, all evening</span></span></li>
+          </ul>
+          <div style="margin-top:auto;padding-top:34px">
+            <div id="v2-attire-slider" data-zoom-group style="position:relative;height:clamp(210px,26vw,300px);overflow:hidden">
+              <div data-attire-slide style="position:absolute;inset:0;opacity:1;transition:opacity 1.1s ease"><div data-zoom style="position:absolute;inset:0;cursor:zoom-in"><image-slot id="v2-g1" shape="rect" fit="cover" placeholder="Male attire reference"></image-slot></div></div>
+              <div data-attire-slide style="position:absolute;inset:0;opacity:0;transition:opacity 1.1s ease"><div data-zoom style="position:absolute;inset:0;cursor:zoom-in"><image-slot id="v2-g2" shape="rect" fit="cover" placeholder="Female attire reference"></image-slot></div></div>
+              <div data-attire-slide style="position:absolute;inset:0;opacity:0;transition:opacity 1.1s ease"><div data-zoom style="position:absolute;inset:0;cursor:zoom-in"><image-slot id="v2-g3" shape="rect" fit="cover" placeholder="Shoes &amp; accessories"></image-slot></div></div>
+              <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:linear-gradient(180deg,rgba(24,0,4,0) 0%,rgba(24,0,4,0.86) 72%);display:flex;align-items:flex-end;justify-content:space-between;gap:14px;pointer-events:none">
+                <span data-attire-caption style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#F6EDE9;text-shadow:0 2px 12px rgba(24,0,4,0.9)">Male attire reference</span>
+                <span style="display:flex;gap:7px">
+                  <span data-attire-dot style="width:22px;height:2px;background:#C08290;opacity:1;transition:opacity .6s ease"></span>
+                  <span data-attire-dot style="width:22px;height:2px;background:#C08290;opacity:0.3;transition:opacity .6s ease"></span>
+                  <span data-attire-dot style="width:22px;height:2px;background:#C08290;opacity:0.3;transition:opacity .6s ease"></span>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
-        <ul style="margin:24px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px 32px">
-          <sc-for list="{{ avoid }}" as="a" hint-placeholder-count="3">
-            <li style="display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start">
-              <span aria-hidden="true" style="font-size:14px;line-height:1.7;color:#C08290">✕</span>
-              <span style="font-size:17px;line-height:1.65;color:#F6EDE9;font-weight:300;text-wrap:pretty">{{ a }}</span>
-            </li>
-          </sc-for>
-        </ul>
-      </div>
-
-      <div data-zoom-group style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px">
-        <div data-zoom style="height:clamp(190px,30vh,260px);position:relative;cursor:zoom-in"><image-slot id="v2-g1" shape="rect" fit="cover" placeholder="Attire reference"></image-slot></div>
-        <div data-zoom style="height:clamp(190px,30vh,260px);position:relative;cursor:zoom-in"><image-slot id="v2-g2" shape="rect" fit="cover" placeholder="Moodboard detail"></image-slot></div>
-        <div data-zoom style="height:clamp(190px,30vh,260px);position:relative;cursor:zoom-in"><image-slot id="v2-g3" shape="rect" fit="cover" placeholder="Florals"></image-slot></div>
       </div>
     </div>
   </section>
@@ -466,8 +458,8 @@
           <h3 style="margin:0;font-size:12px;letter-spacing:0.34em;text-transform:uppercase;color:#F6EDE9;font-weight:500">Principal Sponsors</h3>
         </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;padding-bottom:6px">
-            <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(246,237,233,0.5)">Ninong</div>
-            <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(246,237,233,0.5)">Ninang</div>
+            <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(246,237,233,0.5)">Godfather</div>
+            <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(246,237,233,0.5)">Godmother</div>
           </div>
           <sc-for list="{{ principalPairs }}" as="p" hint-placeholder-count="12">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;padding:11px 0;border-top:1px solid rgba(246,237,233,0.12)">
@@ -485,7 +477,9 @@
           <sc-for list="{{ secondary }}" as="s" hint-placeholder-count="7">
             <div style="padding:14px 0;border-top:1px solid rgba(246,237,233,0.12)">
               <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#C08290;margin-bottom:6px">{{ s.role }}</div>
-              <div style="font-family:'Playfair Display',serif;font-size:18px;line-height:1.45">{{ s.names }}</div>
+              <sc-for list="{{ s.list }}" as="n" hint-placeholder-count="2">
+                <div style="font-family:'Playfair Display',serif;font-size:18px;line-height:1.5">{{ n.name }}</div>
+              </sc-for>
             </div>
           </sc-for>
         </div>
@@ -763,38 +757,38 @@ class Component extends DCLogic {
   { name: "Black", hex: "#0A0A0A" },
 ],
     principal: [
-  ["Orlando Dela Paz", "Elizabeth Dela Paz"],
-  ["Jessie Concepcion", "Aida Concepcion"],
-  ["Zenaida Lucena", "Ruben Lucena"],
-  ["Jap Concepcion", "Adele Concepcion"],
-  ["Jhun Santos", "Mhac Santos"],
-  ["Ate Cristy", "Kuya Art"],
-  ["Alice Guererro", "Joey Guerrero"],
-  ["Ariel Dones", "Liezel Dones"],
-  ["Elizabeth Balano", "Eric Balano"],
-  ["Buboy Medina", "Beng Medina"],
-  ["Boyboy Arillo", "Edwina Nolasco"],
-  ["John Doe *", "Lina Cabrera"],
+  ["Mr. Orlando Dela Paz", "Mrs. Elizabeth Dela Paz"],
+  ["Engr. Jesus Concepcion", "Engr. Aida Concepcion"],
+  ["Mr. Ruben Lucena", "Mrs. Zenaida Lucena"],
+  ["Mr. Jap Concepcion", "Mrs. Adele Concepcion"],
+  ["Mr. Jhun Santos", "Mrs. Mhac Santos"],
+  ["Mr. Arthur Cabantug", "Mrs. Cristy Cabantug"],
+  ["Engr. Joey Guerrero", "Mrs. Alice Guererro"],
+  ["Mr. Ariel Dones", "Mrs. Liezel Dones"],
+  ["Mr. Enrique Balano", "Mrs. Elizabeth Balano"],
+  ["Engr. Buboy Medina", "Mrs. Beng Medina"],
+  ["Mr. Boyboy Arillo", "Mrs. Edwina Nolasco"],
+  ["Mr. John Doe *", "Mrs. Lina Cabrera"],
 ],
     groups: [
   { role: "Best Man", names: ["Benedick Bautista", "Sean Ashley Ortega"] },
-  { role: "Maid of Honour", names: ["Claudine Villa", "Sheen Malaran"] },
+  { role: "Maid of Honour", names: ["Claudine Villa", "Keynan Sheen Malaran"] },
   {
     role: "Groomsmen",
-    names: ["Karl Sulit", "Justin Evangelista", "Paulo Concepcion", "Richard Santos", "Bobby Jallores", "Francis Decano", "John Paul Favoreal"],
+    names: ["Karl Anthony Sulit", "Justin Evangelista", "Zian Paulo Concepcion", "Richard Martin Santos", "Bobby Bryan Jallores", "Francis Daniele Decano", "John Paul Favoreal"],
   },
   {
     role: "Bridesmaids",
-    names: ["April Hernandez", "Jhazel Estrella", "Mika Hara", "Aira Candoleta", "Micah Morta", "Christine Buenaventura", "Orveen Calderon", "Joan Estrella"],
+    names: ["April Hernandez", "Jenny Christel Estrella", "Mika Hara", "Aira Candoleta", "Micah Morta", "Christine Buenaventura", "Princess Orveen Calderon", "Joanna Rose Estrella"],
   },
   { role: "Walang Papel", names: ["John Doe *", "Jane Doe *"] },
 ],
     secondary: [
-  { role: "Flower Girls", names: "Ryelin Gonzales · Caira Gonzales · Aryanna Gonzales · Freya Dones" },
-  { role: "Ring Bearer", names: "Cailee Gonzales" },
-  { role: "Cord Sponsors", names: "Alanah Guerrero & Ernest Balano" },
-  { role: "Candle Sponsor", names: "Alyssa Guerrero" },
-  { role: "Veil Sponsors", names: "DJ Cristino & Lianne Cristino" },
+  { role: "Flower Girls", names: "Ryelin Crishelle Santos-Gonzales · Caira Yzabelle Santos-Gonzales · Aryanna Caitleen Santos-Gonzales · Freya Dones" },
+  { role: "Ring Bearer", names: "Bryana Cailee Santos-Gonzales" },
+  { role: "Cord Sponsors", names: "Joie Alanah Morris Guerrero & Ernest John Balano" },
+  { role: "Candle Sponsor", names: "Joie Alyssa Marie Guerrero" },
+  { role: "Veil Sponsors", names: "Dennis John Cristino & Julie Anne Concepcion-Cristino" },
   { role: "Bible Bearer", names: "Maximus Lucena" },
   { role: "Coin Bearer", names: "John Doe *" },
 ],
@@ -1013,15 +1007,38 @@ class Component extends DCLogic {
     this.timer = setInterval(() => this.tick(), 1000);
     this.motion();
     this.gallery();
+    this.attireSlider();
     this.film();
     setTimeout(() => this.placeholders(), 400);
     setTimeout(() => this.placeholders(), 1400);
   }
   componentWillUnmount() {
     clearInterval(this.timer);
+    clearInterval(this.attireTimer);
     if (this.io) this.io.disconnect();
     if (this.navIo) this.navIo.disconnect();
     if (this.onScroll) window.removeEventListener("scroll", this.onScroll);
+  }
+  attireSlider() {
+    const root = document.getElementById("v2-attire-slider");
+    if (!root) return;
+    const slides = [...root.querySelectorAll("[data-attire-slide]")];
+    const dots = [...root.querySelectorAll("[data-attire-dot]")];
+    const cap = root.querySelector("[data-attire-caption]");
+    const labels = ["Male attire reference", "Female attire reference", "Shoes & accessories"];
+    let i = 0;
+    const show = (n) => {
+      i = (n + slides.length) % slides.length;
+      slides.forEach((s, k) => { s.style.opacity = k === i ? "1" : "0"; });
+      dots.forEach((d, k) => { d.style.opacity = k === i ? "1" : "0.3"; });
+      if (cap) cap.textContent = labels[i] || "";
+    };
+    this.attireTimer = setInterval(() => show(i + 1), 3000);
+    root.addEventListener("mouseenter", () => clearInterval(this.attireTimer));
+    root.addEventListener("mouseleave", () => {
+      clearInterval(this.attireTimer);
+      this.attireTimer = setInterval(() => show(i + 1), 3000);
+    });
   }
   film() {
     const v = document.getElementById("v2-std");
@@ -1879,8 +1896,9 @@ class Component extends DCLogic {
     d.principal.forEach((p) => { flat.push(p[0], p[1]); });
     return {
       story: d.story,
-      ladies: d.dress.ladies, gentlemen: d.dress.gentlemen, avoid: d.dress.avoid,
-      principalFlat: flat, secondary: d.secondary,
+      ladies: d.dress.ladies, gentlemen: d.dress.gentlemen,
+      principalFlat: flat,
+      secondary: d.secondary.map((s) => ({ role: s.role, list: String(s.names).split(/\s*(?:·|&|,)\s*/).filter(Boolean).map((name) => ({ name })) })),
       principalPairs: d.principal.map((p) => ({ a: p[0], b: p[1] })),
       bestMan: (d.groups.find((g) => g.role === "Best Man") || {}).names,
       maidOfHonour: (d.groups.find((g) => g.role === "Maid of Honour") || {}).names,
