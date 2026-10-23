@@ -79,6 +79,7 @@
     #count-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
     #where > div > div:last-of-type, #reception > div > div:last-of-type { padding-bottom:calc(108px + env(safe-area-inset-bottom,0px)) !important; }
     footer { padding-bottom:calc(130px + env(safe-area-inset-bottom,0px)) !important; }
+    #faq-head, #day-head { position:relative !important; top:auto !important; }
   }
 </style>
 </helmet>
@@ -337,7 +338,7 @@
 
   <section id="day" style="position:relative;background:#0E0305;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px)">
     <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(40px,6vw,100px);align-items:start">
-      <div style="position:sticky;top:110px">
+      <div id="day-head" style="position:sticky;top:110px">
         <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Sc. 06 — Running order</p>
         <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:0.96">How the ninth <span style="font-style:italic;color:#E5B7C2">unfolds</span></h2>
         <div style="margin-top:clamp(30px,4vw,48px);display:grid;gap:22px">
@@ -452,7 +453,7 @@
         </div>
       </div>
       <div id="faq" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(30px,5vw,90px);align-items:start">
-        <div style="position:sticky;top:110px">
+        <div id="faq-head" style="position:sticky;top:110px">
           <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Sc. 10 — Questions</p>
           <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:0.96">Before you <span style="font-style:italic;color:#E5B7C2">ask</span></h2>
         </div>
