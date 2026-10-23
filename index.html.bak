@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Carlo &amp; Alexandra — 09 · 01 · 2027</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  html, body { margin:0; background:#0E0305; color:#F6EDE9; -webkit-font-smoothing:antialiased; }
+  a { color:#E5B7C2; text-decoration:none; }
+  a:hover { color:#F6EDE9; }
+  ::selection { background:#C08290; color:#0E0305; }
+  summary::-webkit-details-marker { display:none; }
+  summary { list-style:none; cursor:pointer; }
+  button { font:inherit; }
+  :focus-visible { outline:2px solid #C08290; outline-offset:3px; }
+  @keyframes v2pulse { 0%,100% { opacity: 0.35; } 50% { opacity: 1; } }
+  @keyframes v2drop { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+  @keyframes v2write { from { -webkit-mask-position: 100% 0; mask-position: 100% 0; } to { -webkit-mask-position: 0% 0; mask-position: 0% 0; } }
+  @keyframes v2nib { 0% { left: 1%; top: 58%; opacity: 0; } 9% { opacity: 1; } 32% { top: 14%; } 58% { top: 46%; } 78% { top: 66%; } 96% { opacity: 1; } 100% { left: 99%; top: 48%; opacity: 0; } }
+  @keyframes v2fadeup { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes v2preout { to { opacity: 0; visibility: hidden; } }
+  @keyframes v2kb { from { transform: scale(1); } to { transform: scale(1.035); } }
+  @keyframes v2float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+  @keyframes v2sheen { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+  @keyframes v2bob { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-18px) rotate(3deg); } }
+  @keyframes v2mote { 0% { transform: translate3d(0,20vh,0) scale(0.5); opacity: 0; } 10% { opacity: 1; } 50% { transform: translate3d(34px,-30vh,0) scale(1.3); } 80% { opacity: 0.85; } 100% { transform: translate3d(-18px,-86vh,0) scale(1.6); opacity: 0; } }
+  @keyframes v2marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+  @keyframes v2glow { 0%,100% { box-shadow: 0 0 0 0 rgba(192,130,144,0); } 50% { box-shadow: 0 0 22px 2px rgba(192,130,144,0.35); } }
+  @keyframes v2breathe { 0%,100% { transform: scaleX(1); opacity: 1; } 50% { transform: scaleX(2.6); opacity: 0.45; } }
+  @keyframes v2spin { to { transform: rotate(360deg); } }
+  @keyframes v2cuebob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(9px); } }
+  @keyframes v2cuedrop { 0% { transform: translateY(-100%); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(100%); opacity: 0; } }
+  @keyframes v2cuering { 0% { transform: scale(0.9); opacity: 0.55; } 70%,100% { transform: scale(1.5); opacity: 0; } }
+  @keyframes v2sweep { 0% { transform: translateX(-140%) skewX(-18deg); } 55%,100% { transform: translateX(320%) skewX(-18deg); } }
+  @keyframes v2breath { 0%,100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+  @keyframes v2ring { 0% { box-shadow: 0 0 0 4px #3b000a,0 0 0 0 rgba(192,130,144,0.5); } 70%,100% { box-shadow: 0 0 0 4px #3b000a,0 0 0 12px rgba(192,130,144,0); } }
+  @keyframes v2blink { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
+  @keyframes v2eq { 0%,100% { height: 4px; } 50% { height: 12px; } }
+  @keyframes v2menuin { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes v2spine { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes v2drawx { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  #rsvpDynamic .rsvp-dyn-toggle { flex: 1; background: transparent; color: #2a0008; border: 1px solid rgba(42,0,8,0.35); padding: 12px 16px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: background .3s ease, color .3s ease, border-color .3s ease; }
+  #rsvpDynamic .rsvp-dyn-toggle:hover { border-color: #C08290; }
+  #rsvpDynamic .rsvp-dyn-toggle.is-active { background: #C08290; color: #3b000a; border-color: #C08290; }
+  #rsvpDynamic .rsvp-dyn-btn:hover { background: #2a0008 !important; color: #F6EDE9 !important; }
+  #rsvpDynamic input[type="checkbox"] { accent-color: #C08290; width: 19px; height: 19px; }
+  @keyframes v2rise { from { opacity: 0.15; transform: translateY(38px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes v2rot { from { transform: rotate(-24deg) scale(0.92); } to { transform: rotate(196deg) scale(1.08); } }
+  @keyframes v2sway { 0%,100% { transform: translate3d(0,0,0) rotate(0deg); } 50% { transform: translate3d(14px,-10px,0) rotate(8deg); } }
+  @keyframes v2shimmer { 0% { transform: translateX(-120%); } 100% { transform: translateX(820%); } }
+  @keyframes v2petal { 0% { transform: translate3d(0,110%,0) rotate(0deg) scale(0.8); opacity: 0; } 10% { opacity: 1; } 45% { transform: translate3d(46px,-10%,0) rotate(180deg) scale(1.15); } 85% { opacity: 0.85; } 100% { transform: translate3d(-56px,-125%,0) rotate(420deg) scale(0.9); opacity: 0; } }
+  @keyframes v2monofill { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes v2monodrift { 0%, 100% { transform: translate3d(0,0,0) rotate(-3.5deg) scale(1); } 50% { transform: translate3d(0,-26px,0) rotate(3.5deg) scale(1.05); } }
+  @keyframes v2monobreathe { 0%, 100% { opacity: 0.035; } 50% { opacity: 0.085; } }
+  @keyframes v2monoturn { from { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.06); } to { transform: rotate(360deg) scale(1); } }
+</style>
+</helmet>
+<div id="c-root" style="position:relative;max-width:100%;overflow-x:clip;background:#0E0305;font-family:'Jost',system-ui,sans-serif;color:#F6EDE9">
+
+  <div id="v2-pre" role="button" tabindex="0" aria-label="Enter the site" style="position:fixed;inset:0;z-index:300;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;outline:none;animation:v2preout .8s ease 3.1s forwards">
+    <canvas id="v2-curtain" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;display:block;background:#3b000a"></canvas>
+    <p id="v2-pre-hint" style="position:absolute;left:0;right:0;bottom:clamp(44px,10vh,88px);z-index:3;margin:0;text-align:center;font-size:10px;letter-spacing:0.42em;text-transform:uppercase;color:rgba(246,237,233,0.78);opacity:0;transition:opacity .6s ease">Tap to open</p>
+    <div id="v2-pre-c" style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px">
+    <div style="position:relative;width:min(58vw,320px);aspect-ratio:1/1">
+      <svg viewBox="0 0 1080 1080" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+        <path id="v2-mono-draw" d="M571.52,548.5c4.72-.53,10.7.81,15.18-.03,6.57-1.23,16.86-25.72,20.78-32.14,53.39-87.44,168.94-206.09,276-217.46,101.46-10.78,92.96,70.26,41.37,127.3-66.72,73.78-164.49,105.69-260.19,122.19-7.21,1.24-26.59,1.36-30.98,6.06-3.41,3.65-9.34,18.35-11.88,23.83-25.93,55.79-44.81,125.76-24.75,186.12,6.38,19.21,19.51,40.9,35.96,52.61,22.94-10.43,45.19-22.36,68.45-32.11,58.65-24.57,120.62-40.71,184.7-36.93,24.26-40.86,43.25-113.01,5.61-151.23-55.55-56.42-165.55,15.27-147.57,86.68.99,3.95,6.86,13.08,1.99,15.28-27.57-11.77-19.03-48.58-7.69-69.9,25.58-48.1,98.92-80.04,147.81-47.76,48.95,32.33,38.67,105.47,18.66,152.01-1.25,2.9-9.16,15.26-7.96,16.51,57.96,7.43,129.36,35.93,122.89,106.32-3.76,40.83-42.83,69.96-78.89,82.5-83.05,28.88-175.09,6.91-254.69-22.48-3.32-1.23-19.32-8.92-20.84-7.59l16.77,27.53c23.04,46.55-3.97,104.45-57.13,110.04-16.97,1.79-50.69-9.4-55.61-27.74-2.26-8.44,2.55-16.9,11.29-12.61,5.16,2.53,5.62,16.08,19.48,21.52,27,10.6,54.95-14.22,61.62-39.65,12.49-47.65-24.58-84.7-61.69-107.1-5.17-3.12-24.08-13.95-28.68-15.1-5.55-1.39-23.29,11.3-29.28,14.48-84.43,44.88-185.79,89.41-283.28,63.98-101.58-26.5-116.83-132.63-16.85-174.86,67.49-28.51,157.71-11.6,223.88,14.18,41.07,16,80.1,38.42,118.27,60.18l32.22-17.53c-7.96-7.63-17.92-14.57-25.01-22.9-47.91-56.24-46.5-136.14-23.54-202.9,1.86-5.42,18.5-41.75,16.81-43.37-6.6.71-14.99-2.65-19.12,4.02l-25.17,63.47c-6.14,4.28-12.9,7.6-19.65,10.78-5.77,2.72-21.19,9.72-26.77,10.3-2.79.29-2.14-.86-1.67-3.01l32.15-78.85-1.5-4.14c-14.49.32-29.02-.19-43.51.01-40.16.55-78.89,1-118.89-5.38-10.54-1.68-20.82-5.86-31.59-6.26-53.55,54.67-135.91,121.49-218.22,102.57-28.92-6.65-58.96-27.54-49.26-61.68,5.9-20.77,40.54-24.34,42.9-.62,1.69,17.02-22.68,15-20.92,29.94,2.49,21.12,41.57,28.1,58.63,27.45,58.36-2.24,115.5-43.14,156.16-82.03,2.85-2.72,17.9-17.1,17.92-19.15s-.91-2.17-2.34-3.02c-4.75-2.85-12.52-4.69-17.83-7.3-144.32-71.14-73.79-241.5,69.65-249.64,39.47-2.24,76.03,8.89,108.31,30.72,3.81,2.58,12.74,12.33,16.56,10.1,33.24-47.39,67.78-94.64,104.78-139.28,42.04-50.73,105.93-121.32,168.04-145.5,9.7-3.78,36.95-14.1,28.63,6.14-71.28,151.83-143.2,304.01-205.51,459.88-2.01,5.02-16.6,40.92-15.01,42.53ZM768.67,49.85c-5.11-3.83-43.76,21.24-50.16,25.89-54.46,39.54-103.4,99.96-144.88,152.78-26.09,33.22-50.76,67.65-75.52,101.81-2.3,6.54,7.53,13.13,11.18,18.15,27.21,37.36,39.69,75.02,41.08,121.31.15,4.97,1.98,9.46,0,15.22,2.27,2.61,6.96-8.99,7.55-10.3,5.55-12.29,9.66-25.51,14.94-37.98,56.31-133.02,115.61-266.48,195.82-386.89ZM379.13,473.89c35.92-44.46,68.46-91.7,102.37-137.69-73.18-72.67-200.65-46.77-236.06,50.99-21.82,60.23,6.16,119.1,64.53,143.03,4.17,1.71,14.17,6.33,17.71,3.33,17.28-19.76,34.99-39.28,51.45-59.66ZM916.31,420.97c19.62-22.15,48.01-63.56,32.07-93.79-16.39-31.09-67.44-18.54-93.04-7.5-78.33,33.75-160.77,127.49-203.33,200.16-1.68,2.87-11.84,20.63-10.35,22.05,97.33-10.07,208.29-45.99,274.65-120.92ZM491.81,345.22c-1.59-.64-3.12-.89-4.72-.14-45.88,65.95-93.74,130.81-147.78,190.2-3.11,5.33,6.81,6.51,10.95,7.58,46.56,12.01,109.1,11.01,157.04,8.24,4.53-.26,19.09,1.34,21.24-1.25,1.03-1.24,7.24-20.7,7.98-23.77,11.47-47.72,2.04-108.45-22.65-150.75-2.52-4.32-19.37-29.03-22.06-30.11ZM878.48,757.51c-41.01-2.8-78.84,5.09-117.75,16.53-33.18,9.76-86.03,29.37-114.72,48.01-6.46,4.2.7,6.96,5.33,9.75,63.58,38.35,145.97,15.39,196.16-33.88,3.42-3.35,34.04-37.61,30.97-40.41ZM987.76,793.81c-16.21-15.49-42.19-25.81-63.97-30.67-6.08-1.36-26.49-5.28-31.39-4.35-3.56.67-9.21,12.17-12.04,15.8-57.96,74.26-141.85,107.85-232.98,69.13-5.47-2.33-16.15-9.66-20.94-9.65-4.19,0-18.52,7.83-22.71,10.52-1.81,1.16-7.62,3.87-7.05,6.16,44.07,33.13,93.47,58.83,146.59,74.36,71,20.76,176.79,32.57,237.74-18.16,36.81-30.64,42.27-79.2,6.75-113.13ZM300.01,767.15c-135.41,5.37-163.22,144.22-25.42,171.45,63.98,12.64,135.88-6.98,194.38-32.96,30.63-13.6,60.13-30.52,89.29-46.95-18.56-11.59-38.29-22.2-57.91-32.03-46.56-23.33-94.5-43.75-145.47-55.63l-38.08-4.26-16.8.38Z" fill="none" stroke="#F6EDE9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(246,237,233,0.35))"></path>
+        <path id="v2-mono-fill" d="M571.52,548.5c4.72-.53,10.7.81,15.18-.03,6.57-1.23,16.86-25.72,20.78-32.14,53.39-87.44,168.94-206.09,276-217.46,101.46-10.78,92.96,70.26,41.37,127.3-66.72,73.78-164.49,105.69-260.19,122.19-7.21,1.24-26.59,1.36-30.98,6.06-3.41,3.65-9.34,18.35-11.88,23.83-25.93,55.79-44.81,125.76-24.75,186.12,6.38,19.21,19.51,40.9,35.96,52.61,22.94-10.43,45.19-22.36,68.45-32.11,58.65-24.57,120.62-40.71,184.7-36.93,24.26-40.86,43.25-113.01,5.61-151.23-55.55-56.42-165.55,15.27-147.57,86.68.99,3.95,6.86,13.08,1.99,15.28-27.57-11.77-19.03-48.58-7.69-69.9,25.58-48.1,98.92-80.04,147.81-47.76,48.95,32.33,38.67,105.47,18.66,152.01-1.25,2.9-9.16,15.26-7.96,16.51,57.96,7.43,129.36,35.93,122.89,106.32-3.76,40.83-42.83,69.96-78.89,82.5-83.05,28.88-175.09,6.91-254.69-22.48-3.32-1.23-19.32-8.92-20.84-7.59l16.77,27.53c23.04,46.55-3.97,104.45-57.13,110.04-16.97,1.79-50.69-9.4-55.61-27.74-2.26-8.44,2.55-16.9,11.29-12.61,5.16,2.53,5.62,16.08,19.48,21.52,27,10.6,54.95-14.22,61.62-39.65,12.49-47.65-24.58-84.7-61.69-107.1-5.17-3.12-24.08-13.95-28.68-15.1-5.55-1.39-23.29,11.3-29.28,14.48-84.43,44.88-185.79,89.41-283.28,63.98-101.58-26.5-116.83-132.63-16.85-174.86,67.49-28.51,157.71-11.6,223.88,14.18,41.07,16,80.1,38.42,118.27,60.18l32.22-17.53c-7.96-7.63-17.92-14.57-25.01-22.9-47.91-56.24-46.5-136.14-23.54-202.9,1.86-5.42,18.5-41.75,16.81-43.37-6.6.71-14.99-2.65-19.12,4.02l-25.17,63.47c-6.14,4.28-12.9,7.6-19.65,10.78-5.77,2.72-21.19,9.72-26.77,10.3-2.79.29-2.14-.86-1.67-3.01l32.15-78.85-1.5-4.14c-14.49.32-29.02-.19-43.51.01-40.16.55-78.89,1-118.89-5.38-10.54-1.68-20.82-5.86-31.59-6.26-53.55,54.67-135.91,121.49-218.22,102.57-28.92-6.65-58.96-27.54-49.26-61.68,5.9-20.77,40.54-24.34,42.9-.62,1.69,17.02-22.68,15-20.92,29.94,2.49,21.12,41.57,28.1,58.63,27.45,58.36-2.24,115.5-43.14,156.16-82.03,2.85-2.72,17.9-17.1,17.92-19.15s-.91-2.17-2.34-3.02c-4.75-2.85-12.52-4.69-17.83-7.3-144.32-71.14-73.79-241.5,69.65-249.64,39.47-2.24,76.03,8.89,108.31,30.72,3.81,2.58,12.74,12.33,16.56,10.1,33.24-47.39,67.78-94.64,104.78-139.28,42.04-50.73,105.93-121.32,168.04-145.5,9.7-3.78,36.95-14.1,28.63,6.14-71.28,151.83-143.2,304.01-205.51,459.88-2.01,5.02-16.6,40.92-15.01,42.53ZM768.67,49.85c-5.11-3.83-43.76,21.24-50.16,25.89-54.46,39.54-103.4,99.96-144.88,152.78-26.09,33.22-50.76,67.65-75.52,101.81-2.3,6.54,7.53,13.13,11.18,18.15,27.21,37.36,39.69,75.02,41.08,121.31.15,4.97,1.98,9.46,0,15.22,2.27,2.61,6.96-8.99,7.55-10.3,5.55-12.29,9.66-25.51,14.94-37.98,56.31-133.02,115.61-266.48,195.82-386.89ZM379.13,473.89c35.92-44.46,68.46-91.7,102.37-137.69-73.18-72.67-200.65-46.77-236.06,50.99-21.82,60.23,6.16,119.1,64.53,143.03,4.17,1.71,14.17,6.33,17.71,3.33,17.28-19.76,34.99-39.28,51.45-59.66ZM916.31,420.97c19.62-22.15,48.01-63.56,32.07-93.79-16.39-31.09-67.44-18.54-93.04-7.5-78.33,33.75-160.77,127.49-203.33,200.16-1.68,2.87-11.84,20.63-10.35,22.05,97.33-10.07,208.29-45.99,274.65-120.92ZM491.81,345.22c-1.59-.64-3.12-.89-4.72-.14-45.88,65.95-93.74,130.81-147.78,190.2-3.11,5.33,6.81,6.51,10.95,7.58,46.56,12.01,109.1,11.01,157.04,8.24,4.53-.26,19.09,1.34,21.24-1.25,1.03-1.24,7.24-20.7,7.98-23.77,11.47-47.72,2.04-108.45-22.65-150.75-2.52-4.32-19.37-29.03-22.06-30.11ZM878.48,757.51c-41.01-2.8-78.84,5.09-117.75,16.53-33.18,9.76-86.03,29.37-114.72,48.01-6.46,4.2.7,6.96,5.33,9.75,63.58,38.35,145.97,15.39,196.16-33.88,3.42-3.35,34.04-37.61,30.97-40.41ZM987.76,793.81c-16.21-15.49-42.19-25.81-63.97-30.67-6.08-1.36-26.49-5.28-31.39-4.35-3.56.67-9.21,12.17-12.04,15.8-57.96,74.26-141.85,107.85-232.98,69.13-5.47-2.33-16.15-9.66-20.94-9.65-4.19,0-18.52,7.83-22.71,10.52-1.81,1.16-7.62,3.87-7.05,6.16,44.07,33.13,93.47,58.83,146.59,74.36,71,20.76,176.79,32.57,237.74-18.16,36.81-30.64,42.27-79.2,6.75-113.13ZM300.01,767.15c-135.41,5.37-163.22,144.22-25.42,171.45,63.98,12.64,135.88-6.98,194.38-32.96,30.63-13.6,60.13-30.52,89.29-46.95-18.56-11.59-38.29-22.2-57.91-32.03-46.56-23.33-94.5-43.75-145.47-55.63l-38.08-4.26-16.8.38Z" fill="#F6EDE9" style="opacity:0;animation:v2monofill 1.1s ease 1.85s forwards"></path>
+      </svg>
+    </div>
+    <div style="text-align:center;opacity:0;animation:v2fadeup 1s ease 2.1s forwards">
+      <p style="margin:0;font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,28px);letter-spacing:0.04em;color:#F6EDE9">Carlo <span style="color:#C08290">&amp;</span> Alexandra</p>
+      <p style="margin:12px 0 0;font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">09 · 01 · 2027</p>
+    </div>
+    </div>
+    </div>
+
+  <audio id="c-audio" src="assets/mirrors-bg.mp3" loop="loop" preload="auto"></audio>
+
+  <div id="c-grain" aria-hidden="true" style="position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:0.075;background-size:180px 180px"></div>
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:89;pointer-events:none;background:radial-gradient(ellipse at center,rgba(14,3,5,0) 55%,rgba(7,1,2,0.55) 100%)"></div>
+
+  <header style="position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(14px,2.4vw,24px) clamp(18px,3vw,36px);pointer-events:none">
+    <a href="#top" aria-label="Back to top" style="pointer-events:auto;display:block;width:42px;height:42px;background:#F6EDE9;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center"></a>
+    <div style="display:flex;align-items:center;gap:12px;pointer-events:auto">
+      <button onClick="{{ toggleSound }}" aria-label="{{ soundLabel }}" style="height:44px;display:flex;align-items:center;gap:10px;padding:0 16px;background:rgba(14,3,5,0.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(246,237,233,0.28);color:#F6EDE9;cursor:pointer;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;transition:border-color .3s ease" style-hover="border-color:#C08290">
+        <span style="display:flex;align-items:flex-end;gap:2px;height:12px">
+          <span style="width:2px;height:{{ eq1 }};background:#C08290;transition:height .4s ease"></span>
+          <span style="width:2px;height:{{ eq2 }};background:#C08290;transition:height .4s ease"></span>
+          <span style="width:2px;height:{{ eq3 }};background:#C08290;transition:height .4s ease"></span>
+        </span>
+        <span>{{ soundText }}</span>
+      </button>
+      <button onClick="{{ toggleMenu }}" aria-label="Open menu" style="height:44px;display:flex;align-items:center;gap:12px;padding:0 16px;background:rgba(14,3,5,0.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(246,237,233,0.28);color:#F6EDE9;cursor:pointer;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;transition:border-color .3s ease" style-hover="border-color:#C08290">
+        <span>{{ menuText }}</span>
+        <span style="display:flex;flex-direction:column;gap:5px"><span style="width:18px;height:1px;background:#F6EDE9"></span><span style="width:12px;height:1px;background:#F6EDE9;align-self:flex-end"></span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav aria-label="Sections" style="position:fixed;inset:0;z-index:65;background:#0B0204;display:flex;align-items:center;padding:96px clamp(22px,6vw,90px) 40px;overflow-y:auto;opacity:{{ menuOp }};pointer-events:{{ menuPe }};transition:opacity .6s ease">
+    <div style="width:100%;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0 clamp(24px,5vw,80px)">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="9">
+        <a href="{{ n.href }}" onClick="{{ closeMenu }}" style="display:grid;grid-template-columns:52px 1fr;align-items:baseline;gap:12px;padding:clamp(12px,1.8vh,18px) 0;border-top:1px solid rgba(246,237,233,0.14);color:#F6EDE9;transition:color .3s ease,padding-left .4s cubic-bezier(.22,1,.36,1)" style-hover="color:#E5B7C2;padding-left:10px">
+          <span style="font-size:10px;letter-spacing:0.3em;color:#C08290">SC. {{ n.n }}</span>
+          <span style="font-family:'Bodoni Moda',serif;font-size:clamp(26px,3.4vw,42px);line-height:1.1;white-space:nowrap">{{ n.label }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </nav>
+
+  <a href="#rsvp" style="position:fixed;right:clamp(16px,3vw,34px);bottom:clamp(16px,3vw,30px);z-index:60;display:flex;align-items:center;gap:14px;height:50px;padding:0 22px;background:#C08290;color:#0E0305;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;box-shadow:0 14px 40px rgba(0,0,0,0.45);transition:background .3s ease" style-hover="background:#F6EDE9;color:#0E0305">Reserve a seat <span aria-hidden="true" style="font-family:'Bodoni Moda',serif;font-size:18px;letter-spacing:0">→</span></a>
+
+  <section id="top" data-pin style="position:relative;height:190vh;background:#070102">
+    <div style="position:sticky;top:0;height:100vh;height:100svh;overflow:hidden">
+      <div style="position:absolute;inset:-6%;transform:translate3d(calc(var(--mx,0) * 18px),calc(var(--p,0) * 14vh + var(--my,0) * 12px),0) scale(calc(1.06 + var(--p,0) * 0.14))">
+        <img src="assets/hero.jpg" alt="Carlo and Alexandra" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 42%;display:block;filter:saturate(0.82) contrast(1.06)">
+      </div>
+      <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,1,2,0.55) 0%,rgba(7,1,2,0.08) 34%,rgba(7,1,2,0.25) 62%,rgba(7,1,2,0.92) 100%)"></div>
+      <div aria-hidden="true" style="position:absolute;inset:0;background:#070102;opacity:calc(var(--p,0) * 0.85)"></div>
+
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(20px,5vw,72px) clamp(120px,20vh,190px);transform:translate3d(calc(var(--mx,0) * -30px),calc(var(--p,0) * -22vh + var(--my,0) * -18px),0)">
+        <div style="overflow:hidden"><p style="margin:0 0 clamp(10px,2vh,22px);font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#E5B7C2;transform:translateY({{ hy }});opacity:{{ ho }};transition:transform 1.4s cubic-bezier(.22,1,.36,1) .1s,opacity 1.4s ease .1s">The wedding of</p></div>
+        <h1 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(64px,15.5vw,250px);line-height:0.88;letter-spacing:-0.02em">
+          <span style="display:block;overflow:hidden;padding-bottom:0.06em"><span style="display:block;transform:translateY({{ hy }});transition:transform 1.6s cubic-bezier(.22,1,.36,1) .25s"><span style="display:block;transform:translateX(calc(var(--p,0) * -26vw))">Carlo</span></span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:0.08em"><span style="display:block;transform:translateY({{ hy }});transition:transform 1.6s cubic-bezier(.22,1,.36,1) .45s"><span style="display:block;padding-left:clamp(28px,9vw,180px);font-style:italic;color:#E5B7C2;transform:translateX(calc(var(--p,0) * 22vw))"><span style="font-size:0.55em;vertical-align:0.4em;margin-right:0.12em;color:#C08290">&amp;</span>Alexandra</span></span></span>
+        </h1>
+      </div>
+
+      <div aria-hidden="true" style="position:absolute;left:-10%;top:-20%;width:60%;height:70%;pointer-events:none;background:radial-gradient(closest-side,rgba(229,140,120,0.22),rgba(229,140,120,0));transform:translate3d(calc(var(--mx,0) * -60px),calc(var(--my,0) * -40px + var(--p,0) * -30vh),0)"></div>
+      <div aria-hidden="true" style="position:absolute;right:-12%;bottom:-25%;width:55%;height:70%;pointer-events:none;background:radial-gradient(closest-side,rgba(192,130,144,0.24),rgba(192,130,144,0));transform:translate3d(calc(var(--mx,0) * -80px),calc(var(--my,0) * -50px + var(--p,0) * -45vh),0)"></div>
+
+      <div style="position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 28px;padding:0 clamp(20px,5vw,72px) clamp(84px,11vh,110px);opacity:calc(1 - var(--p,0) * 2.4)">
+        <div style="display:flex;flex-wrap:wrap;gap:8px 28px;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(246,237,233,0.84);opacity:{{ ho }};transition:opacity 1.4s ease 1s">
+          <span>Saturday · 09 · 01 · 2027</span>
+          <span style="color:#C08290">Malolos, Bulacan</span>
+        </div>
+      </div>
+
+      <div aria-hidden="true" style="position:absolute;left:0;right:0;top:0;height:calc(var(--p,0) * 13vh);background:#070102"></div>
+      <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:calc(var(--p,0) * 13vh);background:#070102"></div>
+    </div>
+  </section>
+
+  <section id="date" data-c style="position:relative;overflow:hidden;padding:clamp(90px,14vw,170px) clamp(20px,5vw,72px);background:#070102">
+    <div aria-hidden="true" style="position:absolute;left:0;top:50%;white-space:nowrap;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(160px,30vw,460px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(192,130,144,0.22);transform:translate3d(calc(var(--c,0) * 34vw - 10vw),-50%,0);pointer-events:none">09.01.27</div>
+    <div style="position:relative;max-width:1200px;margin:0 auto">
+      <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Opening night · Barasoain Church · 2:30 PM</p>
+      <h2 style="margin:0;max-width:14ch;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(40px,6.4vw,96px);line-height:0.98">Until we say <span style="font-style:italic;color:#E5B7C2">I do</span></h2>
+      <div style="margin-top:clamp(44px,6vw,80px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid rgba(246,237,233,0.85)">
+        <sc-for list="{{ count }}" as="c" hint-placeholder-count="4">
+          <div style="padding:clamp(16px,2.4vw,28px) clamp(6px,1.4vw,20px) 0 0;border-right:1px solid rgba(246,237,233,0.14)">
+            <div style="font-family:'Bodoni Moda',serif;font-size:clamp(40px,9vw,140px);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-0.02em">{{ c.v }}</div>
+            <div style="margin-top:10px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:#C08290">{{ c.l }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:clamp(36px,5vw,56px);display:flex;flex-wrap:wrap;gap:14px">
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Carlo+%26+Alexandra+%E2%80%94+Wedding&amp;dates=20270109T063000Z/20270109T150000Z&amp;location=Barasoain+Church,+Malolos,+Bulacan" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:18px;height:52px;padding:0 24px;border:1px solid rgba(246,237,233,0.5);color:#F6EDE9;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;transition:background .35s ease,color .35s ease" style-hover="background:#F6EDE9;color:#0E0305">Add to calendar <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" data-pin style="position:relative;height:420vh;background:#0E0305">
+    <div style="position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center">
+      <div aria-hidden="true" style="position:absolute;left:0;top:clamp(80px,13vh,120px);white-space:nowrap;font-family:'Bodoni Moda',serif;font-size:clamp(90px,16vw,240px);line-height:1;color:rgba(246,237,233,0.04);transform:translate3d(calc(var(--p,0) * -40vw),0,0);pointer-events:none">Our story in three acts · Our story in three acts</div>
+      <div id="c-track" style="position:relative;display:flex;align-items:center;gap:clamp(40px,7vw,120px);width:max-content;padding:0 clamp(20px,7vw,110px);transform:translate3d(calc(var(--p,0) * var(--dx,0) * -1px),0,0);will-change:transform">
+        <div style="flex:0 0 auto;width:min(78vw,560px)">
+          <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Sc. 02 — Our story</p>
+          <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(48px,7.4vw,112px);line-height:0.95">In three <span style="font-style:italic;color:#E5B7C2">acts</span></h2>
+          <div style="margin-top:34px;display:flex;align-items:center;gap:16px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(246,237,233,0.7)"><span style="width:60px;height:1px;background:#C08290"></span>Keep scrolling</div>
+        </div>
+        <sc-for list="{{ story }}" as="s" hint-placeholder-count="3">
+          <article data-hc style="flex:0 0 auto;position:relative;display:flex;flex-wrap:wrap;align-items:flex-end;gap:clamp(22px,3vw,48px);width:min(86vw,1040px)">
+            <div aria-hidden="true" style="position:absolute;right:0;top:-0.32em;font-family:'Bodoni Moda',serif;font-size:clamp(120px,20vw,320px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(192,130,144,0.38);transform:translate3d(calc(var(--h,0) * 24vw),0,0);pointer-events:none">{{ s.year }}</div>
+            <div style="position:relative;flex:1 1 300px;max-width:560px;height:min(58vh,560px);overflow:hidden;background:#1a0509">
+              <div style="position:absolute;inset:0 -14%;transform:translate3d(calc(var(--h,0) * -12%),0,0)">
+                <image-slot id="{{ s.slot }}" shape="rect" fit="cover" placeholder="{{ s.ph }}"></image-slot>
+              </div>
+              <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 120px rgba(7,1,2,0.6)"></div>
+            </div>
+            <div style="position:relative;flex:1 1 280px;max-width:400px;padding-bottom:8px">
+              <p style="margin:0 0 16px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Act {{ s.n }} · {{ s.year }}</p>
+              <h3 style="margin:0 0 16px;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(30px,3.6vw,50px);line-height:1.04">{{ s.title }}</h3>
+              <p style="margin:0;font-size:16px;line-height:1.8;font-weight:300;color:rgba(246,237,233,0.8);text-wrap:pretty">{{ s.body }}</p>
+            </div>
+          </article>
+        </sc-for>
+        <div style="flex:0 0 auto;width:12vw"></div>
+      </div>
+      <div style="position:absolute;left:clamp(20px,7vw,110px);right:clamp(20px,7vw,110px);bottom:clamp(90px,12vh,120px);height:1px;background:rgba(246,237,233,0.16)"><div style="height:100%;background:#C08290;transform-origin:left center;transform:scaleX(var(--p,0))"></div></div>
+    </div>
+  </section>
+
+  <section id="vow" data-pin aria-label="Thirteen years after a joke at our expense, we are making it permanent." style="position:relative;height:240vh;background:#3b000a">
+    <div style="position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:0 clamp(20px,6vw,80px)">
+      <div aria-hidden="true" style="position:absolute;left:0;top:14%;white-space:nowrap;font-family:'Bodoni Moda',serif;font-size:clamp(80px,13vw,200px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(246,237,233,0.12);transform:translate3d(calc(var(--p,0) * -50vw),0,0)">Carlo &amp; Alexandra · Carlo &amp; Alexandra · Carlo &amp; Alexandra</div>
+      <div aria-hidden="true" style="position:absolute;right:0;bottom:12%;white-space:nowrap;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(80px,13vw,200px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(229,183,194,0.16);transform:translate3d(calc(var(--p,0) * 50vw),0,0)">2012 — 2027 · 2012 — 2027 · 2012 — 2027</div>
+      <p aria-hidden="true" style="position:relative;margin:0;max-width:18ch;text-align:center;font-family:'Bodoni Moda',serif;font-size:clamp(34px,5.8vw,86px);line-height:1.1;text-wrap:balance">
+        <sc-for list="{{ vowWords }}" as="w" hint-placeholder-count="12"><span data-w style="opacity:0.14;font-style:{{ w.fs }};color:{{ w.col }}">{{ w.t }} </span></sc-for>
+      </p>
+    </div>
+  </section>
+
+  <section id="film" style="position:relative;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px);background:#070102;text-align:center">
+    <p style="margin:0 0 18px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Sc. 02b — Save the date</p>
+    <h2 style="margin:0 0 clamp(36px,5vw,64px);font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(36px,6vw,88px);line-height:1">Our film</h2>
+    <div style="position:relative;max-width:960px;margin:0 auto;height:clamp(260px,52vh,540px);background:#2a0007;overflow:hidden">
+      <video id="v2-std" src="https://github.com/carlodp/wedding-site/releases/download/assets/1.9.27.Carlo.-.Alexandra.STD.Revised.1.mp4" playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
+      <div id="v2-std-stub" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(246,237,233,0.1);pointer-events:none">
+        <span style="font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(246,237,233,0.4)">Save-the-date film</span>
+      </div>
+      <button id="v2-std-play" aria-label="Play our save the date" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;display:none;align-items:center;gap:14px;background:rgba(14,3,5,0.55);border:1px solid rgba(246,237,233,0.45);color:#F6EDE9;font-family:inherit;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;padding:18px 28px;cursor:pointer;backdrop-filter:blur(8px);transition:background .4s,border-color .4s">
+        <span aria-hidden="true" style="display:block;width:0;height:0;border-left:9px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent"></span>
+        Play our save the date
+      </button>
+    </div>
+  </section>
+
+  <section id="gallery" style="position:relative;padding:clamp(90px,12vw,150px) clamp(14px,3vw,48px) clamp(60px,8vw,110px);background:#0E0305;overflow:hidden">
+    <div data-c style="position:relative;max-width:1400px;margin:0 auto">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(40px,6vw,80px);padding:0 clamp(6px,2vw,24px)">
+        <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(64px,13vw,200px);line-height:0.86;transform:translate3d(calc(var(--c,0) * -14vw),0,0)">Stills</h2>
+        <p style="margin:0;max-width:30ch;font-size:11px;letter-spacing:0.3em;line-height:2;text-transform:uppercase;color:#C08290">Sc. 03 — Frames from thirteen years</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,2vw,28px);align-items:start">
+        <div style="display:grid;gap:clamp(8px,2vw,28px);transform:translate3d(0,calc(var(--c,0) * 120px),0)">
+          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-1" shape="rect" fit="cover" placeholder="Still 1"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-2" shape="rect" fit="cover" placeholder="Still 2"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:1/1;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-3" shape="rect" fit="cover" placeholder="Still 3"></image-slot></div></div>
+        </div>
+        <div style="display:grid;gap:clamp(8px,2vw,28px);margin-top:clamp(60px,12vw,180px);transform:translate3d(0,calc(var(--c,0) * -160px),0)">
+          <div data-unmask style="position:relative;aspect-ratio:2/3;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-4" shape="rect" fit="cover" placeholder="Still 4"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-5" shape="rect" fit="cover" placeholder="Still 5"></image-slot></div></div>
+        </div>
+        <div style="display:grid;gap:clamp(8px,2vw,28px);margin-top:clamp(20px,5vw,70px);transform:translate3d(0,calc(var(--c,0) * 60px),0)">
+          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-6" shape="rect" fit="cover" placeholder="Still 6"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:1/1;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-7" shape="rect" fit="cover" placeholder="Still 7"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-8" shape="rect" fit="cover" placeholder="Still 8"></image-slot></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="where" data-pin style="position:relative;height:230vh;background:#070102">
+    <div style="position:sticky;top:0;height:100vh;height:100svh;overflow:hidden">
+      <div style="position:absolute;inset:0;clip-path:inset(max(0%,calc((1 - var(--p,0) * 1.8) * 22%)) max(0%,calc((1 - var(--p,0) * 1.8) * 30%)))">
+        <img src="assets/barasoain-church.jpg" alt="Barasoain Church" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.8) contrast(1.05);transform:scale(calc(1.4 - min(1,var(--p,0) * 1.8) * 0.4 + var(--p,0) * 0.06))">
+        <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,1,2,0.88) 0%,rgba(7,1,2,0.45) 50%,rgba(7,1,2,0.1) 100%);opacity:calc((var(--p,0) - 0.4) * 3)"></div>
+      </div>
+      <div aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,72px);pointer-events:none;opacity:calc(1 - var(--p,0) * 3.2)">
+        <span style="font-family:'Bodoni Moda',serif;font-size:clamp(40px,7vw,110px);line-height:1">Scene I</span>
+        <span style="font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(40px,7vw,110px);line-height:1;color:#E5B7C2">2:30</span>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;padding:0 clamp(20px,5vw,72px) clamp(100px,14vh,140px);opacity:calc((var(--p,0) - 0.5) * 4);transform:translate3d(0,calc((1 - min(1,max(0,(var(--p,0) - 0.5) * 3))) * 40px),0)">
+        <p style="margin:0 0 16px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">Sc. 04 — The ceremony · 2:30 PM</p>
+        <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(46px,8vw,124px);line-height:0.94">Barasoain<br><span style="font-style:italic">Church</span></h2>
+        <p style="margin:20px 0 0;max-width:44ch;font-size:16px;line-height:1.75;font-weight:300;color:rgba(246,237,233,0.86);text-wrap:pretty">Our Lady of Mount Carmel Parish, Paseo del Congreso, Malolos. Please be seated by 2:00 PM — the processional begins promptly at half past two.</p>
+        <a href="https://maps.app.goo.gl/sjGYeUagkC9sWRh8A" target="_blank" rel="noopener" style="margin-top:24px;display:inline-flex;align-items:center;gap:16px;height:48px;padding:0 22px;border:1px solid rgba(246,237,233,0.6);color:#F6EDE9;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;transition:background .35s ease,color .35s ease" style-hover="background:#F6EDE9;color:#0E0305">Directions <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="reception" data-pin style="position:relative;height:230vh;background:#070102">
+    <div style="position:sticky;top:0;height:100vh;height:100svh;overflow:hidden">
+      <div style="position:absolute;inset:0;clip-path:inset(max(0%,calc((1 - var(--p,0) * 1.8) * 22%)) max(0%,calc((1 - var(--p,0) * 1.8) * 30%)))">
+        <img src="assets/placida-pavillion.jpg" alt="Placida Pavillion" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.8) contrast(1.05);transform:scale(calc(1.4 - min(1,var(--p,0) * 1.8) * 0.4 + var(--p,0) * 0.06))">
+        <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(270deg,rgba(7,1,2,0.88) 0%,rgba(7,1,2,0.45) 50%,rgba(7,1,2,0.1) 100%);opacity:calc((var(--p,0) - 0.4) * 3)"></div>
+      </div>
+      <div aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,72px);pointer-events:none;opacity:calc(1 - var(--p,0) * 3.2)">
+        <span style="font-family:'Bodoni Moda',serif;font-size:clamp(40px,7vw,110px);line-height:1">Scene II</span>
+        <span style="font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(40px,7vw,110px);line-height:1;color:#E5B7C2">5:30</span>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:flex-end;text-align:right;padding:0 clamp(20px,5vw,72px) clamp(100px,14vh,140px);opacity:calc((var(--p,0) - 0.5) * 4);transform:translate3d(0,calc((1 - min(1,max(0,(var(--p,0) - 0.5) * 3))) * 40px),0)">
+        <p style="margin:0 0 16px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">Sc. 05 — The reception · 5:30 PM</p>
+        <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(46px,8vw,124px);line-height:0.94">Placida<br><span style="font-style:italic">Pavillion</span></h2>
+        <p style="margin:20px 0 0;max-width:44ch;font-size:16px;line-height:1.75;font-weight:300;color:rgba(246,237,233,0.86);text-wrap:pretty">Events Place, Malolos — twenty minutes from the church. Doors open at half past five, dinner and programme to follow. Parking on site.</p>
+        <a href="https://maps.app.goo.gl/JYPcoUsfDagVbKRMA" target="_blank" rel="noopener" style="margin-top:24px;display:inline-flex;align-items:center;gap:16px;height:48px;padding:0 22px;border:1px solid rgba(246,237,233,0.6);color:#F6EDE9;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;transition:background .35s ease,color .35s ease" style-hover="background:#F6EDE9;color:#0E0305">Directions <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="day" style="position:relative;background:#0E0305;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px)">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(40px,6vw,100px);align-items:start">
+      <div style="position:sticky;top:110px">
+        <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Sc. 06 — Running order</p>
+        <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:0.96">How the ninth <span style="font-style:italic;color:#E5B7C2">unfolds</span></h2>
+        <div style="margin-top:clamp(30px,4vw,48px);display:grid;gap:22px">
+          <sc-for list="{{ travel }}" as="v" hint-placeholder-count="3">
+            <div style="border-top:1px solid rgba(246,237,233,0.18);padding-top:16px">
+              <p style="margin:0 0 8px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:#C08290">{{ v.kicker }} — {{ v.title }}</p>
+              <p style="margin:0;font-size:15px;line-height:1.75;font-weight:300;color:rgba(246,237,233,0.76);text-wrap:pretty">{{ v.body }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="border-top:2px solid rgba(246,237,233,0.85)">
+        <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="7">
+          <div data-focus style="display:grid;grid-template-columns:clamp(110px,14vw,170px) 1fr;gap:clamp(16px,2.4vw,32px);align-items:baseline;padding:clamp(22px,3.4vw,36px) 0;border-bottom:1px solid rgba(246,237,233,0.14);transition:opacity .3s linear">
+            <div style="font-family:'Bodoni Moda',serif;font-size:clamp(34px,4.6vw,64px);line-height:1;letter-spacing:-0.01em">{{ t.hour }}<span style="font-size:0.32em;letter-spacing:0.2em;margin-left:6px;color:#C08290;font-family:'Jost',sans-serif;vertical-align:0.6em">{{ t.mer }}</span></div>
+            <div>
+              <div style="font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(22px,2.4vw,30px);line-height:1.2">{{ t.label }}</div>
+              <p style="margin:8px 0 0;font-size:14px;line-height:1.7;font-weight:300;color:rgba(246,237,233,0.72)">{{ t.note }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="guide" data-c style="position:relative;overflow:hidden;background:#3b000a;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px)">
+    <div aria-hidden="true" style="position:absolute;left:0;top:clamp(30px,5vw,60px);white-space:nowrap;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(110px,20vw,320px);line-height:1;color:rgba(246,237,233,0.045);transform:translate3d(calc(var(--c,0) * 30vw - 8vw),0,0);pointer-events:none">Strictly black · Strictly black</div>
+    <div style="position:relative;max-width:1200px;margin:0 auto">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;padding-bottom:24px;border-bottom:2px solid #C08290">
+        <div>
+          <p style="margin:0 0 18px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">Sc. 07 — Wardrobe</p>
+          <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(40px,6vw,90px);line-height:0.98">Semi-formal, <span style="font-style:italic;color:#E5B7C2">strictly black</span></h2>
+        </div>
+        <p style="margin:0;font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:#E5B7C2">Dress code · Guests</p>
+      </div>
+      <div style="margin-top:clamp(28px,3.6vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:2px">
+        <div style="background:#F6EDE9;color:#2a0008;padding:clamp(26px,3.4vw,48px)">
+          <p style="margin:0 0 26px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#8C2338">Yes — please wear</p>
+          <p style="margin:0 0 8px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:26px;color:#650015">Ladies</p>
+          <ul style="margin:0 0 30px;padding:0;list-style:none;display:grid;gap:14px">
+            <sc-for list="{{ ladies }}" as="l" hint-placeholder-count="3"><li style="font-size:18px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:14px;text-wrap:pretty">{{ l }}</li></sc-for>
+          </ul>
+          <p style="margin:0 0 8px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:26px;color:#650015">Gentlemen</p>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:14px">
+            <sc-for list="{{ gentlemen }}" as="g" hint-placeholder-count="3"><li style="font-size:18px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:14px;text-wrap:pretty">{{ g }}</li></sc-for>
+          </ul>
+        </div>
+        <div style="background:#1a0307;padding:clamp(26px,3.4vw,48px);display:flex;flex-direction:column">
+          <p style="margin:0 0 26px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#C08290">No — please avoid</p>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:22px">
+            <sc-for list="{{ avoid }}" as="x" hint-placeholder-count="3">
+              <li style="display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start"><span aria-hidden="true" style="font-family:'Bodoni Moda',serif;font-size:24px;color:#C08290;line-height:1">✕</span><span><span style="display:block;font-family:'Bodoni Moda',serif;font-size:clamp(22px,2.2vw,27px);line-height:1.25">{{ x.t }}</span><span style="display:block;margin-top:5px;font-size:14px;font-weight:300;color:rgba(246,237,233,0.66)">{{ x.why }}</span></span></li>
+            </sc-for>
+          </ul>
+          <div style="margin-top:auto;padding-top:34px">
+            <div style="position:relative;height:clamp(220px,28vw,320px);overflow:hidden">
+              <div style="position:absolute;inset:0;transition:opacity 1.1s ease;opacity:{{ a0 }}"><image-slot id="v2-g1" shape="rect" fit="cover" placeholder="Male attire reference"></image-slot></div>
+              <div style="position:absolute;inset:0;transition:opacity 1.1s ease;opacity:{{ a1 }}"><image-slot id="v2-g2" shape="rect" fit="cover" placeholder="Female attire reference"></image-slot></div>
+              <div style="position:absolute;inset:0;transition:opacity 1.1s ease;opacity:{{ a2 }}"><image-slot id="v2-g3" shape="rect" fit="cover" placeholder="Shoes &amp; accessories"></image-slot></div>
+              <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:linear-gradient(180deg,rgba(7,1,2,0) 0%,rgba(7,1,2,0.86) 72%);display:flex;align-items:flex-end;justify-content:space-between;gap:14px;pointer-events:none">
+                <span style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#F6EDE9">{{ attireCap }}</span>
+                <span style="display:flex;gap:7px"><span style="width:22px;height:2px;background:#C08290;opacity:{{ d0 }};transition:opacity .6s ease"></span><span style="width:22px;height:2px;background:#C08290;opacity:{{ d1 }};transition:opacity .6s ease"></span><span style="width:22px;height:2px;background:#C08290;opacity:{{ d2 }};transition:opacity .6s ease"></span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="entourage" style="position:relative;background:#070102;padding:clamp(100px,14vw,180px) clamp(20px,5vw,72px);text-align:center">
+    <div style="max-width:980px;margin:0 auto">
+      <p style="margin:0 0 22px;font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#C08290">Sc. 08 — The cast</p>
+      <p data-focus style="margin:0;font-size:12px;letter-spacing:0.5em;text-transform:uppercase;color:rgba(246,237,233,0.7)">Starring</p>
+      <h2 data-focus style="margin:18px 0 0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(46px,8vw,120px);line-height:0.96">Carlo <span style="font-style:italic;color:#E5B7C2">&amp;</span> Alexandra</h2>
+
+      <div data-focus style="margin-top:clamp(80px,10vw,130px)">
+        <p style="margin:0 0 28px;font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#C08290">Principal sponsors</p>
+        <div style="display:grid;gap:14px">
+          <sc-for list="{{ principalPairs }}" as="p" hint-placeholder-count="12">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:clamp(10px,2vw,24px);align-items:baseline">
+              <span style="text-align:right;font-family:'Bodoni Moda',serif;font-size:clamp(16px,2vw,22px);line-height:1.35">{{ p.a }}</span>
+              <span style="font-family:'Bodoni Moda',serif;font-style:italic;font-size:14px;color:#C08290">&amp;</span>
+              <span style="text-align:left;font-family:'Bodoni Moda',serif;font-size:clamp(16px,2vw,22px);line-height:1.35">{{ p.b }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="margin-top:clamp(80px,10vw,130px);display:grid;gap:clamp(40px,5vw,64px)">
+        <sc-for list="{{ credits }}" as="g" hint-placeholder-count="12">
+          <div data-focus style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,4vw,56px);align-items:baseline">
+            <p style="margin:0;text-align:right;font-size:11px;letter-spacing:0.32em;line-height:2;text-transform:uppercase;color:#C08290">{{ g.role }}</p>
+            <div style="text-align:left;display:grid;gap:6px">
+              <sc-for list="{{ g.names }}" as="n" hint-placeholder-count="2"><span style="font-family:'Bodoni Moda',serif;font-size:clamp(17px,2.1vw,24px);line-height:1.3">{{ n }}</span></sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin:clamp(60px,8vw,90px) 0 0;font-size:12px;font-weight:300;color:rgba(246,237,233,0.6)">{{ entourageNote }}</p>
+    </div>
+  </section>
+
+  <section id="notes" style="position:relative;background:#0E0305;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px)">
+    <div style="max-width:1200px;margin:0 auto">
+      <div data-c style="padding-bottom:clamp(70px,9vw,120px)">
+        <p style="margin:0 0 22px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Sc. 09 — A note on gifts</p>
+        <p style="margin:0;max-width:24ch;font-family:'Bodoni Moda',serif;font-size:clamp(32px,4.8vw,70px);line-height:1.1;text-wrap:balance">{{ giftBody }}</p>
+        <div style="margin-top:clamp(30px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,4vw,60px);border-top:1px solid rgba(246,237,233,0.2);padding-top:26px">
+          <p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(20px,2.2vw,27px);line-height:1.45;color:#E5B7C2;text-wrap:pretty">{{ giftEmphasis }}</p>
+          <p style="margin:0;font-size:16px;line-height:1.8;font-weight:300;color:rgba(246,237,233,0.78);text-wrap:pretty">{{ giftNote }}</p>
+        </div>
+      </div>
+      <div id="faq" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(30px,5vw,90px);align-items:start">
+        <div style="position:sticky;top:110px">
+          <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Sc. 10 — Questions</p>
+          <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:0.96">Before you <span style="font-style:italic;color:#E5B7C2">ask</span></h2>
+        </div>
+        <div style="border-top:2px solid rgba(246,237,233,0.85)">
+          <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="8">
+            <details style="border-bottom:1px solid rgba(246,237,233,0.16)">
+              <summary style="display:flex;justify-content:space-between;gap:20px;align-items:baseline;padding:22px 0;font-family:'Bodoni Moda',serif;font-size:clamp(19px,2.2vw,25px);line-height:1.3;color:#F6EDE9">
+                <span>{{ f.q }}</span><span aria-hidden="true" style="flex:0 0 auto;color:#C08290;font-family:'Jost',sans-serif;font-size:18px">+</span>
+              </summary>
+              <p style="margin:0;padding:0 0 26px;font-size:15px;line-height:1.85;font-weight:300;color:rgba(246,237,233,0.78);max-width:62ch;text-wrap:pretty">{{ f.a }}</p>
+            </details>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rsvp" data-c style="position:relative;overflow:hidden;background:#3b000a;padding:clamp(100px,13vw,170px) clamp(20px,5vw,72px)">
+    <div aria-hidden="true" style="position:absolute;left:0;bottom:4%;white-space:nowrap;font-family:'Bodoni Moda',serif;font-size:clamp(110px,20vw,320px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(246,237,233,0.1);transform:translate3d(calc(var(--c,0) * -30vw),0,0);pointer-events:none">Admit one · Admit one · Admit one</div>
+    <div style="position:relative;max-width:1100px;margin:0 auto">
+      <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">Sc. 11 — RSVP</p>
+      <h2 style="margin:0 0 clamp(36px,5vw,60px);font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(44px,7vw,108px);line-height:0.96">Reserve your <span style="font-style:italic;color:#E5B7C2">seat</span></h2>
+      <div style="display:flex;flex-wrap:wrap;background:#F6EDE9;color:#2a0008;box-shadow:0 40px 90px rgba(7,1,2,0.5);transform:rotate(calc(var(--c,0) * -2deg))">
+        <div style="flex:999 1 420px;min-width:0;padding:clamp(26px,4vw,52px)">
+          <p style="margin:0 0 10px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#8C2338">Kindly reply by {{ deadline }}</p>
+          <p style="margin:0 0 26px;max-width:52ch;font-size:16px;line-height:1.75;font-weight:400;text-wrap:pretty">Search for your name exactly as it appears on your invitation. Your entry already knows whether you have a plus one.</p>
+          <input id="rsvpQuery" type="text" placeholder="Your full name" aria-label="Your full name" style="width:100%;box-sizing:border-box;height:56px;padding:0 18px;background:transparent;border:1px solid rgba(42,0,8,0.4);color:#2a0008;font:inherit;font-size:16px;outline:none;margin-bottom:12px">
+          <a id="rsvpFindBtn" href="#rsvp" style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 22px;background:#650015;color:#F6EDE9;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;transition:background .3s ease" style-hover="background:#8C2338;color:#F6EDE9">Find my invitation <span aria-hidden="true">→</span></a>
+          <div id="rsvpDynamic" style="margin-top:14px"></div>
+          <div style="margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:16px">
+            <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+              <div style="border-top:1px solid rgba(42,0,8,0.2);padding-top:12px"><span style="font-family:'Bodoni Moda',serif;font-size:18px;color:#8C2338">{{ st.n }}</span><p style="margin:6px 0 0;font-size:13px;line-height:1.6">{{ st.text }}</p></div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex:1 1 220px;border-left:2px dashed rgba(42,0,8,0.3);padding:clamp(26px,4vw,52px) clamp(22px,3vw,36px);display:flex;flex-direction:column;justify-content:space-between;gap:28px;background:#EBD5DA">
+          <div>
+            <p style="margin:0;font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:#8C2338">Admit</p>
+            <p style="margin:6px 0 0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:40px;line-height:1;color:#650015">By name</p>
+          </div>
+          <div style="display:grid;gap:12px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase">
+            <div style="display:flex;justify-content:space-between;gap:10px;border-top:1px solid rgba(42,0,8,0.2);padding-top:10px"><span style="color:#8C2338">Date</span><span>09 · 01 · 27</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;border-top:1px solid rgba(42,0,8,0.2);padding-top:10px"><span style="color:#8C2338">Doors</span><span>2:00 PM</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;border-top:1px solid rgba(42,0,8,0.2);padding-top:10px"><span style="color:#8C2338">Venue</span><span>Barasoain</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="position:relative;background:#070102;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px) 120px;text-align:center">
+    <div aria-label="Alexandra and Carlo" style="width:clamp(80px,10vw,120px);aspect-ratio:1/1;margin:0 auto;background:#C08290;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center"></div>
+    <p style="margin:34px 0 0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(48px,9vw,140px);line-height:1">Until the ninth.</p>
+    <p style="margin:26px 0 0;font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:#C08290">Alexandra &amp; Carlo · 09 · 01 · 2027 · Malolos, Bulacan</p>
+    <p style="margin:20px 0 0;font-size:14px;font-weight:300;color:rgba(246,237,233,0.7)">Anything we have not answered — <a href="mailto:hello@example.com">hello@example.com</a></p>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  RSVP_API_URL = "https://script.google.com/macros/s/AKfycbyIQzu6DTXL4zoEpIdDgKriEB7cuaxpY-K5_H_c2HQR4AcKFo4yfj7S9FSPZWMfijOn/exec";
+  state = { hin: false, menu: false, playing: false, ai: 0, now: Date.now() };
+  d = {
+    story: [
+      { year: "2012", title: "How we met", body: "We met in college at FEU East Asia. We started talking because our peers kept teasing the two of us — ironically, that is exactly how it began." },
+      { year: "2022", title: "Talking again", body: "Ten years later a friend forced the connection back into place. We started talking again, and the rest is history." },
+      { year: "2025", title: "The proposal", body: "On the twentieth of December, Carlo asked. Thirteen years after a joke at our expense, we are making it permanent." },
+    ],
+    ladies: ["Long dress, midi dress or elegant separates in solid black", "Nude, gold or silver accessories only", "Heels or dressy flats — there is lawn and cobblestone"],
+    gentlemen: ["Black suit, or black barong with black slacks", "Black tie optional; no patterns or bold colours", "Black leather shoes"],
+    avoid: [
+      { t: "White, ivory or cream", why: "Reserved for the bride" },
+      { t: "Burgundy, mauve or gray", why: "Worn by the wedding party" },
+      { t: "Denim, shorts, rubber shoes", why: "Semi-formal, all evening" },
+    ],
+    principal: [
+      ["Mr. Orlando Dela Paz", "Mrs. Elizabeth Dela Paz"], ["Engr. Jesus Jessie Concepcion", "Engr. Aida Concepcion"], ["Mr. Ruben Lucena", "Mrs. Zenaida Lucena"],
+      ["Mr. Jap Concepcion", "Mrs. Adele Concepcion"], ["Mr. Lazaro Santos Jr.", "Mrs. Macrina Santos"], ["Mr. Arthur Cabantug", "Mrs. Cristy Cabantug"],
+      ["Engr. Joey Guerrero", "Mrs. Alice Guerrero"], ["Mr. Ariel Dones", "Mrs. Liezel Dones"], ["Mr. Enrique Balano", "Mrs. Elizabeth Balano"],
+      ["Mr. Resorte Medina Jr.", "Mrs. Virgina Medina"], ["Mr. Arlie Calera Arillo", "Mrs. Edwina Nolasco"], ["Mr. Eduardo Rongavilla", "Mrs. Imelda Rongavilla"],
+    ],
+    groups: [
+      { role: "Best Man", names: ["Benedick Bautista", "Sean Ashley Ortega"] },
+      { role: "Maid of Honour", names: ["Claudine Villa", "Keynan Sheen Malaran"] },
+      { role: "Groomsmen", names: ["Karl Anthony Sulit", "Justin Evangelista", "Zian Paulo Concepcion", "Richard Martin Santos", "Bobby Bryan Jallores", "Francis Daniele Decano", "John Paul Favoreal"] },
+      { role: "Bridesmaids", names: ["April Hernandez", "Jenny Cristel Estrella", "Mika Hara", "Joanna Rose Estrella", "Christine Lunzaga", "Princess Orveen Calderon", "Micah Morta"] },
+    ],
+    secondary: [
+      { role: "Flower Girls", names: "Freya Jane Dones · Ryelin Crishelle Gonzales · Caira Yzabelle Gonzales · Aryanna Caitleen Gonzales" },
+      { role: "Ring Bearer", names: "Bryana Cailee Gonzales" },
+      { role: "Cord Sponsors", names: "Joie Alanah Guerrero · Ernest John Balano" },
+      { role: "Candle Sponsors", names: "Joie Alyssa Guerrero · Rianne Johann Umali" },
+      { role: "Veil Sponsors", names: "Julie Anne Cristino · Dennis John Cristino" },
+      { role: "Bible Bearer", names: "Peyton Maximus Lucena" },
+      { role: "Arras Bearer", names: "Angelus Ichiro Mendoza" },
+    ],
+    timeline: [
+      { time: "1:45 PM", label: "Guests arrive", note: "Barasoain Church — ushers will seat you" },
+      { time: "2:30 PM", label: "The ceremony", note: "Processional, rites and vows" },
+      { time: "3:45 PM", label: "Photographs", note: "Family and entourage at the church" },
+      { time: "5:30 PM", label: "Reception opens", note: "Placida Pavillion — cocktails" },
+      { time: "6:15 PM", label: "Dinner & programme", note: "Toasts from the principal sponsors" },
+      { time: "8:30 PM", label: "First dance", note: "Then the floor is yours" },
+      { time: "10:00 PM", label: "Last song", note: "Safe drive home" },
+    ],
+    travel: [
+      { title: "Lawiswis Kawayan Resort", kicker: "Stay", body: "Our preparation venue and the easiest place to stay the night. Rooms are limited — book early and mention the wedding." },
+      { title: "From Metro Manila", kicker: "Drive", body: "About an hour and a half via NLEX to the Tabang or Balagtas exit. Leave earlier on a Saturday afternoon." },
+      { title: "Parking", kicker: "On the day", body: "Street and lot parking near Barasoain Church, and on-site parking at Placida Pavillion." },
+    ],
+    gift: {
+      body: "Your presence is the gift — you travelling to Malolos to stand with us.",
+      emphasis: "If you would like to give something, we would genuinely prefer a cash gift over a physical one.",
+      note: "We are building our first home together, and a contribution towards it goes further than anything we could unwrap. A card box will be waiting near the entrance at Placida Pavillion — no envelope is ever expected, and none will be counted.",
+    },
+    faqs: [
+      { q: "What does strictly black mean?", a: "Solid black, semi-formal attire for all guests — a black dress, or a black suit or barong. Burgundy, mauve and gray are reserved for the wedding party, and please leave white and ivory to the bride." },
+      { q: "Can I bring my children?", a: "We adore your little ones, but this is an adults-only celebration, with the exception of the children in our entourage. Please arrange care for the evening so you can enjoy it fully." },
+      { q: "Can I bring a plus one?", a: "Only if your invitation and your RSVP entry say so. Our guest list is at capacity, so a plus one can only be confirmed through the name on your invitation." },
+      { q: "Can I bring someone who wasn't invited?", a: "Respectfully, no. Every seat is assigned by name, and guests who are not on the list cannot be accommodated at the church or the reception." },
+      { q: "When should I arrive?", a: "Please be at Barasoain Church by 2:00 PM. The reception at Placida Pavillion opens at 5:30 PM." },
+      { q: "Is there a gift registry?", a: "No registry. If you would like to give something, we would honestly prefer a cash gift over a physical one — it goes towards our first home. A card box will be waiting near the entrance at the reception." },
+      { q: "Can I take photos?", a: "Yes, after the ceremony. We are keeping the processional and the vows unplugged so everyone sees it with their own eyes. Please share anything you take with us afterwards." },
+      { q: "What if my plans change?", a: "Let us know by November 30, 2026 so we can adjust the seating. After that date we can no longer make changes with the venue." },
+    ],
+    steps: ["Type your full name as printed on the invitation", "Confirm attendance for the church, the reception, or both", "Add your plus one only if your entry allows it", "Tell us about any dietary requirements"],
+    deadline: "30 November 2026",
+    note: "* Names marked with an asterisk are still to be confirmed.",
+    iso: "2027-01-09T14:30:00+08:00",
+  };
+
+  componentDidMount() {
+    this.preloader();
+    if (!document.getElementById("v2-pre")) setTimeout(() => this.heroIn(), 300);
+    this.grain();
+    this.scrollFx();
+    this.film();
+    this.initRsvp();
+    this.tick = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    this.slide = setInterval(() => this.setState((s) => ({ ai: (s.ai + 1) % 3 })), 3000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.tick); clearInterval(this.slide); clearInterval(this.grainT);
+    cancelAnimationFrame(this.fxRaf);
+  }
+
+  heroIn() { this.setState({ hin: true }); }
+
+  film() {
+    const v = document.getElementById("v2-std");
+    const btn = document.getElementById("v2-std-play");
+    const stub = document.getElementById("v2-std-stub");
+    const audio = document.getElementById("c-audio");
+    if (!v || !btn) return;
+    const ready = () => { if (stub) stub.remove(); btn.style.display = "flex"; };
+    v.addEventListener("loadeddata", ready);
+    if (v.readyState >= 2) ready();
+    v.addEventListener("error", () => { btn.style.display = "none"; });
+    let musicWas = false;
+    btn.addEventListener("click", () => {
+      musicWas = audio && !audio.paused && audio.volume > 0.01;
+      if (musicWas) audio.pause();
+      v.setAttribute("controls", "controls");
+      btn.style.opacity = "0";
+      setTimeout(() => { btn.style.display = "none"; }, 400);
+      v.play();
+    });
+    const back = () => { if (musicWas && audio) audio.play().catch(() => {}); musicWas = false; };
+    v.addEventListener("ended", back);
+    v.addEventListener("pause", () => { if (v.currentTime > 0 && !v.ended) back(); });
+    v.addEventListener("play", () => { if (audio && !audio.paused) { musicWas = true; audio.pause(); } });
+  }
+
+  initRsvp() {
+    const input = document.getElementById("rsvpQuery");
+    const btn = document.getElementById("rsvpFindBtn");
+    const out = document.getElementById("rsvpDynamic");
+    if (!input || !btn || !out) return;
+
+    const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[c]));
+
+    const api = (params, method) => {
+      if (method === "POST") {
+        return fetch(this.RSVP_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(params),
+        }).then((r) => r.json());
+      }
+      return fetch(this.RSVP_API_URL + "?" + new URLSearchParams(params).toString()).then((r) => r.json());
+    };
+
+    const setOut = (html) => { out.innerHTML = html; };
+    const msgBox = (text) => `<p style="margin:18px 0 0;font-size:16px;line-height:1.7;font-weight:300;color:rgba(42,0,8,0.78);text-align:center">${esc(text)}</p>`;
+
+    const renderForm = (household, prefill) => {
+      input.style.display = "none";
+      btn.style.display = "none";
+      const members = household.members || [];
+      const saved = prefill || {};
+      const attending = new Set(saved.attendingMembers && saved.attendingMembers.length ? saved.attendingMembers : members);
+
+      const memberRows = members.length > 1
+        ? `<p style="margin:0 0 8px;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6">Who's coming?</p>` +
+          members.map((m) => `
+            <label style="display:flex;align-items:center;gap:12px;font-size:17px;font-weight:300;padding:9px 0;color:#2a0008">
+              <input type="checkbox" data-member="${esc(m)}" ${attending.has(m) ? "checked" : ""}>
+              ${esc(m)}
+            </label>`).join("")
+        : "";
+
+      const plusOneBlock = household.plusOneAllowed ? `
+        <label style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:300;padding:8px 0;color:#2a0008">
+          <input type="checkbox" id="rsvpPlusOneToggle" ${saved.plusOneName ? "checked" : ""}>
+          I'll be bringing a plus one
+        </label>
+        <input id="rsvpPlusOneName" type="text" placeholder="Plus one's full name" value="${esc(saved.plusOneName || "")}" style="width:100%;box-sizing:border-box;background:transparent;color:#2a0008;border:none;border-bottom:1px solid rgba(42,0,8,0.35);padding:8px 0;margin:6px 0 14px;display:${saved.plusOneName ? "block" : "none"}">
+      ` : "";
+
+      setOut(`
+        <div>
+          <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#C08290;text-align:center">We found you</p>
+          <p style="margin:0 0 18px;font-size:18px;font-weight:300;opacity:0.85;text-align:center;color:#2a0008">${esc(members.join(", "))}</p>
+          <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6">Attending the church ceremony?</p>
+          <div style="display:flex;gap:10px;margin-bottom:18px">
+            <button type="button" data-yn="church" data-val="Yes" class="rsvp-dyn-toggle${saved.attendingChurch === "Yes" ? " is-active" : ""}">Yes</button>
+            <button type="button" data-yn="church" data-val="No" class="rsvp-dyn-toggle${saved.attendingChurch === "No" ? " is-active" : ""}">No</button>
+          </div>
+          <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6">Attending the reception?</p>
+          <div style="display:flex;gap:10px;margin-bottom:18px">
+            <button type="button" data-yn="reception" data-val="Yes" class="rsvp-dyn-toggle${saved.attendingReception === "Yes" ? " is-active" : ""}">Yes</button>
+            <button type="button" data-yn="reception" data-val="No" class="rsvp-dyn-toggle${saved.attendingReception === "No" ? " is-active" : ""}">No</button>
+          </div>
+          ${memberRows}
+          ${plusOneBlock}
+          <button type="button" id="rsvpSubmitBtn" class="rsvp-dyn-btn" style="display:block;width:100%;margin-top:20px;background:#C08290;color:#3b000a;padding:15px 20px;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer">${household.alreadyResponded ? "Update my RSVP" : "Send my RSVP"}</button>
+        </div>
+      `);
+
+      const state = { church: saved.attendingChurch || "", reception: saved.attendingReception || "" };
+      out.querySelectorAll("[data-yn]").forEach((b) => {
+        b.addEventListener("click", () => {
+          state[b.dataset.yn] = b.dataset.val;
+          out.querySelectorAll('[data-yn="' + b.dataset.yn + '"]').forEach((x) => x.classList.remove("is-active"));
+          b.classList.add("is-active");
+        });
+      });
+
+      const plusToggle = document.getElementById("rsvpPlusOneToggle");
+      const plusName = document.getElementById("rsvpPlusOneName");
+      if (plusToggle && plusName) {
+        plusToggle.addEventListener("change", () => {
+          plusName.style.display = plusToggle.checked ? "block" : "none";
+          if (!plusToggle.checked) plusName.value = "";
+        });
+      }
+
+      document.getElementById("rsvpSubmitBtn").addEventListener("click", () => {
+        const memberBoxes = Array.from(out.querySelectorAll("[data-member]"));
+        const attendingMembersNow = memberBoxes.length
+          ? memberBoxes.filter((cb) => cb.checked).map((cb) => cb.dataset.member)
+          : members.slice();
+        const payload = {
+          action: "submit",
+          householdId: household.householdId,
+          attendingChurch: state.church,
+          attendingReception: state.reception,
+          attendingMembers: attendingMembersNow,
+          plusOneName: plusToggle && plusToggle.checked ? plusName.value.trim() : "",
+        };
+        setOut(msgBox("Sending your RSVP…"));
+        api(payload, "POST").then((res) => {
+          if (res && res.ok) {
+            setOut(`
+              <div style="text-align:center">
+                <p style="margin:0;font-family:'Playfair Display',serif;font-size:32px;color:#C08290">Thank you</p>
+                <p style="margin:14px 0 0;font-size:16px;line-height:1.7;font-weight:300;color:#2a0008;opacity:0.8">We've saved your RSVP. See you on 9 January 2027.</p>
+              </div>
+            `);
+          } else {
+            setOut(msgBox("Something went wrong saving your RSVP — please try again in a moment."));
+          }
+        }).catch(() => setOut(msgBox("Something went wrong saving your RSVP — please try again in a moment.")));
+      });
+    };
+
+    const renderAlreadyResponded = (household) => {
+      input.style.display = "none";
+      btn.style.display = "none";
+      const saved = household.saved || {};
+      const statusCard = (label, value) => `
+        <div style="flex:1;border:1px solid rgba(42,0,8,0.25);padding:14px 10px">
+          <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.55">${label}</p>
+          <p style="margin:0;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;color:${value === "Yes" ? "#C08290" : "rgba(42,0,8,0.4)"}">${value === "Yes" ? "Attending" : "Not attending"}</p>
+        </div>`;
+
+      setOut(`
+        <div style="text-align:center;color:#2a0008">
+          <p style="margin:0 0 8px;font-size:15px;font-weight:300;opacity:0.7">You've already submitted an RSVP for</p>
+          <div style="margin:0 0 24px">
+            ${household.members.map((m) => `<p style="margin:0 0 4px;font-size:19px;font-family:'Playfair Display',serif;color:#2a0008">${esc(m)}</p>`).join("")}
+          </div>
+          <div style="display:flex;gap:10px;margin:0 0 ${saved.plusOneName ? "14px" : "24px"}">
+            ${statusCard("Church", saved.attendingChurch)}
+            ${statusCard("Reception", saved.attendingReception)}
+          </div>
+          ${saved.plusOneName ? `<p style="margin:0 0 24px;font-size:15px;font-weight:300;opacity:0.75">Plus one: <span style="color:#2a0008">${esc(saved.plusOneName)}</span></p>` : ""}
+          <p style="margin:0 0 14px;font-size:14px;font-weight:300;opacity:0.85">Want to make changes?</p>
+          <div style="display:flex;gap:10px">
+            <button type="button" id="rsvpEditYes" class="rsvp-dyn-toggle">Yes, update it</button>
+            <button type="button" id="rsvpEditNo" class="rsvp-dyn-toggle">No, that's correct</button>
+          </div>
+        </div>
+      `);
+      document.getElementById("rsvpEditYes").addEventListener("click", () => renderForm(household, saved));
+      document.getElementById("rsvpEditNo").addEventListener("click", () => {
+        setOut(`
+          <div style="text-align:center">
+            <p style="margin:0;font-family:'Playfair Display',serif;font-size:32px;color:#C08290">Good to know</p>
+            <p style="margin:14px 0 0;font-size:16px;line-height:1.7;font-weight:300;color:#2a0008;opacity:0.8">See you on 9 January 2027.</p>
+          </div>
+        `);
+      });
+    };
+
+    const runLookup = () => {
+      const q = input.value.trim();
+      if (!q) return;
+      btn.style.opacity = "0.6";
+      btn.style.pointerEvents = "none";
+      setOut(msgBox("Looking up your invitation…"));
+      api({ action: "lookup", query: q }).then((res) => {
+        btn.style.opacity = "";
+        btn.style.pointerEvents = "";
+        if (!res || !res.found) {
+          setOut(msgBox("We couldn't find that name — try typing it exactly as it appears on your invitation."));
+          return;
+        }
+        if (res.alreadyResponded) {
+          renderAlreadyResponded(res);
+        } else {
+          renderForm(res, res.saved);
+        }
+      }).catch(() => {
+        btn.style.opacity = "";
+        btn.style.pointerEvents = "";
+        setOut(msgBox("Something went wrong — please try again in a moment."));
+      });
+    };
+
+    btn.addEventListener("click", (e) => { e.preventDefault(); runLookup(); });
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); runLookup(); } });
+  }
+
+  startMusic() {
+    const a = document.getElementById("c-audio");
+    if (!a) return;
+    a.volume = 0.4;
+    a.play().then(() => this.setState({ playing: true })).catch(() => {});
+  }
+
+  preloader() {
+    const el = document.getElementById("v2-pre");
+    if (!el) return;
+    const ink = document.getElementById("v2-mono-draw");
+    if (ink && ink.getTotalLength) {
+      const L = ink.getTotalLength();
+      ink.style.strokeDasharray = L;
+      ink.style.strokeDashoffset = L;
+      requestAnimationFrame(() => {
+        ink.style.transition = "stroke-dashoffset 2.45s cubic-bezier(.5,.08,.35,1)";
+        ink.style.strokeDashoffset = "0";
+      });
+    }
+    el.style.display = "flex";
+    el.style.animation = "none";
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const content = document.getElementById("v2-pre-c");
+    const hint = document.getElementById("v2-pre-hint");
+    const cv = document.getElementById("v2-curtain");
+    let raf = 0, gl = null;
+    const finish = () => {
+      cancelAnimationFrame(raf);
+      el.style.display = "none";
+      document.body.style.overflow = prev;
+      if (gl && gl.getExtension("WEBGL_lose_context")) gl.getExtension("WEBGL_lose_context").loseContext();
+    };
+    const fade = (delay) => {
+      el.style.transition = "opacity .8s ease";
+      setTimeout(() => { el.style.opacity = "0"; this.heroIn(); }, delay);
+      setTimeout(finish, delay + 850);
+    };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { fade(1800); return; }
+    try { gl = cv.getContext("webgl", { antialias: true, alpha: true, premultipliedAlpha: false }); } catch (e) { gl = null; }
+    const VS = "precision highp float;attribute vec2 a;uniform float uSide,uT,uO;varying float vLit,vSheen,vAO,vV,vSh;" +
+      "float hash(float n){return fract(sin(n)*43758.5453);}" +
+      "float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);float n=i.x+i.y*57.;return mix(mix(hash(n),hash(n+1.),f.x),mix(hash(n+57.),hash(n+58.),f.x),f.y);}" +
+      "float ease(float x){x=clamp(x,0.,1.);return x<.5?4.*x*x*x:1.-pow(-2.*x+2.,3.)/2.;}" +
+      "float gath(float v,float sd){return uO<0.?0.:ease((uO-v*.42-sd*.07)/1.5);}" +
+      "float slide(float v,float sd){return uO<0.?0.:ease((uO-1.2-v*.26-sd*.05)/1.05);}" +
+      "float dep(float u,float v,float g,float sd){float sk=sd*17.3+3.;" +
+      "float w=(noise(vec2(u*3.1+sk,v*1.3))-.5)*1.9+(noise(vec2(u*8.7+sk,v*2.6+uT*.05))-.5)*.5;" +
+      "float ph=u*6.2831*(8.3+sd*.9)+w;" +
+      "float d=sin(ph)+.36*sin(ph*2.07+1.3+sk)+.16*sin(ph*3.9+sk*2.);" +
+      "float am=(.5+.8*noise(vec2(u*4.3+sk,v*.9+3.)))*(.78+.5*v);" +
+      "am*=1.+2.6*g;am*=mix(.3,1.,smoothstep(0.,.07,v));return d*am;}" +
+      "void main(){float u=a.x,v=a.y,sd=uSide;float g=gath(v,sd),s=slide(v,sd);" +
+      "float cl=1.05+sd*.03;float sp=cl*(1.-.8*g);float ou=-(sp+.3)*s;" +
+      "float tt=max(uO-v*.35,0.);float sw=uO<0.?0.:v*v*.075*sin(tt*4.3+.4)*exp(-tt*1.25)*(1.-s);" +
+      "float id=v*v*(.006*sin(uT*.8+u*2.6+sd*2.)+.004*sin(uT*1.7+u*5.+v*3.));" +
+      "float d=dep(u,v,g,sd);float e=.0015;float sl=(dep(u+e,v,g,sd)-d)/e;" +
+      "float xi=ou+u*sp+d*.005*(1.+g*1.5)+(sw+id)*(.25+.75*u);" +
+      "xi+=(noise(vec2(v*6.+sd*5.,uT*.25))-.5)*.03*smoothstep(.88,1.,u);" +
+      "float x=sd<.5?-1.+xi:1.-xi;float hem=(noise(vec2(u*12.+sd*9.,1.))-.5)*.012*smoothstep(.97,1.,v);" +
+      "gl_Position=vec4(x,1.02-v*2.06+hem,0.,1.);" +
+      "float k=clamp(sl*.018/max(sp,.06),-14.,14.);vec3 n=normalize(vec3(sd<.5?-k:k,-.15*v,1.));" +
+      "vec3 L=normalize(vec3(-.3,.5,.8));vLit=max(dot(n,L),0.);vSheen=pow(1.-abs(n.z),1.5);" +
+      "vAO=.55+.45*smoothstep(-1.6,1.2,d/(1.+2.6*g));vV=v;" +
+      "float gR=gath(v,1.),sR=slide(v,1.);float spR=1.08*(1.-.8*gR);float xR=1.-(-(spR+.3)*sR+spR);" +
+      "vSh=sd<.5?1.-.6*smoothstep(-.2,0.,x-xR):1.;}";
+    const FS = "precision mediump float;varying float vLit,vSheen,vAO,vV,vSh;" +
+      "float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}" +
+      "void main(){vec3 base=vec3(.40,.012,.07);vec3 sh=vec3(.86,.44,.54);" +
+      "vec3 c=base*(.16+1.05*vLit)*vAO;c+=sh*vSheen*.30*vAO;c+=vec3(.05,0.,.01)*(1.-vAO);" +
+      "c*=mix(.5,1.,smoothstep(0.,.16,vV))*mix(1.,.55,smoothstep(.78,1.,vV));c*=vSh;" +
+      "c*=.95+.08*h(gl_FragCoord.xy);gl_FragColor=vec4(c,1.);}";
+    let prog = null, uSide, uT, uO, nIdx = 0;
+    if (gl) {
+      const mk = (type, src) => { const sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh); if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(sh)); return null; } return sh; };
+      const vs = mk(gl.VERTEX_SHADER, VS), fs = mk(gl.FRAGMENT_SHADER, FS);
+      if (vs && fs) {
+        prog = gl.createProgram();
+        gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+        if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) prog = null;
+      }
+    }
+    if (!prog) {
+      cv.style.background = "#4a000f";
+      let seenF = false;
+      try { seenF = sessionStorage.getItem("v2-opened") === "1"; } catch (e) {}
+      const goF = () => { try { sessionStorage.setItem("v2-opened", "1"); } catch (e) {} if (this.startMusic) this.startMusic(); fade(0); };
+      el.addEventListener("click", goF, { once: true });
+      if (seenF) setTimeout(goF, 3300);
+      return;
+    }
+    const C = 260, R = 72, verts = [], idx = [];
+    for (let j = 0; j <= R; j++) for (let i = 0; i <= C; i++) verts.push(i / C, j / R);
+    for (let j = 0; j < R; j++) for (let i = 0; i < C; i++) {
+      const p = j * (C + 1) + i;
+      idx.push(p, p + 1, p + C + 1, p + 1, p + C + 2, p + C + 1);
+    }
+    nIdx = idx.length;
+    gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(idx), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, "a");
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    uSide = gl.getUniformLocation(prog, "uSide");
+    uT = gl.getUniformLocation(prog, "uT");
+    uO = gl.getUniformLocation(prog, "uO");
+    const size = () => {
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      cv.width = Math.round(cv.clientWidth * dpr);
+      cv.height = Math.round(cv.clientHeight * dpr);
+      gl.viewport(0, 0, cv.width, cv.height);
+    };
+    size();
+    window.addEventListener("resize", size, { passive: true });
+    let openAt = -1, first = true;
+    const t0 = performance.now();
+    const frame = (now) => {
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.uniform1f(uT, (now - t0) / 1000);
+      gl.uniform1f(uO, openAt < 0 ? -1 : (now - openAt) / 1000);
+      gl.uniform1f(uSide, 0); gl.drawElements(gl.TRIANGLES, nIdx, gl.UNSIGNED_SHORT, 0);
+      gl.uniform1f(uSide, 1); gl.drawElements(gl.TRIANGLES, nIdx, gl.UNSIGNED_SHORT, 0);
+      if (first) { first = false; cv.style.background = "transparent"; }
+      raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+    let seen = false;
+    try { seen = sessionStorage.getItem("v2-opened") === "1"; } catch (e) {}
+    let opened = false;
+    if (!seen) setTimeout(() => { if (!opened) hint.style.opacity = "1"; }, 3300);
+    const open = () => {
+      if (opened || performance.now() - t0 < 500) return;
+      opened = true;
+      try { sessionStorage.setItem("v2-opened", "1"); } catch (e) {}
+      if (this.startMusic) this.startMusic();
+      hint.style.opacity = "0";
+      content.style.transition = "opacity .55s ease,transform 1.2s cubic-bezier(.22,1,.36,1)";
+      content.style.opacity = "0";
+      content.style.transform = "scale(.94)";
+      el.style.cursor = "default";
+      openAt = performance.now();
+      setTimeout(() => this.heroIn(), 500);
+      setTimeout(finish, 2600);
+    };
+    el.addEventListener("click", open);
+    el.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); open(); } });
+    if (seen) setTimeout(open, 3300);
+  }
+
+  grain() {
+    const el = document.getElementById("c-grain");
+    if (!el) return;
+    const frames = [];
+    for (let f = 0; f < 4; f++) {
+      const c = document.createElement("canvas");
+      c.width = c.height = 140;
+      const x = c.getContext("2d");
+      const img = x.createImageData(140, 140);
+      for (let i = 0; i < img.data.length; i += 4) {
+        const v = Math.random() * 255;
+        img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
+        img.data[i + 3] = 255;
+      }
+      x.putImageData(img, 0, 0);
+      frames.push("url(" + c.toDataURL() + ")");
+    }
+    let k = 0;
+    el.style.backgroundImage = frames[0];
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    this.grainT = setInterval(() => {
+      k = (k + 1) % frames.length;
+      el.style.backgroundImage = frames[k];
+      el.style.backgroundPosition = Math.round(Math.random() * 140) + "px " + Math.round(Math.random() * 140) + "px";
+    }, 90);
+  }
+
+  scrollFx() {
+    const q = (s) => Array.from(document.querySelectorAll(s));
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const set = (el, k, v) => { const s = v.toFixed(4); if (el["_" + k] !== s) { el["_" + k] = s; el.style.setProperty(k, s); } };
+    const story = document.getElementById("story");
+    const track = document.getElementById("c-track");
+    const hero = document.getElementById("top");
+    const words = () => q("#vow [data-w]");
+    const sizeStory = () => {
+      if (!story || !track) return;
+      const dx = Math.max(0, track.scrollWidth - window.innerWidth);
+      story.style.setProperty("--dx", String(dx));
+      story.style.height = dx + window.innerHeight * 1.15 + "px";
+    };
+    sizeStory();
+    window.addEventListener("resize", sizeStory, { passive: true });
+    setTimeout(sizeStory, 800);
+    setTimeout(sizeStory, 2500);
+    let tx = 0, ty = 0, mx = 0, my = 0;
+    window.addEventListener("mousemove", (e) => { tx = e.clientX / window.innerWidth - 0.5; ty = e.clientY / window.innerHeight - 0.5; }, { passive: true });
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const frame = () => {
+      const vh = window.innerHeight, vw = window.innerWidth;
+      mx += (tx - mx) * 0.06; my += (ty - my) * 0.06;
+      if (hero) { set(hero, "--mx", reduce ? 0 : mx); set(hero, "--my", reduce ? 0 : my); }
+      q("[data-pin]").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -vh || r.top > vh * 2) return;
+        const p = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);
+        set(el, "--p", p);
+        if (el.id === "vow") {
+          const ws = words(), n = ws.length;
+          ws.forEach((w, i) => { const o = 0.14 + 0.86 * clamp(p * 1.3 * n - i, 0, 1); const s = o.toFixed(3); if (w._o !== s) { w._o = s; w.style.opacity = s; } });
+        }
+      });
+      q("[data-c]").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -vh || r.top > vh * 2) return;
+        set(el, "--c", clamp((r.top + r.height / 2 - vh / 2) / vh, -1.5, 1.5));
+      });
+      q("[data-unmask]").forEach((el) => {
+        const r = el.parentElement.getBoundingClientRect();
+        const own = el.getBoundingClientRect();
+        const top = own.top;
+        if (r.bottom < -vh || r.top > vh * 2) return;
+        set(el, "--q", clamp((vh - top) / (vh * 0.75), 0, 1));
+      });
+      q("[data-focus]").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -vh || r.top > vh * 2) return;
+        const c = Math.abs((r.top + r.height / 2 - vh * 0.5) / vh);
+        const o = (0.3 + 0.7 * (1 - clamp((c - 0.18) * 2.2, 0, 1))).toFixed(3);
+        if (el._o !== o) { el._o = o; el.style.opacity = o; }
+      });
+      q("[data-hc]").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.right < -vw || r.left > vw * 2) return;
+        set(el, "--h", clamp((r.left + r.width / 2 - vw / 2) / vw, -1.5, 1.5));
+      });
+      this.fxRaf = requestAnimationFrame(frame);
+    };
+    this.fxRaf = requestAnimationFrame(frame);
+  }
+
+  renderVals() {
+    const d = this.d, st = this.state;
+    const left = Math.max(0, new Date(d.iso).getTime() - st.now);
+    const pad = (n) => String(n).padStart(2, "0");
+    const count = [
+      { v: pad(Math.floor(left / 864e5)), l: "Days" },
+      { v: pad(Math.floor(left / 36e5) % 24), l: "Hours" },
+      { v: pad(Math.floor(left / 6e4) % 60), l: "Minutes" },
+      { v: pad(Math.floor(left / 1e3) % 60), l: "Seconds" },
+    ];
+    const roman = ["I", "II", "III", "IV"];
+    const words = "Thirteen years after a joke at our expense, we are making it".split(" ").map((t) => ({ t, fs: "normal", col: "#F6EDE9" }));
+    words.push({ t: "permanent.", fs: "italic", col: "#E5B7C2" });
+    const caps = ["Male attire reference", "Female attire reference", "Shoes & accessories"];
+    const credits = d.groups.map((g) => ({ role: g.role, names: g.names }))
+      .concat(d.secondary.map((s) => ({ role: s.role, names: s.names.split(" · ") })));
+    const nav = [["Opening", "#top"], ["Our story", "#story"], ["Our film", "#film"], ["Stills", "#gallery"], ["The ceremony", "#where"], ["The reception", "#reception"], ["Running order", "#day"], ["Wardrobe", "#guide"], ["The cast", "#entourage"], ["Questions", "#faq"], ["RSVP", "#rsvp"]]
+      .map((x, i) => ({ label: x[0], href: x[1], n: pad(i + 1) }));
+    const on = st.playing;
+    return {
+      hy: st.hin ? "0%" : "110%",
+      ho: st.hin ? 1 : 0,
+      count,
+      story: d.story.map((s, i) => ({ ...s, n: roman[i], slot: "c-act-" + (i + 1), ph: "Act " + roman[i] + " — " + s.year + " photo" })),
+      vowWords: words,
+      travel: d.travel,
+      timeline: d.timeline.map((t) => { const [h, m] = t.time.split(" "); return { ...t, hour: h, mer: m }; }),
+      ladies: d.ladies, gentlemen: d.gentlemen, avoid: d.avoid,
+      a0: st.ai === 0 ? 1 : 0, a1: st.ai === 1 ? 1 : 0, a2: st.ai === 2 ? 1 : 0,
+      d0: st.ai === 0 ? 1 : 0.3, d1: st.ai === 1 ? 1 : 0.3, d2: st.ai === 2 ? 1 : 0.3,
+      attireCap: caps[st.ai],
+      principalPairs: d.principal.map(([a, b]) => ({ a, b })),
+      credits,
+      entourageNote: d.note,
+      giftBody: d.gift.body, giftEmphasis: d.gift.emphasis, giftNote: d.gift.note,
+      faqs: d.faqs,
+      steps: d.steps.map((text, i) => ({ n: pad(i + 1), text })),
+      deadline: d.deadline,
+      nav,
+      menuOp: st.menu ? 1 : 0,
+      menuPe: st.menu ? "auto" : "none",
+      menuText: st.menu ? "Close" : "Menu",
+      toggleMenu: () => this.setState((s) => ({ menu: !s.menu })),
+      closeMenu: () => this.setState({ menu: false }),
+      soundText: on ? "Sound on" : "Sound off",
+      soundLabel: on ? "Turn music off" : "Turn music on",
+      eq1: on ? "12px" : "3px", eq2: on ? "7px" : "3px", eq3: on ? "10px" : "3px",
+      toggleSound: () => {
+        const a = document.getElementById("c-audio");
+        if (!a) return;
+        if (a.paused) this.startMusic();
+        else { a.pause(); this.setState({ playing: false }); }
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
