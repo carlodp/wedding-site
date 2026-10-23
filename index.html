@@ -68,13 +68,13 @@
     #c-rsvp-btn { display:none !important; }
     #m-bar { display:flex !important; }
     #hero-content { padding:0 20px calc(116px + env(safe-area-inset-bottom,0px)) !important; transform:translate3d(0,calc(var(--p,0) * -20vh),0) !important; }
-    #hero-h1 { font-size:25vw !important; line-height:0.9 !important; }
-    #hero-alex { font-size:17vw !important; padding-left:0 !important; }
+    #hero-h1 { font-size:19vw !important; line-height:0.9 !important; }
+    #hero-alex { padding-left:0 !important; }
     #film { height:230vh !important; }
     #film-sticky { display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; gap:24px !important; padding-bottom:calc(60px + env(safe-area-inset-bottom,0px)) !important; box-sizing:border-box !important; }
     #film-bg-text { font-size:42vw !important; top:14% !important; transform:translate3d(calc(var(--p,0) * -120vw + 10vw),0,0) !important; }
     #film-video-wrap { position:relative !important; inset:auto !important; clip-path:none !important; width:calc(62vw + min(1,var(--p,0) * 2.4) * 38vw) !important; max-width:100% !important; aspect-ratio:16/9; overflow:hidden !important; box-shadow:0 30px 70px rgba(0,0,0,0.6); background:#000 !important; }
-    #film-ui { position:relative !important; inset:auto !important; width:calc(100% - 40px) !important; padding:0 !important; height:56px !important; justify-content:flex-start !important; flex-direction:row !important; }
+    #film-ui { position:relative !important; inset:auto !important; width:calc(100% - 40px) !important; padding:0 !important; height:auto !important; justify-content:flex-start !important; flex-direction:row !important; }
     #film-ctl { position:relative !important; inset:auto !important; left:auto !important; right:auto !important; bottom:auto !important; width:calc(100% - 40px) !important; }
     #count-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
     #where > div > div:last-of-type, #reception > div > div:last-of-type { padding-bottom:calc(108px + env(safe-area-inset-bottom,0px)) !important; }
@@ -610,8 +610,8 @@ class Component extends DCLogic {
     const upd = () => this.setState({ fT: v.currentTime || 0, fD: v.duration || 0, fPaused: v.paused, fMuted: v.muted });
     ["timeupdate", "loadedmetadata", "play", "pause", "volumechange"].forEach((e) => v.addEventListener(e, upd));
     v.addEventListener("ended", () => this.filmStop());
-    v.addEventListener("error", () => this.setState({ fMissing: true }));
-    if (v.error) this.setState({ fMissing: true });
+    v.addEventListener("error", () => {});
+
     new IntersectionObserver((es) => {
       const vis = es[0].isIntersecting;
       if (vis) { if (v.paused && !this.state.fSound) v.play().catch(() => {}); }
@@ -1015,8 +1015,8 @@ class Component extends DCLogic {
     const fs = !!st.fSound;
     const pct = st.fD ? (st.fT / st.fD) * 100 : 0;
     return {
-      filmMissing: !!st.fMissing,
-      filmBtnDisplay: st.fMissing ? "none" : "flex",
+      filmMissing: false,
+      filmBtnDisplay: "flex",
       filmDim: fs ? 0 : 1,
       filmUiOp: fs ? 0 : 1, filmUiPe: fs ? "none" : "auto",
       filmCtlOp: fs ? 1 : 0, filmCtlPe: fs ? "auto" : "none",
