@@ -112,7 +112,7 @@
       <sc-for list="{{ nav }}" as="n" hint-placeholder-count="9">
         <a href="{{ n.href }}" onClick="{{ closeMenu }}" style="display:grid;grid-template-columns:52px 1fr;align-items:baseline;gap:12px;padding:clamp(12px,1.8vh,18px) 0;border-top:1px solid rgba(246,237,233,0.14);color:#F6EDE9;transition:color .3s ease,padding-left .4s cubic-bezier(.22,1,.36,1)" style-hover="color:#E5B7C2;padding-left:10px">
           <span style="font-size:10px;letter-spacing:0.3em;color:#C08290">SC. {{ n.n }}</span>
-          <span style="font-family:'Bodoni Moda',serif;font-size:clamp(26px,3.4vw,42px);line-height:1.1">{{ n.label }}</span>
+          <span style="font-family:'Bodoni Moda',serif;font-size:clamp(26px,3.4vw,42px);line-height:1.1;white-space:nowrap">{{ n.label }}</span>
         </a>
       </sc-for>
     </div>
