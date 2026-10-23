@@ -118,7 +118,7 @@
     </div>
   </nav>
 
-  <a href="#rsvp" style="position:fixed;right:clamp(16px,3vw,34px);bottom:clamp(16px,3vw,30px);z-index:60;display:flex;align-items:center;gap:14px;height:50px;padding:0 22px;background:#C08290;color:#0E0305;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;box-shadow:0 14px 40px rgba(0,0,0,0.45);transition:background .3s ease" style-hover="background:#F6EDE9;color:#0E0305">Reserve a seat <span aria-hidden="true" style="font-family:'Bodoni Moda',serif;font-size:18px;letter-spacing:0">→</span></a>
+  <a href="#rsvp" style="position:fixed;right:clamp(16px,3vw,34px);bottom:clamp(16px,3vw,30px);z-index:60;display:flex;align-items:center;gap:14px;height:50px;padding:0 22px;background:#C08290;color:#0E0305;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;box-shadow:0 14px 40px rgba(0,0,0,0.45);transition:background .3s ease,opacity .4s ease;opacity:{{ rsvpBtnOp }};pointer-events:{{ rsvpBtnPe }}" style-hover="background:#F6EDE9;color:#0E0305">Reserve a seat <span aria-hidden="true" style="font-family:'Bodoni Moda',serif;font-size:18px;letter-spacing:0">→</span></a>
 
   <section id="top" data-pin style="position:relative;height:190vh;background:#070102">
     <div style="position:sticky;top:0;height:100vh;height:100svh;overflow:hidden">
@@ -973,6 +973,7 @@ class Component extends DCLogic {
       filmDim: fs ? 0 : 1,
       filmUiOp: fs ? 0 : 1, filmUiPe: fs ? "none" : "auto",
       filmCtlOp: fs ? 1 : 0, filmCtlPe: fs ? "auto" : "none",
+      rsvpBtnOp: fs ? 0 : 1, rsvpBtnPe: fs ? "none" : "auto",
       filmDurText: st.fD ? fmt(st.fD) + " · Save the date" : "Save the date",
       filmTimeText: fmt(st.fT) + " / " + fmt(st.fD),
       filmPct: Math.round(pct), filmPctCss: pct.toFixed(2) + "%",
