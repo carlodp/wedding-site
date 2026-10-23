@@ -578,7 +578,7 @@ class Component extends DCLogic {
       { q: "Can I take photos?", a: "Yes, after the ceremony. We are keeping the processional and the vows unplugged so everyone sees it with their own eyes. Please share anything you take with us afterwards." },
       { q: "What if my plans change?", a: "Let us know by November 30, 2026 so we can adjust the seating. After that date we can no longer make changes with the venue." },
     ],
-    steps: ["Type your full name as printed on the invitation", "Confirm attendance for the church, the reception, or both", "Add your plus one only if your entry allows it", "Tell us about any dietary requirements"],
+    steps: ["Type your full name as printed on the invitation", "Confirm attendance for the church, the reception, or both", "Add your plus one only if your entry allows it"],
     deadline: "30 November 2026",
     note: "* Names marked with an asterisk are still to be confirmed.",
     iso: "2027-01-09T14:30:00+08:00",
@@ -654,8 +654,6 @@ class Component extends DCLogic {
         html += `<div style="margin-top:14px"><p style="margin:0 0 8px;font-size:12px;color:rgba(42,0,8,0.7)">Your plus one's name (if attending):</p>`;
         html += `<input type="text" id="rsvpPlusName" placeholder="Full name" value="${row._plusName || ''}" style="width:100%;box-sizing:border-box;height:44px;padding:0 14px;background:transparent;border:1px solid rgba(42,0,8,0.35);color:#2a0008;font:inherit;font-size:14px;outline:none"></div>`;
       }
-      html += `<div style="margin-top:14px"><p style="margin:0 0 8px;font-size:12px;color:rgba(42,0,8,0.7)">Dietary requirements (optional):</p>`;
-      html += `<input type="text" id="rsvpDiet" placeholder="e.g. vegetarian, nut allergy" value="${row._diet || ''}" style="width:100%;box-sizing:border-box;height:44px;padding:0 14px;background:transparent;border:1px solid rgba(42,0,8,0.35);color:#2a0008;font:inherit;font-size:14px;outline:none"></div>`;
       html += `<button id="rsvpSubmit" class="rsvp-dyn-btn" style="${cs}margin-top:16px;width:100%;height:50px;background:#650015;color:#F6EDE9;border:0;cursor:pointer;transition:background .3s ease,color .3s ease">Confirm RSVP →</button>`;
       html += `</div>`;
       show(html);
@@ -667,8 +665,7 @@ class Component extends DCLogic {
         const reception = dyn.querySelector('[data-key="reception"]').classList.contains("is-active");
         const attending = members.length > 1 ? members.filter((m, i) => dyn.querySelector(`[data-member="${i}"]`).checked) : members;
         const plusName = hasPlus ? (document.getElementById("rsvpPlusName") || {}).value || "" : "";
-        const diet = (document.getElementById("rsvpDiet") || {}).value || "";
-        const payload = { name: row.name, church, reception, attending: attending.join(","), plusName, diet };
+        const payload = { name: row.name, church, reception, attending: attending.join(","), plusName };
         const sb = document.getElementById("rsvpSubmit");
         if (sb) { sb.textContent = "Saving…"; sb.disabled = true; }
         fetch(this.RSVP_API_URL, { method: "POST", body: JSON.stringify(payload) })
