@@ -49,6 +49,11 @@
   @keyframes v2menuin { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   @keyframes v2spine { from { transform: scaleY(0); } to { transform: scaleY(1); } }
   @keyframes v2drawx { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  #rsvpDynamic .rsvp-dyn-toggle { flex: 1; background: transparent; color: #2a0008; border: 1px solid rgba(42,0,8,0.35); padding: 12px 16px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: background .3s ease, color .3s ease, border-color .3s ease; }
+  #rsvpDynamic .rsvp-dyn-toggle:hover { border-color: #C08290; }
+  #rsvpDynamic .rsvp-dyn-toggle.is-active { background: #C08290; color: #3b000a; border-color: #C08290; }
+  #rsvpDynamic .rsvp-dyn-btn:hover { background: #2a0008 !important; color: #F6EDE9 !important; }
+  #rsvpDynamic input[type="checkbox"] { accent-color: #C08290; width: 19px; height: 19px; }
   @keyframes v2rise { from { opacity: 0.15; transform: translateY(38px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes v2rot { from { transform: rotate(-24deg) scale(0.92); } to { transform: rotate(196deg) scale(1.08); } }
   @keyframes v2sway { 0%,100% { transform: translate3d(0,0,0) rotate(0deg); } 50% { transform: translate3d(14px,-10px,0) rotate(8deg); } }
@@ -428,8 +433,9 @@
         <div style="flex:999 1 420px;min-width:0;padding:clamp(26px,4vw,52px)">
           <p style="margin:0 0 10px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#8C2338">Kindly reply by {{ deadline }}</p>
           <p style="margin:0 0 26px;max-width:52ch;font-size:16px;line-height:1.75;font-weight:400;text-wrap:pretty">Search for your name exactly as it appears on your invitation. Your entry already knows whether you have a plus one.</p>
-          <input type="text" placeholder="Your full name" aria-label="Your full name" style="width:100%;box-sizing:border-box;height:56px;padding:0 18px;background:transparent;border:1px solid rgba(42,0,8,0.4);color:#2a0008;font:inherit;font-size:16px;outline:none;margin-bottom:12px">
-          <a href="#rsvp" style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 22px;background:#650015;color:#F6EDE9;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;transition:background .3s ease" style-hover="background:#8C2338;color:#F6EDE9">Find my invitation <span aria-hidden="true">→</span></a>
+          <input id="rsvpQuery" type="text" placeholder="Your full name" aria-label="Your full name" style="width:100%;box-sizing:border-box;height:56px;padding:0 18px;background:transparent;border:1px solid rgba(42,0,8,0.4);color:#2a0008;font:inherit;font-size:16px;outline:none;margin-bottom:12px">
+          <a id="rsvpFindBtn" href="#rsvp" style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 22px;background:#650015;color:#F6EDE9;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;transition:background .3s ease" style-hover="background:#8C2338;color:#F6EDE9">Find my invitation <span aria-hidden="true">→</span></a>
+          <div id="rsvpDynamic" style="margin-top:14px"></div>
           <div style="margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:16px">
             <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
               <div style="border-top:1px solid rgba(42,0,8,0.2);padding-top:12px"><span style="font-family:'Bodoni Moda',serif;font-size:18px;color:#8C2338">{{ st.n }}</span><p style="margin:6px 0 0;font-size:13px;line-height:1.6">{{ st.text }}</p></div>
@@ -461,6 +467,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  RSVP_API_URL = "https://script.google.com/macros/s/AKfycbyIQzu6DTXL4zoEpIdDgKriEB7cuaxpY-K5_H_c2HQR4AcKFo4yfj7S9FSPZWMfijOn/exec";
   state = { hin: false, menu: false, playing: false, ai: 0, now: Date.now() };
   d = {
     story: [
@@ -475,21 +482,26 @@ class Component extends DCLogic {
       { t: "Burgundy, mauve or gray", why: "Worn by the wedding party" },
       { t: "Denim, shorts, rubber shoes", why: "Semi-formal, all evening" },
     ],
-    principal: [],
+    principal: [
+      ["Mr. Orlando Dela Paz", "Mrs. Elizabeth Dela Paz"], ["Engr. Jesus Concepcion", "Engr. Aida Concepcion"], ["Mr. Ruben Lucena", "Mrs. Zenaida Lucena"],
+      ["Mr. Jap Concepcion", "Mrs. Adele Concepcion"], ["Mr. Jhun Santos", "Mrs. Mhac Santos"], ["Mr. Arthur Cabantug", "Mrs. Cristy Cabantug"],
+      ["Engr. Joey Guerrero", "Mrs. Alice Guererro"], ["Mr. Ariel Dones", "Mrs. Liezel Dones"], ["Mr. Enrique Balano", "Mrs. Elizabeth Balano"],
+      ["Engr. Buboy Medina", "Mrs. Beng Medina"], ["Mr. Boyboy Arillo", "Mrs. Edwina Nolasco"], ["Mr. John Doe *", "Mrs. Lina Cabrera"],
+    ],
     groups: [
-      { role: "Best Man", names: [] },
-      { role: "Maid of Honour", names: [] },
-      { role: "Groomsmen", names: [] },
-      { role: "Bridesmaids", names: [] },
+      { role: "Best Man", names: ["Benedick Bautista", "Sean Ashley Ortega"] },
+      { role: "Maid of Honour", names: ["Claudine Villa", "Keynan Sheen Malaran"] },
+      { role: "Groomsmen", names: ["Karl Anthony Sulit", "Justin Evangelista", "Zian Paulo Concepcion", "Richard Martin Santos", "Bobby Bryan Jallores", "Francis Daniele Decano", "John Paul Favoreal"] },
+      { role: "Bridesmaids", names: ["April Hernandez", "Jenny Christel Estrella", "Mika Hara", "Aira Candoleta", "Micah Morta", "Christine Buenaventura", "Princess Orveen Calderon", "Joanna Rose Estrella"] },
     ],
     secondary: [
-      { role: "Flower Girls", names: "" },
-      { role: "Ring Bearer", names: "" },
-      { role: "Cord Sponsors", names: "" },
-      { role: "Candle Sponsor", names: "" },
-      { role: "Veil Sponsors", names: "" },
-      { role: "Bible Bearer", names: "" },
-      { role: "Coin Bearer", names: "" },
+      { role: "Flower Girls", names: "Ryelin Crishelle Santos-Gonzales · Caira Yzabelle Santos-Gonzales · Aryanna Caitleen Santos-Gonzales · Freya Dones" },
+      { role: "Ring Bearer", names: "Bryana Cailee Santos-Gonzales" },
+      { role: "Cord Sponsors", names: "Joie Alanah Morris Guerrero · Ernest John Balano" },
+      { role: "Candle Sponsor", names: "Joie Alyssa Marie Guerrero" },
+      { role: "Veil Sponsors", names: "Dennis John Cristino · Julie Anne Concepcion-Cristino" },
+      { role: "Bible Bearer", names: "Maximus Lucena" },
+      { role: "Coin Bearer", names: "John Doe *" },
     ],
     timeline: [
       { time: "1:45 PM", label: "Guests arrive", note: "Barasoain Church — ushers will seat you" },
@@ -522,7 +534,7 @@ class Component extends DCLogic {
     ],
     steps: ["Type your full name as printed on the invitation", "Confirm attendance for the church, the reception, or both", "Add your plus one only if your entry allows it", "Tell us about any dietary requirements"],
     deadline: "30 November 2026",
-    note: "",
+    note: "* Names marked with an asterisk are still to be confirmed.",
     iso: "2027-01-09T14:30:00+08:00",
   };
 
@@ -532,6 +544,7 @@ class Component extends DCLogic {
     this.grain();
     this.scrollFx();
     this.film();
+    this.initRsvp();
     this.tick = setInterval(() => this.setState({ now: Date.now() }), 1000);
     this.slide = setInterval(() => this.setState((s) => ({ ai: (s.ai + 1) % 3 })), 3000);
   }
@@ -565,6 +578,189 @@ class Component extends DCLogic {
     v.addEventListener("ended", back);
     v.addEventListener("pause", () => { if (v.currentTime > 0 && !v.ended) back(); });
     v.addEventListener("play", () => { if (audio && !audio.paused) { musicWas = true; audio.pause(); } });
+  }
+
+  initRsvp() {
+    const input = document.getElementById("rsvpQuery");
+    const btn = document.getElementById("rsvpFindBtn");
+    const out = document.getElementById("rsvpDynamic");
+    if (!input || !btn || !out) return;
+
+    const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[c]));
+
+    const api = (params, method) => {
+      if (method === "POST") {
+        return fetch(this.RSVP_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(params),
+        }).then((r) => r.json());
+      }
+      return fetch(this.RSVP_API_URL + "?" + new URLSearchParams(params).toString()).then((r) => r.json());
+    };
+
+    const setOut = (html) => { out.innerHTML = html; };
+    const msgBox = (text) => `<p style="margin:18px 0 0;font-size:16px;line-height:1.7;font-weight:300;color:rgba(42,0,8,0.78);text-align:center">${esc(text)}</p>`;
+
+    const renderForm = (household, prefill) => {
+      input.style.display = "none";
+      btn.style.display = "none";
+      const members = household.members || [];
+      const saved = prefill || {};
+      const attending = new Set(saved.attendingMembers && saved.attendingMembers.length ? saved.attendingMembers : members);
+
+      const memberRows = members.length > 1
+        ? `<p style="margin:0 0 8px;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6">Who's coming?</p>` +
+          members.map((m) => `
+            <label style="display:flex;align-items:center;gap:12px;font-size:17px;font-weight:300;padding:9px 0;color:#2a0008">
+              <input type="checkbox" data-member="${esc(m)}" ${attending.has(m) ? "checked" : ""}>
+              ${esc(m)}
+            </label>`).join("")
+        : "";
+
+      const plusOneBlock = household.plusOneAllowed ? `
+        <label style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:300;padding:8px 0;color:#2a0008">
+          <input type="checkbox" id="rsvpPlusOneToggle" ${saved.plusOneName ? "checked" : ""}>
+          I'll be bringing a plus one
+        </label>
+        <input id="rsvpPlusOneName" type="text" placeholder="Plus one's full name" value="${esc(saved.plusOneName || "")}" style="width:100%;box-sizing:border-box;background:transparent;color:#2a0008;border:none;border-bottom:1px solid rgba(42,0,8,0.35);padding:8px 0;margin:6px 0 14px;display:${saved.plusOneName ? "block" : "none"}">
+      ` : "";
+
+      setOut(`
+        <div>
+          <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#C08290;text-align:center">We found you</p>
+          <p style="margin:0 0 18px;font-size:18px;font-weight:300;opacity:0.85;text-align:center;color:#2a0008">${esc(members.join(", "))}</p>
+          <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6">Attending the church ceremony?</p>
+          <div style="display:flex;gap:10px;margin-bottom:18px">
+            <button type="button" data-yn="church" data-val="Yes" class="rsvp-dyn-toggle${saved.attendingChurch === "Yes" ? " is-active" : ""}">Yes</button>
+            <button type="button" data-yn="church" data-val="No" class="rsvp-dyn-toggle${saved.attendingChurch === "No" ? " is-active" : ""}">No</button>
+          </div>
+          <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6">Attending the reception?</p>
+          <div style="display:flex;gap:10px;margin-bottom:18px">
+            <button type="button" data-yn="reception" data-val="Yes" class="rsvp-dyn-toggle${saved.attendingReception === "Yes" ? " is-active" : ""}">Yes</button>
+            <button type="button" data-yn="reception" data-val="No" class="rsvp-dyn-toggle${saved.attendingReception === "No" ? " is-active" : ""}">No</button>
+          </div>
+          ${memberRows}
+          ${plusOneBlock}
+          <button type="button" id="rsvpSubmitBtn" class="rsvp-dyn-btn" style="display:block;width:100%;margin-top:20px;background:#C08290;color:#3b000a;padding:15px 20px;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer">${household.alreadyResponded ? "Update my RSVP" : "Send my RSVP"}</button>
+        </div>
+      `);
+
+      const state = { church: saved.attendingChurch || "", reception: saved.attendingReception || "" };
+      out.querySelectorAll("[data-yn]").forEach((b) => {
+        b.addEventListener("click", () => {
+          state[b.dataset.yn] = b.dataset.val;
+          out.querySelectorAll('[data-yn="' + b.dataset.yn + '"]').forEach((x) => x.classList.remove("is-active"));
+          b.classList.add("is-active");
+        });
+      });
+
+      const plusToggle = document.getElementById("rsvpPlusOneToggle");
+      const plusName = document.getElementById("rsvpPlusOneName");
+      if (plusToggle && plusName) {
+        plusToggle.addEventListener("change", () => {
+          plusName.style.display = plusToggle.checked ? "block" : "none";
+          if (!plusToggle.checked) plusName.value = "";
+        });
+      }
+
+      document.getElementById("rsvpSubmitBtn").addEventListener("click", () => {
+        const memberBoxes = Array.from(out.querySelectorAll("[data-member]"));
+        const attendingMembersNow = memberBoxes.length
+          ? memberBoxes.filter((cb) => cb.checked).map((cb) => cb.dataset.member)
+          : members.slice();
+        const payload = {
+          action: "submit",
+          householdId: household.householdId,
+          attendingChurch: state.church,
+          attendingReception: state.reception,
+          attendingMembers: attendingMembersNow,
+          plusOneName: plusToggle && plusToggle.checked ? plusName.value.trim() : "",
+        };
+        setOut(msgBox("Sending your RSVP…"));
+        api(payload, "POST").then((res) => {
+          if (res && res.ok) {
+            setOut(`
+              <div style="text-align:center">
+                <p style="margin:0;font-family:'Playfair Display',serif;font-size:32px;color:#C08290">Thank you</p>
+                <p style="margin:14px 0 0;font-size:16px;line-height:1.7;font-weight:300;color:#2a0008;opacity:0.8">We've saved your RSVP. See you on 9 January 2027.</p>
+              </div>
+            `);
+          } else {
+            setOut(msgBox("Something went wrong saving your RSVP — please try again in a moment."));
+          }
+        }).catch(() => setOut(msgBox("Something went wrong saving your RSVP — please try again in a moment.")));
+      });
+    };
+
+    const renderAlreadyResponded = (household) => {
+      input.style.display = "none";
+      btn.style.display = "none";
+      const saved = household.saved || {};
+      const statusCard = (label, value) => `
+        <div style="flex:1;border:1px solid rgba(42,0,8,0.25);padding:14px 10px">
+          <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.55">${label}</p>
+          <p style="margin:0;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;color:${value === "Yes" ? "#C08290" : "rgba(42,0,8,0.4)"}">${value === "Yes" ? "Attending" : "Not attending"}</p>
+        </div>`;
+
+      setOut(`
+        <div style="text-align:center;color:#2a0008">
+          <p style="margin:0 0 8px;font-size:15px;font-weight:300;opacity:0.7">You've already submitted an RSVP for</p>
+          <div style="margin:0 0 24px">
+            ${household.members.map((m) => `<p style="margin:0 0 4px;font-size:19px;font-family:'Playfair Display',serif;color:#2a0008">${esc(m)}</p>`).join("")}
+          </div>
+          <div style="display:flex;gap:10px;margin:0 0 ${saved.plusOneName ? "14px" : "24px"}">
+            ${statusCard("Church", saved.attendingChurch)}
+            ${statusCard("Reception", saved.attendingReception)}
+          </div>
+          ${saved.plusOneName ? `<p style="margin:0 0 24px;font-size:15px;font-weight:300;opacity:0.75">Plus one: <span style="color:#2a0008">${esc(saved.plusOneName)}</span></p>` : ""}
+          <p style="margin:0 0 14px;font-size:14px;font-weight:300;opacity:0.85">Want to make changes?</p>
+          <div style="display:flex;gap:10px">
+            <button type="button" id="rsvpEditYes" class="rsvp-dyn-toggle">Yes, update it</button>
+            <button type="button" id="rsvpEditNo" class="rsvp-dyn-toggle">No, that's correct</button>
+          </div>
+        </div>
+      `);
+      document.getElementById("rsvpEditYes").addEventListener("click", () => renderForm(household, saved));
+      document.getElementById("rsvpEditNo").addEventListener("click", () => {
+        setOut(`
+          <div style="text-align:center">
+            <p style="margin:0;font-family:'Playfair Display',serif;font-size:32px;color:#C08290">Good to know</p>
+            <p style="margin:14px 0 0;font-size:16px;line-height:1.7;font-weight:300;color:#2a0008;opacity:0.8">See you on 9 January 2027.</p>
+          </div>
+        `);
+      });
+    };
+
+    const runLookup = () => {
+      const q = input.value.trim();
+      if (!q) return;
+      btn.style.opacity = "0.6";
+      btn.style.pointerEvents = "none";
+      setOut(msgBox("Looking up your invitation…"));
+      api({ action: "lookup", query: q }).then((res) => {
+        btn.style.opacity = "";
+        btn.style.pointerEvents = "";
+        if (!res || !res.found) {
+          setOut(msgBox("We couldn't find that name — try typing it exactly as it appears on your invitation."));
+          return;
+        }
+        if (res.alreadyResponded) {
+          renderAlreadyResponded(res);
+        } else {
+          renderForm(res, res.saved);
+        }
+      }).catch(() => {
+        btn.style.opacity = "";
+        btn.style.pointerEvents = "";
+        setOut(msgBox("Something went wrong — please try again in a moment."));
+      });
+    };
+
+    btn.addEventListener("click", (e) => { e.preventDefault(); runLookup(); });
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); runLookup(); } });
   }
 
   startMusic() {
