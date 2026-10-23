@@ -633,11 +633,12 @@ class Component extends DCLogic {
     const cs = "font-family:inherit;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;";
     const show = (html) => { dyn.innerHTML = html; };
     const err = (msg) => show(`<p style="margin:0;padding:14px 0;font-size:13px;color:#8C2338">${msg}</p>`);
-    const setTicket = (name, lines) => {
+    const setTicket = (name, lines, msg) => {
       const t = document.getElementById("rsvpTicket");
       if (!t) return;
       let h = `<p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(16px,2vw,24px);line-height:1.25;color:#650015">${name}</p>`;
       lines.forEach(l => { h += `<p style="margin:8px 0 0;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#8C2338">${l}</p>`; });
+      if (msg) h += `<p style="margin:18px 0 0;font-size:13px;line-height:1.7;color:#650015;font-family:'Bodoni Moda',serif;font-style:italic">${msg}</p>`;
       t.innerHTML = h;
     };
     const renderForm = (row, isEdit) => {
@@ -687,7 +688,7 @@ class Component extends DCLogic {
           .then(r => r.json())
           .then(res => {
             if (res.ok) {
-              setTicket(row.name, [attending ? "Confirmed ✦" : "Not attending", ...(plusName ? [`+1 · ${plusName}`] : [])]);
+              setTicket(row.name, [attending ? "Confirmed ✦" : "Not attending", ...(plusName ? [`+1 · ${plusName}`] : [])], attending ? "We can't wait to celebrate with you." : "We'll miss you. Thank you for letting us know.");
               show(`<p style="margin:0;padding:18px 0;font-size:15px;font-family:'Bodoni Moda',serif;font-style:italic;color:#650015">You're confirmed. See you on the ninth. ✦</p>`);
             } else err("Something went wrong. Please try again.");
           })
