@@ -50,7 +50,9 @@
     #v2-bottom { display: flex !important; }
     #v2-brandmeta { display: none !important; }
     #v2-cue { display: none !important; }
-    #v2-sound { bottom: calc(120px + env(safe-area-inset-bottom)) !important; left: 14px !important; font-size: 8.5px !important; padding: 9px 12px !important; min-height: 36px !important; }
+    #v2-sound { top: clamp(16px,2.4vw,26px) !important; bottom: auto !important; left: auto !important; right: calc(clamp(18px,3vw,34px) + 122px) !important; font-size: 8px !important; letter-spacing: 0.22em !important; padding: 0 12px !important; min-height: 46px !important; height: 46px !important; box-sizing: border-box !important; gap: 7px !important; align-items: center !important; }
+    body { padding-bottom: 82px !important; }
+    footer { padding-bottom: 18px !important; }
     #v2-menu { height: 100svh !important; max-height: 100svh !important; overflow: hidden !important; }
     #v2-menu > div:last-child { height: 100% !important; min-height: 0 !important; overflow: hidden !important; grid-template-columns: minmax(0,1fr) !important; grid-template-rows: minmax(0,auto) minmax(0,auto) !important; align-content: space-between !important; gap: clamp(10px,2svh,28px) !important; padding: max(62px,8.5svh) clamp(22px,6vw,40px) calc(clamp(12px,2.2svh,26px) + env(safe-area-inset-bottom)) !important; }
     #v2-menu > div:last-child > div:first-child > p:first-child { margin-bottom: clamp(6px,1.4svh,18px) !important; }
@@ -79,7 +81,7 @@
     #v2-herotext > div { margin-left: auto !important; margin-right: auto !important; }
     #v2-motes > div:nth-child(n+7) { display: none; }
     [data-petals] > div:nth-child(n+4) { display: none; }
-    body { padding-bottom: 66px; }
+
   }
   @media (hover: none) {
     a:active, details:active { opacity: 0.75; }
@@ -97,7 +99,7 @@
   @keyframes v2blink { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
   @keyframes v2eq { 0%,100% { height: 4px; } 50% { height: 12px; } }
   @media (max-width: 860px) { #v2-cta { display: none !important; } }
-  @media (max-width: 860px) { #v2-sound { bottom: calc(120px + env(safe-area-inset-bottom)) !important; } }
+
   @keyframes v2menuin { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   @keyframes v2spine { from { transform: scaleY(0); } to { transform: scaleY(1); } }
   @keyframes v2drawx { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -111,17 +113,15 @@
   @keyframes v2monobreathe { 0%, 100% { opacity: 0.035; } 50% { opacity: 0.085; } }
   @keyframes v2monoturn { from { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.06); } to { transform: rotate(360deg) scale(1); } }
   @media (prefers-reduced-motion: reduce) { #v2-pre { display: none !important; } }
-  #rsvpDynamic .rsvp-dyn-toggle { flex: 1; background: transparent; color: #F6EDE9; border: 1px solid rgba(246,237,233,0.35); padding: 12px 16px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: background .3s ease, color .3s ease, border-color .3s ease; }
-  #rsvpDynamic .rsvp-dyn-toggle:hover { border-color: #C08290; }
-  #rsvpDynamic .rsvp-dyn-toggle.is-active { background: #C08290; color: #3b000a; border-color: #C08290; }
-  #rsvpDynamic .rsvp-dyn-btn:hover { background: #F6EDE9 !important; }
-  #rsvpDynamic input[type="checkbox"] { accent-color: #C08290; width: 19px; height: 19px; }
 </style>
 </helmet>
 
-<div style="max-width:100%;overflow-x:hidden;background:#3b000a;font-family:'Jost',system-ui,sans-serif">
+<div style="max-width:100%;overflow-x:clip;background:#3b000a;font-family:'Jost',system-ui,sans-serif">
 
-  <div id="v2-pre" style="position:fixed;inset:0;z-index:300;background:#3b000a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;animation:v2preout .8s ease 3.1s forwards">
+  <div id="v2-pre" role="button" tabindex="0" aria-label="Enter the site" style="position:fixed;inset:0;z-index:300;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;outline:none;animation:v2preout .8s ease 3.1s forwards">
+    <canvas id="v2-curtain" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;display:block;background:#3b000a"></canvas>
+    <p id="v2-pre-hint" style="position:absolute;left:0;right:0;bottom:clamp(44px,10vh,88px);z-index:3;margin:0;text-align:center;font-size:10px;letter-spacing:0.42em;text-transform:uppercase;color:rgba(246,237,233,0.78);opacity:0;transition:opacity .6s ease">Tap to open</p>
+    <div id="v2-pre-c" style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px">
     <div style="position:relative;width:min(58vw,320px);aspect-ratio:1/1">
       <svg viewBox="0 0 1080 1080" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
         <path id="v2-mono-draw" d="M571.52,548.5c4.72-.53,10.7.81,15.18-.03,6.57-1.23,16.86-25.72,20.78-32.14,53.39-87.44,168.94-206.09,276-217.46,101.46-10.78,92.96,70.26,41.37,127.3-66.72,73.78-164.49,105.69-260.19,122.19-7.21,1.24-26.59,1.36-30.98,6.06-3.41,3.65-9.34,18.35-11.88,23.83-25.93,55.79-44.81,125.76-24.75,186.12,6.38,19.21,19.51,40.9,35.96,52.61,22.94-10.43,45.19-22.36,68.45-32.11,58.65-24.57,120.62-40.71,184.7-36.93,24.26-40.86,43.25-113.01,5.61-151.23-55.55-56.42-165.55,15.27-147.57,86.68.99,3.95,6.86,13.08,1.99,15.28-27.57-11.77-19.03-48.58-7.69-69.9,25.58-48.1,98.92-80.04,147.81-47.76,48.95,32.33,38.67,105.47,18.66,152.01-1.25,2.9-9.16,15.26-7.96,16.51,57.96,7.43,129.36,35.93,122.89,106.32-3.76,40.83-42.83,69.96-78.89,82.5-83.05,28.88-175.09,6.91-254.69-22.48-3.32-1.23-19.32-8.92-20.84-7.59l16.77,27.53c23.04,46.55-3.97,104.45-57.13,110.04-16.97,1.79-50.69-9.4-55.61-27.74-2.26-8.44,2.55-16.9,11.29-12.61,5.16,2.53,5.62,16.08,19.48,21.52,27,10.6,54.95-14.22,61.62-39.65,12.49-47.65-24.58-84.7-61.69-107.1-5.17-3.12-24.08-13.95-28.68-15.1-5.55-1.39-23.29,11.3-29.28,14.48-84.43,44.88-185.79,89.41-283.28,63.98-101.58-26.5-116.83-132.63-16.85-174.86,67.49-28.51,157.71-11.6,223.88,14.18,41.07,16,80.1,38.42,118.27,60.18l32.22-17.53c-7.96-7.63-17.92-14.57-25.01-22.9-47.91-56.24-46.5-136.14-23.54-202.9,1.86-5.42,18.5-41.75,16.81-43.37-6.6.71-14.99-2.65-19.12,4.02l-25.17,63.47c-6.14,4.28-12.9,7.6-19.65,10.78-5.77,2.72-21.19,9.72-26.77,10.3-2.79.29-2.14-.86-1.67-3.01l32.15-78.85-1.5-4.14c-14.49.32-29.02-.19-43.51.01-40.16.55-78.89,1-118.89-5.38-10.54-1.68-20.82-5.86-31.59-6.26-53.55,54.67-135.91,121.49-218.22,102.57-28.92-6.65-58.96-27.54-49.26-61.68,5.9-20.77,40.54-24.34,42.9-.62,1.69,17.02-22.68,15-20.92,29.94,2.49,21.12,41.57,28.1,58.63,27.45,58.36-2.24,115.5-43.14,156.16-82.03,2.85-2.72,17.9-17.1,17.92-19.15s-.91-2.17-2.34-3.02c-4.75-2.85-12.52-4.69-17.83-7.3-144.32-71.14-73.79-241.5,69.65-249.64,39.47-2.24,76.03,8.89,108.31,30.72,3.81,2.58,12.74,12.33,16.56,10.1,33.24-47.39,67.78-94.64,104.78-139.28,42.04-50.73,105.93-121.32,168.04-145.5,9.7-3.78,36.95-14.1,28.63,6.14-71.28,151.83-143.2,304.01-205.51,459.88-2.01,5.02-16.6,40.92-15.01,42.53ZM768.67,49.85c-5.11-3.83-43.76,21.24-50.16,25.89-54.46,39.54-103.4,99.96-144.88,152.78-26.09,33.22-50.76,67.65-75.52,101.81-2.3,6.54,7.53,13.13,11.18,18.15,27.21,37.36,39.69,75.02,41.08,121.31.15,4.97,1.98,9.46,0,15.22,2.27,2.61,6.96-8.99,7.55-10.3,5.55-12.29,9.66-25.51,14.94-37.98,56.31-133.02,115.61-266.48,195.82-386.89ZM379.13,473.89c35.92-44.46,68.46-91.7,102.37-137.69-73.18-72.67-200.65-46.77-236.06,50.99-21.82,60.23,6.16,119.1,64.53,143.03,4.17,1.71,14.17,6.33,17.71,3.33,17.28-19.76,34.99-39.28,51.45-59.66ZM916.31,420.97c19.62-22.15,48.01-63.56,32.07-93.79-16.39-31.09-67.44-18.54-93.04-7.5-78.33,33.75-160.77,127.49-203.33,200.16-1.68,2.87-11.84,20.63-10.35,22.05,97.33-10.07,208.29-45.99,274.65-120.92ZM491.81,345.22c-1.59-.64-3.12-.89-4.72-.14-45.88,65.95-93.74,130.81-147.78,190.2-3.11,5.33,6.81,6.51,10.95,7.58,46.56,12.01,109.1,11.01,157.04,8.24,4.53-.26,19.09,1.34,21.24-1.25,1.03-1.24,7.24-20.7,7.98-23.77,11.47-47.72,2.04-108.45-22.65-150.75-2.52-4.32-19.37-29.03-22.06-30.11ZM878.48,757.51c-41.01-2.8-78.84,5.09-117.75,16.53-33.18,9.76-86.03,29.37-114.72,48.01-6.46,4.2.7,6.96,5.33,9.75,63.58,38.35,145.97,15.39,196.16-33.88,3.42-3.35,34.04-37.61,30.97-40.41ZM987.76,793.81c-16.21-15.49-42.19-25.81-63.97-30.67-6.08-1.36-26.49-5.28-31.39-4.35-3.56.67-9.21,12.17-12.04,15.8-57.96,74.26-141.85,107.85-232.98,69.13-5.47-2.33-16.15-9.66-20.94-9.65-4.19,0-18.52,7.83-22.71,10.52-1.81,1.16-7.62,3.87-7.05,6.16,44.07,33.13,93.47,58.83,146.59,74.36,71,20.76,176.79,32.57,237.74-18.16,36.81-30.64,42.27-79.2,6.75-113.13ZM300.01,767.15c-135.41,5.37-163.22,144.22-25.42,171.45,63.98,12.64,135.88-6.98,194.38-32.96,30.63-13.6,60.13-30.52,89.29-46.95-18.56-11.59-38.29-22.2-57.91-32.03-46.56-23.33-94.5-43.75-145.47-55.63l-38.08-4.26-16.8.38Z" fill="none" stroke="#F6EDE9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(246,237,233,0.35))"></path>
@@ -132,7 +132,8 @@
       <p style="margin:0;font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,28px);letter-spacing:0.04em;color:#F6EDE9">Carlo <span style="color:#C08290">&amp;</span> Alexandra</p>
       <p style="margin:12px 0 0;font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">09 · 01 · 2027</p>
     </div>
-  </div>
+    </div>
+    </div>
 
   <div id="v2-prog" style="position:fixed;top:0;left:0;height:2px;width:0;background:#C08290;z-index:400;pointer-events:none"></div>
 
@@ -226,12 +227,12 @@
     </div>
   </div>
 
-  <div id="v2-bottom" style="position:fixed;bottom:0;left:0;right:0;z-index:56;display:none;align-items:center;justify-content:space-between;gap:14px;padding:11px 18px calc(11px + env(safe-area-inset-bottom));background:rgba(41,0,7,0.96);backdrop-filter:blur(12px);border-top:1px solid rgba(246,237,233,0.18)">
+  <div id="v2-bottom" style="position:fixed;bottom:0;left:0;right:0;z-index:56;display:none;align-items:center;justify-content:space-between;gap:14px;padding:6px 18px calc(6px + env(safe-area-inset-bottom));background:rgba(41,0,7,0.96);backdrop-filter:blur(12px);border-top:1px solid rgba(246,237,233,0.18)">
     <div>
       <div style="font-family:'Playfair Display',serif;font-size:17px;color:#F6EDE9;line-height:1.1">Carlo <span style="color:#C08290">&amp;</span> Alexandra</div>
       <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(246,237,233,0.6);margin-top:3px">09 · 01 · 2027 · Malolos</div>
     </div>
-    <a href="#rsvp" style="position:relative;overflow:hidden;isolation:isolate;flex:0 0 auto;min-width:150px;justify-content:center;font-size:10px;letter-spacing:0.26em;text-transform:uppercase;background:#C08290;color:#3b000a;padding:14px 28px;font-weight:500;min-height:46px;display:flex;align-items:center" style-before="content:'';position:absolute;top:0;bottom:0;left:0;width:44%;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0) 100%);animation:v2sweep 4.6s ease-in-out infinite">RSVP</a>
+    <a href="#rsvp" style="position:relative;overflow:hidden;isolation:isolate;flex:0 0 auto;min-width:150px;justify-content:center;font-size:10px;letter-spacing:0.26em;text-transform:uppercase;background:#C08290;color:#3b000a;padding:0 28px;font-weight:500;min-height:44px;height:44px;box-sizing:border-box;display:flex;align-items:center" style-before="content:'';position:absolute;top:0;bottom:0;left:0;width:44%;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0) 100%);animation:v2sweep 4.6s ease-in-out infinite">RSVP</a>
   </div>
 
   <div id="v2-topscrim" aria-hidden="true" style="position:fixed;top:0;left:0;right:0;height:132px;z-index:56;pointer-events:none;background:linear-gradient(180deg,rgba(24,0,4,0.72) 0%,rgba(24,0,4,0.34) 52%,rgba(24,0,4,0) 100%)"></div>
@@ -319,13 +320,30 @@
     </div>
   </section>
 
+  <section style="position:relative;overflow:hidden;padding:clamp(60px,8vw,96px) clamp(20px,5vw,26px);text-align:center;border-bottom:1px solid rgba(246,237,233,0.16)">
+    <p data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0 0 16px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Save the date</p>
+    <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(30px,4.4vw,54px);line-height:1.1">Scratch to <span style="font-style:italic;color:#C08290">reveal</span></h2>
+    <div data-reveal data-delay="120" style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;max-width:520px;margin:clamp(30px,4vw,44px) auto 0">
+      <div id="v2-scratch" style="position:relative;aspect-ratio:1.6/1;background:#F6EDE9;color:#3b000a;box-shadow:0 30px 70px rgba(24,0,4,0.45);overflow:hidden;user-select:none;-webkit-user-select:none">
+        <div style="position:absolute;inset:12px;border:1px solid rgba(101,0,21,0.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1.4vw,10px);padding:10px">
+          <span style="font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:#8C2338">Saturday</span>
+          <span style="font-family:'Playfair Display',serif;font-size:clamp(40px,10vw,68px);line-height:1;color:#650015">09 · 01 · 27</span>
+          <span style="font-size:clamp(10px,2.4vw,12px);letter-spacing:0.22em;text-transform:uppercase;color:#3b000a">2:30 PM · Barasoain Church</span>
+          <a id="v2-scratch-cta" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Carlo+%26+Alexandra+%E2%80%94+Wedding&amp;dates=20270109T063000Z/20270109T150000Z&amp;location=Barasoain+Church,+Malolos,+Bulacan" target="_blank" rel="noopener" style="margin-top:clamp(4px,1.2vw,10px);font-size:10px;letter-spacing:0.26em;text-transform:uppercase;font-weight:500;color:#F6EDE9;background:#650015;padding:11px 18px;transition:background .3s ease" style-hover="background:#8C2338;color:#F6EDE9">Add to calendar</a>
+        </div>
+        <canvas id="v2-scratch-cv" aria-label="Scratch card covering the wedding date" style="position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:crosshair"></canvas>
+      </div>
+      <p id="v2-scratch-hint" style="margin:18px 0 0;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(246,237,233,0.62);transition:opacity .5s ease">Use your finger or cursor</p>
+    </div>
+  </section>
+
   <section id="story" style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(64px,9vw,104px) clamp(20px,5vw,26px) 0;text-align:center">
     <div aria-hidden="true" style="position:absolute;left:calc(50% - 50vw - 8vw);top:2%;width:min(58vw,540px);aspect-ratio:1/1;pointer-events:none;background:#F6EDE9;opacity:0.05;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;animation:v2monodrift 26s ease-in-out infinite, v2monobreathe 13s ease-in-out infinite"></div>
     <p data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0 0 18px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290;animation:v2blink 5.5s ease-in-out infinite">Our Story</p>
     <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0 auto;max-width:20ch;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(32px,5vw,62px);line-height:1.1">It started as a joke</h2>
     <p data-reveal data-delay="120" style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:26px auto 0;max-width:60ch;font-size:17px;line-height:1.85;color:rgba(246,237,233,0.78);font-weight:300;text-wrap:pretty">It began as a joke at our expense in a college hallway in 2012 — teasing that pushed two strangers into conversation. Ten years, one forced reintroduction and a proposal later, we would love you there when we make it permanent.</p>
     <div data-reveal data-delay="200" style="opacity:0;transform:translateY(28px) scale(0.99);transition:opacity 1.2s ease,transform 1.2s ease;margin-top:56px;height:clamp(260px,52vh,520px);position:relative;overflow:hidden;background:#2a0007">
-      <video id="v2-std" data-src="https://github.com/carlodp/wedding-site/releases/download/assets/1.9.27.Carlo.-.Alexandra.STD.Revised.1.mp4" playsinline="playsinline" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
+      <video id="v2-std" src="https://github.com/carlodp/wedding-site/releases/download/assets/1.9.27.Carlo.-.Alexandra.STD.Revised.1.mp4" playsinline="playsinline" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
       <div id="v2-std-stub" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(24,0,4,0.32);border:1px solid rgba(246,237,233,0.16);pointer-events:none">
         <span style="display:block;width:26px;height:1px;background:rgba(192,130,144,0.7)"></span>
         <span style="font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(246,237,233,0.5);text-align:center;padding:0 18px">Save-the-date film</span>
@@ -335,19 +353,43 @@
         Play our save the date
       </button>
     </div>
-    <div style="margin-top:64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:44px;text-align:left">
-      <sc-for list="{{ story }}" as="s" hint-placeholder-count="3">
-        <div data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease">
-          <div style="height:1px;background:rgba(192,130,144,0.5);margin-bottom:18px;transform-origin:left center;animation:v2drawx linear both;animation-timeline:view();animation-range:entry 8% cover 34%"></div>
-          <div style="font-size:12px;letter-spacing:0.3em;color:#C08290">{{ s.year }}</div>
-          <h3 style="margin:14px 0 10px;font-family:'Playfair Display',serif;font-weight:400;font-size:24px">{{ s.title }}</h3>
-          <p style="margin:0;font-size:15px;line-height:1.8;color:rgba(246,237,233,0.72);font-weight:300;text-wrap:pretty">{{ s.body }}</p>
+    <div id="v2-chap" data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin-top:64px;text-align:left">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px">
+        <div id="v2-chap-years" style="display:flex;flex-wrap:wrap;gap:clamp(16px,3vw,36px)">
+          <sc-for list="{{ story }}" as="s" hint-placeholder-count="3">
+            <button data-chap-year style="background:none;border:0;padding:6px 0;font-family:'Playfair Display',serif;font-size:clamp(17px,2vw,21px);color:rgba(246,237,233,0.5);cursor:pointer;transition:color .4s ease">{{ s.year }}</button>
+          </sc-for>
         </div>
-      </sc-for>
+        <div style="display:flex;gap:10px">
+          <button data-chap="prev" aria-label="Previous chapter" style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(246,237,233,0.35);color:#F6EDE9;font-family:'Playfair Display',serif;font-size:22px;line-height:1;padding:0 0 3px;cursor:pointer;transition:background .35s ease,color .35s ease,border-color .35s ease" style-hover="background:#C08290;color:#3b000a;border-color:#C08290">‹</button>
+          <button data-chap="next" aria-label="Next chapter" style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(246,237,233,0.35);color:#F6EDE9;font-family:'Playfair Display',serif;font-size:22px;line-height:1;padding:0 0 3px;cursor:pointer;transition:background .35s ease,color .35s ease,border-color .35s ease" style-hover="background:#C08290;color:#3b000a;border-color:#C08290">›</button>
+        </div>
+      </div>
+      <div style="position:relative;height:1px;background:rgba(246,237,233,0.16);margin-bottom:26px"><div id="v2-chap-bar" style="position:absolute;left:0;top:-1px;height:3px;width:0;background:#C08290;transition:width .6s cubic-bezier(.22,1,.36,1)"></div></div>
+      <div id="v2-chap-track" style="display:flex;gap:clamp(14px,2.4vw,28px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 calc(-1 * clamp(20px,5vw,26px));padding:0 clamp(20px,5vw,26px) 6px;scroll-padding:0 clamp(20px,5vw,26px)">
+        <sc-for list="{{ story }}" as="s" hint-placeholder-count="3">
+          <article data-chap-card style="flex:0 0 min(84%,500px);scroll-snap-align:start;position:relative;overflow:hidden;box-sizing:border-box;background:rgba(24,0,4,0.34);border:1px solid rgba(246,237,233,0.16);padding:clamp(26px,3.4vw,40px);min-height:clamp(300px,34vw,360px);display:flex;flex-direction:column;justify-content:flex-end;transition:border-color .6s ease,opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1)">
+            <div aria-hidden="true" style="position:absolute;right:-3%;top:-6%;font-family:'Playfair Display',serif;font-size:clamp(110px,15vw,190px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(192,130,144,0.42);pointer-events:none">{{ s.year }}</div>
+            <p style="position:relative;margin:0 0 14px;font-size:10px;letter-spacing:0.36em;text-transform:uppercase;color:#C08290">Chapter {{ s.n }}</p>
+            <h3 style="position:relative;margin:0 0 12px;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(26px,3vw,34px);line-height:1.15">{{ s.title }}</h3>
+            <p style="position:relative;margin:0;font-size:16px;line-height:1.8;font-weight:300;color:rgba(246,237,233,0.78);text-wrap:pretty">{{ s.body }}</p>
+          </article>
+        </sc-for>
+      </div>
+      <p style="margin:16px 0 0;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(246,237,233,0.55)">Swipe or drag through our chapters</p>
     </div>
   </section>
 
-  <section id="gallery" data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1.1s cubic-bezier(.22,1,.36,1),transform 1.1s cubic-bezier(.22,1,.36,1);margin-top:clamp(64px,9vw,104px);border-top:1px solid rgba(246,237,233,0.16)">
+  <section id="v2-pin" aria-label="Thirteen years after a joke at our expense, we are making it permanent." style="position:relative;height:230vh;margin-top:clamp(64px,9vw,104px);border-top:1px solid rgba(246,237,233,0.16)">
+    <div style="position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;overflow:hidden;padding:0 clamp(20px,6vw,80px);text-align:center">
+      <div data-pin-mono aria-hidden="true" style="position:absolute;left:50%;top:50%;width:min(86vw,680px);aspect-ratio:1/1;translate:-50% -50%;background:#C08290;opacity:0.08;pointer-events:none;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center"></div>
+      <p style="position:relative;margin:0;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">2012 — 2027</p>
+      <p aria-hidden="true" style="position:relative;margin:0;max-width:19ch;font-family:'Playfair Display',serif;font-size:clamp(32px,5.6vw,80px);line-height:1.16;color:#F6EDE9;text-wrap:balance"><span data-w style="opacity:0.16;transition:opacity .25s linear">Thirteen</span> <span data-w style="opacity:0.16;transition:opacity .25s linear">years</span> <span data-w style="opacity:0.16;transition:opacity .25s linear">after</span> <span data-w style="opacity:0.16;transition:opacity .25s linear">a</span> <span data-w style="opacity:0.16;transition:opacity .25s linear">joke</span> <span data-w style="opacity:0.16;transition:opacity .25s linear">at</span> <span data-w style="opacity:0.16;transition:opacity .25s linear">our</span> <span data-w style="opacity:0.16;transition:opacity .25s linear">expense,</span> <span data-w style="opacity:0.16;transition:opacity .25s linear">we</span> <span data-w style="opacity:0.16;transition:opacity .25s linear">are</span> <span data-w style="opacity:0.16;transition:opacity .25s linear">making</span> <span data-w style="opacity:0.16;transition:opacity .25s linear">it</span> <span data-w style="opacity:0.16;transition:opacity .25s linear;font-style:italic;color:#C08290">permanent.</span></p>
+      <div style="position:absolute;left:50%;bottom:clamp(40px,8vh,70px);width:min(240px,50vw);height:1px;translate:-50% 0;background:rgba(246,237,233,0.18)"><div data-pin-bar style="height:100%;background:#C08290;transform-origin:left center;transform:scaleX(0)"></div></div>
+    </div>
+  </section>
+
+  <section id="gallery" data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1.1s cubic-bezier(.22,1,.36,1),transform 1.1s cubic-bezier(.22,1,.36,1);border-top:1px solid rgba(246,237,233,0.16)">
     <div id="v2-car" style="position:relative;overflow:hidden;touch-action:pan-y">
       <div id="v2-track" data-zoom-group style="display:flex;transition:transform .9s cubic-bezier(.22,1,.36,1);will-change:transform">
         <div data-slide data-zoom style="flex:0 0 33.3333%;height:clamp(240px,46vh,540px);position:relative;cursor:zoom-in;padding:0 1px;box-sizing:border-box">
@@ -570,6 +612,25 @@
           </div>
         </div>
       </div>
+      <div id="v2-route" data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease;margin-top:40px;text-align:left;border:1px solid rgba(246,237,233,0.22);background:rgba(24,0,4,0.22);padding:clamp(22px,3vw,34px)">
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px 20px">
+          <p style="margin:0;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#C08290">The route</p>
+          <p style="margin:0;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(246,237,233,0.7)">About 20 minutes by car · hover or tap to drive it</p>
+        </div>
+        <div id="v2-route-map" style="position:relative;margin:clamp(22px,3vw,32px) 0 clamp(14px,2vw,20px);aspect-ratio:5/1;min-height:90px">
+          <svg viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+            <path d="M40,140 C200,30 330,200 500,110 S800,20 960,60" fill="none" stroke="rgba(246,237,233,0.24)" stroke-width="2" stroke-dasharray="3 9" vector-effect="non-scaling-stroke"></path>
+            <path id="v2-route-line" d="M40,140 C200,30 330,200 500,110 S800,20 960,60" fill="none" stroke="#C08290" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+          </svg>
+          <span id="v2-route-car" aria-hidden="true" style="position:absolute;left:4%;top:70%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#F6EDE9;box-shadow:0 0 16px 5px rgba(244,221,226,0.55);opacity:0;transition:opacity .4s ease;pointer-events:none"></span>
+          <a data-route-pin href="https://maps.app.goo.gl/sjGYeUagkC9sWRh8A" target="_blank" rel="noopener" aria-label="Directions to Barasoain Church" style="position:absolute;left:4%;top:70%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:#C08290;box-shadow:0 0 0 6px rgba(192,130,144,0.2);transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease"></a>
+          <a data-route-pin href="https://maps.app.goo.gl/JYPcoUsfDagVbKRMA" target="_blank" rel="noopener" aria-label="Directions to Placida Pavillion" style="position:absolute;left:96%;top:30%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:#F6EDE9;box-shadow:0 0 0 6px rgba(246,237,233,0.16);transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease"></a>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:20px">
+          <div><div style="font-family:'Playfair Display',serif;font-size:clamp(17px,2vw,22px);line-height:1.25">Barasoain Church</div><div style="margin-top:4px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(246,237,233,0.62)">Ceremony · 2:30 PM</div></div>
+          <div style="text-align:right"><div style="font-family:'Playfair Display',serif;font-size:clamp(17px,2vw,22px);line-height:1.25">Placida Pavillion</div><div style="margin-top:4px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(246,237,233,0.62)">Reception · 5:30 PM</div></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -656,9 +717,9 @@
       <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:0;font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(34px,5.6vw,72px);line-height:1.06">Kindly reply by<br><span style="font-style:italic;color:#C08290">30 November 2026</span></h2>
       <p data-reveal data-delay="100" style="opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;margin:26px auto 0;max-width:56ch;font-size:16px;line-height:1.85;font-weight:300;color:rgba(246,237,233,0.78);text-wrap:pretty">Search for your name exactly as it appears on your invitation. Your entry already knows whether you have a plus one — if it does not offer you one, we sadly cannot accommodate it.</p>
       <div data-reveal data-delay="180" style="opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;max-width:560px;margin:44px auto 0;border:1px solid rgba(246,237,233,0.25);padding:34px">
-        <input id="rsvpQuery" type="text" placeholder="Type your full name or email" style="width:100%;box-sizing:border-box;background:transparent;color:#F6EDE9;border:1px solid rgba(246,237,233,0.35);padding:14px 16px;font-family:inherit;font-size:14px;text-align:center;text-transform:capitalize;margin-bottom:14px">
-        <a id="rsvpFindBtn" href="#rsvp" style="display:block;background:#C08290;color:#3b000a;padding:15px 20px;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:500" style-hover="background:#F6EDE9">Find my invitation</a>
-        <div id="rsvpDynamic" style="text-align:left"></div>
+        <input class="input" type="text" placeholder="Type your full name" style="width:100%;box-sizing:border-box;background:transparent;color:#F6EDE9;border-color:rgba(246,237,233,0.35);margin-bottom:14px">
+        <a href="#rsvp" style="display:block;background:#C08290;color:#3b000a;padding:15px 20px;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:500" style-hover="background:#F6EDE9">Find my invitation</a>
+        <p style="margin:20px 0 0;font-size:13px;line-height:1.7;opacity:0.6;font-weight:300">Runs on RSVPify — the guest list, seat counts and per-guest plus-one rules live there.</p>
       </div>
       <div style="max-width:820px;margin:44px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px;text-align:left">
         <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
@@ -699,7 +760,6 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  RSVP_API_URL = "https://script.google.com/macros/s/AKfycbyIQzu6DTXL4zoEpIdDgKriEB7cuaxpY-K5_H_c2HQR4AcKFo4yfj7S9FSPZWMfijOn/exec";
   d = {
     couple: {
   bride: "Alexandra",
@@ -756,43 +816,23 @@ class Component extends DCLogic {
   { name: "IronClad Gray", hex: "#4B5257" },
   { name: "Black", hex: "#0A0A0A" },
 ],
-    principal: [
-  ["Mr. Orlando Dela Paz", "Mrs. Elizabeth Dela Paz"],
-  ["Engr. Jesus Concepcion", "Engr. Aida Concepcion"],
-  ["Mr. Ruben Lucena", "Mrs. Zenaida Lucena"],
-  ["Mr. Jap Concepcion", "Mrs. Adele Concepcion"],
-  ["Mr. Jhun Santos", "Mrs. Mhac Santos"],
-  ["Mr. Arthur Cabantug", "Mrs. Cristy Cabantug"],
-  ["Engr. Joey Guerrero", "Mrs. Alice Guererro"],
-  ["Mr. Ariel Dones", "Mrs. Liezel Dones"],
-  ["Mr. Enrique Balano", "Mrs. Elizabeth Balano"],
-  ["Engr. Buboy Medina", "Mrs. Beng Medina"],
-  ["Mr. Boyboy Arillo", "Mrs. Edwina Nolasco"],
-  ["Mr. John Doe *", "Mrs. Lina Cabrera"],
-],
+    principal: [],
     groups: [
-  { role: "Best Man", names: ["Benedick Bautista", "Sean Ashley Ortega"] },
-  { role: "Maid of Honour", names: ["Claudine Villa", "Keynan Sheen Malaran"] },
-  {
-    role: "Groomsmen",
-    names: ["Karl Anthony Sulit", "Justin Evangelista", "Zian Paulo Concepcion", "Richard Martin Santos", "Bobby Bryan Jallores", "Francis Daniele Decano", "John Paul Favoreal"],
-  },
-  {
-    role: "Bridesmaids",
-    names: ["April Hernandez", "Jenny Christel Estrella", "Mika Hara", "Aira Candoleta", "Micah Morta", "Christine Buenaventura", "Princess Orveen Calderon", "Joanna Rose Estrella"],
-  },
-  { role: "Walang Papel", names: ["John Doe *", "Jane Doe *"] },
+  { role: "Best Man", names: [] },
+  { role: "Maid of Honour", names: [] },
+  { role: "Groomsmen", names: [] },
+  { role: "Bridesmaids", names: [] },
 ],
     secondary: [
-  { role: "Flower Girls", names: "Ryelin Crishelle Santos-Gonzales · Caira Yzabelle Santos-Gonzales · Aryanna Caitleen Santos-Gonzales · Freya Dones" },
-  { role: "Ring Bearer", names: "Bryana Cailee Santos-Gonzales" },
-  { role: "Cord Sponsors", names: "Joie Alanah Morris Guerrero & Ernest John Balano" },
-  { role: "Candle Sponsor", names: "Joie Alyssa Marie Guerrero" },
-  { role: "Veil Sponsors", names: "Dennis John Cristino & Julie Anne Concepcion-Cristino" },
-  { role: "Bible Bearer", names: "Maximus Lucena" },
-  { role: "Coin Bearer", names: "John Doe *" },
+  { role: "Flower Girls", names: "" },
+  { role: "Ring Bearer", names: "" },
+  { role: "Cord Sponsors", names: "" },
+  { role: "Candle Sponsor", names: "" },
+  { role: "Veil Sponsors", names: "" },
+  { role: "Bible Bearer", names: "" },
+  { role: "Coin Bearer", names: "" },
 ],
-    entourageNote: "* Names marked with an asterisk are still to be confirmed.",
+    entourageNote: "",
     places: [
   {
     time: "2:30 PM",
@@ -889,6 +929,7 @@ class Component extends DCLogic {
     "Type your full name as printed on the invitation",
     "Confirm attendance for the church, the reception, or both",
     "Add your plus one only if your entry allows it",
+    "Tell us about any dietary requirements",
   ],
 },
   };
@@ -987,27 +1028,410 @@ class Component extends DCLogic {
     }
     el.style.display = "flex";
     el.style.animation = "none";
-    void el.offsetWidth;
-    el.style.animation = "v2preout .8s ease 3.1s forwards";
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const done = () => {
+    const content = document.getElementById("v2-pre-c");
+    const hint = document.getElementById("v2-pre-hint");
+    const cv = document.getElementById("v2-curtain");
+    let raf = 0, gl = null;
+    const finish = () => {
+      cancelAnimationFrame(raf);
       el.style.display = "none";
       document.body.style.overflow = prev;
+      if (gl && gl.getExtension("WEBGL_lose_context")) gl.getExtension("WEBGL_lose_context").loseContext();
     };
-    const t = setTimeout(done, 4000);
-    el.addEventListener("click", () => { clearTimeout(t); done(); });
+    const fade = (delay) => {
+      el.style.transition = "opacity .8s ease";
+      setTimeout(() => { el.style.opacity = "0"; this.replayHero(); }, delay);
+      setTimeout(finish, delay + 850);
+    };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { fade(1800); return; }
+    try { gl = cv.getContext("webgl", { antialias: true, alpha: true, premultipliedAlpha: false }); } catch (e) { gl = null; }
+    const VS = "precision highp float;attribute vec2 a;uniform float uSide,uT,uO;varying float vLit,vSheen,vAO,vV,vSh;" +
+      "float hash(float n){return fract(sin(n)*43758.5453);}" +
+      "float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);float n=i.x+i.y*57.;return mix(mix(hash(n),hash(n+1.),f.x),mix(hash(n+57.),hash(n+58.),f.x),f.y);}" +
+      "float ease(float x){x=clamp(x,0.,1.);return x<.5?4.*x*x*x:1.-pow(-2.*x+2.,3.)/2.;}" +
+      "float gath(float v,float sd){return uO<0.?0.:ease((uO-v*.42-sd*.07)/1.5);}" +
+      "float slide(float v,float sd){return uO<0.?0.:ease((uO-1.2-v*.26-sd*.05)/1.05);}" +
+      "float dep(float u,float v,float g,float sd){float sk=sd*17.3+3.;" +
+      "float w=(noise(vec2(u*3.1+sk,v*1.3))-.5)*1.9+(noise(vec2(u*8.7+sk,v*2.6+uT*.05))-.5)*.5;" +
+      "float ph=u*6.2831*(8.3+sd*.9)+w;" +
+      "float d=sin(ph)+.36*sin(ph*2.07+1.3+sk)+.16*sin(ph*3.9+sk*2.);" +
+      "float am=(.5+.8*noise(vec2(u*4.3+sk,v*.9+3.)))*(.78+.5*v);" +
+      "am*=1.+2.6*g;am*=mix(.3,1.,smoothstep(0.,.07,v));return d*am;}" +
+      "void main(){float u=a.x,v=a.y,sd=uSide;float g=gath(v,sd),s=slide(v,sd);" +
+      "float cl=1.05+sd*.03;float sp=cl*(1.-.8*g);float ou=-(sp+.3)*s;" +
+      "float tt=max(uO-v*.35,0.);float sw=uO<0.?0.:v*v*.075*sin(tt*4.3+.4)*exp(-tt*1.25)*(1.-s);" +
+      "float id=v*v*(.006*sin(uT*.8+u*2.6+sd*2.)+.004*sin(uT*1.7+u*5.+v*3.));" +
+      "float d=dep(u,v,g,sd);float e=.0015;float sl=(dep(u+e,v,g,sd)-d)/e;" +
+      "float xi=ou+u*sp+d*.005*(1.+g*1.5)+(sw+id)*(.25+.75*u);" +
+      "xi+=(noise(vec2(v*6.+sd*5.,uT*.25))-.5)*.03*smoothstep(.88,1.,u);" +
+      "float x=sd<.5?-1.+xi:1.-xi;float hem=(noise(vec2(u*12.+sd*9.,1.))-.5)*.012*smoothstep(.97,1.,v);" +
+      "gl_Position=vec4(x,1.02-v*2.06+hem,0.,1.);" +
+      "float k=clamp(sl*.018/max(sp,.06),-14.,14.);vec3 n=normalize(vec3(sd<.5?-k:k,-.15*v,1.));" +
+      "vec3 L=normalize(vec3(-.3,.5,.8));vLit=max(dot(n,L),0.);vSheen=pow(1.-abs(n.z),1.5);" +
+      "vAO=.55+.45*smoothstep(-1.6,1.2,d/(1.+2.6*g));vV=v;" +
+      "float gR=gath(v,1.),sR=slide(v,1.);float spR=1.08*(1.-.8*gR);float xR=1.-(-(spR+.3)*sR+spR);" +
+      "vSh=sd<.5?1.-.6*smoothstep(-.2,0.,x-xR):1.;}";
+    const FS = "precision mediump float;varying float vLit,vSheen,vAO,vV,vSh;" +
+      "float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}" +
+      "void main(){vec3 base=vec3(.40,.012,.07);vec3 sh=vec3(.86,.44,.54);" +
+      "vec3 c=base*(.16+1.05*vLit)*vAO;c+=sh*vSheen*.30*vAO;c+=vec3(.05,0.,.01)*(1.-vAO);" +
+      "c*=mix(.5,1.,smoothstep(0.,.16,vV))*mix(1.,.55,smoothstep(.78,1.,vV));c*=vSh;" +
+      "c*=.95+.08*h(gl_FragCoord.xy);gl_FragColor=vec4(c,1.);}";
+    let prog = null, uSide, uT, uO, nIdx = 0;
+    if (gl) {
+      const mk = (type, src) => { const sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh); if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(sh)); return null; } return sh; };
+      const vs = mk(gl.VERTEX_SHADER, VS), fs = mk(gl.FRAGMENT_SHADER, FS);
+      if (vs && fs) {
+        prog = gl.createProgram();
+        gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+        if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) prog = null;
+      }
+    }
+    if (!prog) {
+      cv.style.background = "#4a000f";
+      let seenF = false;
+      try { seenF = sessionStorage.getItem("v2-opened") === "1"; } catch (e) {}
+      const goF = () => { try { sessionStorage.setItem("v2-opened", "1"); } catch (e) {} if (this.startMusic) this.startMusic(); fade(0); };
+      el.addEventListener("click", goF, { once: true });
+      if (seenF) setTimeout(goF, 3300);
+      return;
+    }
+    const C = 260, R = 72, verts = [], idx = [];
+    for (let j = 0; j <= R; j++) for (let i = 0; i <= C; i++) verts.push(i / C, j / R);
+    for (let j = 0; j < R; j++) for (let i = 0; i < C; i++) {
+      const p = j * (C + 1) + i;
+      idx.push(p, p + 1, p + C + 1, p + 1, p + C + 2, p + C + 1);
+    }
+    nIdx = idx.length;
+    gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(idx), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, "a");
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    uSide = gl.getUniformLocation(prog, "uSide");
+    uT = gl.getUniformLocation(prog, "uT");
+    uO = gl.getUniformLocation(prog, "uO");
+    const size = () => {
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      cv.width = Math.round(cv.clientWidth * dpr);
+      cv.height = Math.round(cv.clientHeight * dpr);
+      gl.viewport(0, 0, cv.width, cv.height);
+    };
+    size();
+    window.addEventListener("resize", size, { passive: true });
+    let openAt = -1, first = true;
+    const t0 = performance.now();
+    const frame = (now) => {
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.uniform1f(uT, (now - t0) / 1000);
+      gl.uniform1f(uO, openAt < 0 ? -1 : (now - openAt) / 1000);
+      gl.uniform1f(uSide, 0); gl.drawElements(gl.TRIANGLES, nIdx, gl.UNSIGNED_SHORT, 0);
+      gl.uniform1f(uSide, 1); gl.drawElements(gl.TRIANGLES, nIdx, gl.UNSIGNED_SHORT, 0);
+      if (first) { first = false; cv.style.background = "transparent"; }
+      raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+    let seen = false;
+    try { seen = sessionStorage.getItem("v2-opened") === "1"; } catch (e) {}
+    let opened = false;
+    if (!seen) setTimeout(() => { if (!opened) hint.style.opacity = "1"; }, 3300);
+    const open = () => {
+      if (opened || performance.now() - t0 < 500) return;
+      opened = true;
+      try { sessionStorage.setItem("v2-opened", "1"); } catch (e) {}
+      if (this.startMusic) this.startMusic();
+      hint.style.opacity = "0";
+      content.style.transition = "opacity .55s ease,transform 1.2s cubic-bezier(.22,1,.36,1)";
+      content.style.opacity = "0";
+      content.style.transform = "scale(.94)";
+      el.style.cursor = "default";
+      openAt = performance.now();
+      setTimeout(() => this.replayHero(), 500);
+      setTimeout(finish, 2600);
+    };
+    el.addEventListener("click", open);
+    el.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); open(); } });
+    if (seen) setTimeout(open, 3300);
+  }
+  replayHero() {
+    const top = document.getElementById("top");
+    if (!top || !top.getAnimations) return;
+    top.getAnimations({ subtree: true }).forEach((an) => {
+      const t = an.effect && an.effect.getTiming && an.effect.getTiming();
+      const d = t ? +t.delay || 0 : 0;
+      if (d < 3000) return;
+      an.effect.updateTiming({ delay: d - 2800 });
+      an.currentTime = 0;
+      an.play();
+    });
+  }
+  burst(host) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const r = host.getBoundingClientRect();
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    for (let i = 0; i < 26; i++) {
+      const p = document.createElement("div");
+      const sz = 7 + Math.random() * 9;
+      p.style.cssText = "position:fixed;left:" + cx + "px;top:" + cy + "px;width:" + sz + "px;height:" + sz + "px;margin:-" + sz / 2 + "px;z-index:450;pointer-events:none;border-radius:50% 0 50% 50%;background:" + (i % 3 ? "rgba(244,221,226,0.95)" : "#C08290");
+      document.body.appendChild(p);
+      const ang = Math.random() * Math.PI * 2, dist = 90 + Math.random() * Math.max(140, r.width * 0.55);
+      const dx = Math.cos(ang) * dist, dy = Math.sin(ang) * dist * 0.75;
+      const an = p.animate([
+        { transform: "translate(0,0) rotate(0deg) scale(.4)", opacity: 1 },
+        { transform: "translate(" + dx + "px," + dy + "px) rotate(" + (180 + Math.random() * 360) + "deg) scale(1)", opacity: 1, offset: 0.55 },
+        { transform: "translate(" + dx * 1.15 + "px," + (dy + 120) + "px) rotate(" + (360 + Math.random() * 360) + "deg) scale(.8)", opacity: 0 },
+      ], { duration: 1500 + Math.random() * 700, easing: "cubic-bezier(.22,1,.36,1)" });
+      an.onfinish = () => p.remove();
+    }
+  }
+  scratch() {
+    const wrap = document.getElementById("v2-scratch");
+    const cv = document.getElementById("v2-scratch-cv");
+    if (!wrap || !cv || !cv.getContext) return;
+    const ctx = cv.getContext("2d", { willReadFrequently: true });
+    let done = false, started = false, drawing = false, last = null, moves = 0;
+    const paint = () => {
+      if (done || started) return;
+      const r = wrap.getBoundingClientRect();
+      if (!r.width) return;
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      const W = r.width, H = r.height;
+      cv.width = Math.round(W * dpr);
+      cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.globalCompositeOperation = "source-over";
+      const g = ctx.createLinearGradient(0, 0, W, H);
+      g.addColorStop(0, "#A86676"); g.addColorStop(0.42, "#D9A7B3"); g.addColorStop(0.52, "#EBC9D1"); g.addColorStop(0.62, "#D19AA7"); g.addColorStop(1, "#9C5A6B");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+      ctx.globalAlpha = 0.1;
+      ctx.fillStyle = "#3b000a";
+      for (let i = 0; i < (W * H) / 50; i++) ctx.fillRect(Math.random() * W, Math.random() * H, 1, 1);
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = "rgba(59,0,10,0.35)";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(12.5, 12.5, W - 25, H - 25);
+      ctx.fillStyle = "#3b000a";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = "italic " + Math.round(Math.min(40, W / 11)) + "px 'Playfair Display', serif";
+      ctx.fillText("Our date", W / 2, H / 2 - 10);
+      ctx.font = "500 10px Jost, sans-serif";
+      if ("letterSpacing" in ctx) ctx.letterSpacing = "4px";
+      ctx.fillText("SCRATCH HERE", W / 2, H / 2 + 26);
+      if ("letterSpacing" in ctx) ctx.letterSpacing = "0px";
+    };
+    paint();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(paint);
+    window.addEventListener("resize", paint, { passive: true });
+    const pos = (e) => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    const stroke = (p) => {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.lineWidth = Math.max(36, cv.getBoundingClientRect().width / 11);
+      ctx.beginPath();
+      const f = last || { x: p.x - 0.1, y: p.y };
+      ctx.moveTo(f.x, f.y);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+      last = p;
+    };
+    const reveal = () => {
+      if (done) return;
+      done = true;
+      cv.style.transition = "opacity .9s ease";
+      cv.style.opacity = "0";
+      cv.style.pointerEvents = "none";
+      const hint = document.getElementById("v2-scratch-hint");
+      if (hint) hint.textContent = "See you there";
+      this.burst(wrap);
+      setTimeout(() => cv.remove(), 1000);
+    };
+    const check = () => {
+      if (done) return;
+      const data = ctx.getImageData(0, 0, cv.width, cv.height).data;
+      let clear = 0, tot = 0;
+      for (let i = 3; i < data.length; i += 80) { tot++; if (data[i] < 40) clear++; }
+      if (tot && clear / tot > 0.48) reveal();
+    };
+    cv.addEventListener("pointerdown", (e) => {
+      if (done) return;
+      drawing = true; started = true; last = null;
+      try { cv.setPointerCapture(e.pointerId); } catch (er) {}
+      stroke(pos(e));
+    });
+    cv.addEventListener("pointermove", (e) => {
+      if (!drawing) return;
+      stroke(pos(e));
+      if (++moves % 14 === 0) check();
+    });
+    const up = () => { if (!drawing) return; drawing = false; last = null; check(); };
+    cv.addEventListener("pointerup", up);
+    cv.addEventListener("pointercancel", up);
+  }
+  chapters() {
+    const track = document.getElementById("v2-chap-track");
+    if (!track) return;
+    const root = document.getElementById("v2-chap");
+    const cards = () => Array.from(track.querySelectorAll("[data-chap-card]"));
+    const years = () => Array.from(root.querySelectorAll("[data-chap-year]"));
+    const bar = document.getElementById("v2-chap-bar");
+    let active = 0;
+    const padL = () => parseFloat(getComputedStyle(track).paddingLeft) || 0;
+    const paint = () => {
+      const cs = cards();
+      if (!cs.length) return;
+      const x = track.scrollLeft;
+      let best = 0, bd = Infinity;
+      cs.forEach((c, i) => { const d = Math.abs(c.offsetLeft - padL() - x); if (d < bd) { bd = d; best = i; } });
+      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) best = cs.length - 1;
+      active = best;
+      cs.forEach((c, i) => {
+        c.style.borderColor = i === best ? "rgba(192,130,144,0.75)" : "rgba(246,237,233,0.16)";
+        c.style.opacity = i === best ? "1" : "0.62";
+      });
+      years().forEach((y, i) => { y.style.color = i === best ? "#C08290" : "rgba(246,237,233,0.5)"; });
+      if (bar) bar.style.width = ((best + 1) / cs.length) * 100 + "%";
+    };
+    const go = (i) => {
+      const cs = cards();
+      if (!cs.length) return;
+      const n = Math.max(0, Math.min(cs.length - 1, i));
+      track.scrollTo({ left: cs[n].offsetLeft - padL(), behavior: "smooth" });
+    };
+    let raf = 0;
+    track.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; paint(); }); }, { passive: true });
+    root.querySelectorAll("[data-chap]").forEach((b) => b.addEventListener("click", () => go(active + (b.dataset.chap === "next" ? 1 : -1))));
+    root.addEventListener("click", (ev) => {
+      const y = ev.target.closest("[data-chap-year]");
+      if (y) go(years().indexOf(y));
+    });
+    // mouse drag on desktop; touch uses native swipe + snap
+    let down = false, sx = 0, sl = 0, moved = false;
+    track.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse") return;
+      down = true; moved = false; sx = e.clientX; sl = track.scrollLeft;
+      track.style.scrollSnapType = "none";
+    });
+    window.addEventListener("pointermove", (e) => {
+      if (!down) return;
+      const dx = e.clientX - sx;
+      if (Math.abs(dx) > 4) moved = true;
+      track.scrollLeft = sl - dx;
+    });
+    window.addEventListener("pointerup", () => {
+      if (!down) return;
+      down = false;
+      const dx = track.scrollLeft - sl;
+      track.style.scrollSnapType = "x mandatory";
+      go(Math.abs(dx) > 60 ? active + (dx > 0 ? 1 : 0) : active);
+    });
+    track.addEventListener("dragstart", (e) => e.preventDefault());
+    paint();
+    setTimeout(paint, 600);
+  }
+  pin() {
+    const sec = document.getElementById("v2-pin");
+    if (!sec) return;
+    const words = Array.from(sec.querySelectorAll("[data-w]"));
+    const mono = sec.querySelector("[data-pin-mono]");
+    const bar = sec.querySelector("[data-pin-bar]");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      words.forEach((w) => { w.style.opacity = "1"; });
+      return;
+    }
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    let raf = 0;
+    const upd = () => {
+      raf = 0;
+      const r = sec.getBoundingClientRect();
+      const total = Math.max(1, r.height - window.innerHeight);
+      const p = clamp(-r.top / total, 0, 1);
+      const n = words.length;
+      words.forEach((w, i) => { w.style.opacity = (0.16 + 0.84 * clamp(p * 1.25 * n - i, 0, 1)).toFixed(3); });
+      if (mono) mono.style.transform = "scale(" + (0.8 + p * 0.32).toFixed(3) + ") rotate(" + (-14 + p * 28).toFixed(2) + "deg)";
+      if (bar) bar.style.transform = "scaleX(" + p.toFixed(3) + ")";
+    };
+    this.onPin = () => { if (!raf) raf = requestAnimationFrame(upd); };
+    window.addEventListener("scroll", this.onPin, { passive: true });
+    window.addEventListener("resize", this.onPin, { passive: true });
+    upd();
+  }
+  route() {
+    const box = document.getElementById("v2-route");
+    const line = document.getElementById("v2-route-line");
+    const car = document.getElementById("v2-route-car");
+    if (!box || !line || !line.getTotalLength) return;
+    const pins = Array.from(box.querySelectorAll("[data-route-pin]"));
+    const L = line.getTotalLength();
+    line.style.strokeDasharray = L + " " + L;
+    line.style.strokeDashoffset = String(L);
+    let running = false, drawn = false;
+    const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const glow = (i, on) => {
+      const p = pins[i];
+      if (!p) return;
+      p.style.transform = on ? "scale(1.45)" : "none";
+      p.style.boxShadow = on ? "0 0 0 10px rgba(192,130,144,0.28),0 0 26px 6px rgba(244,221,226,0.35)" : (i ? "0 0 0 6px rgba(246,237,233,0.16)" : "0 0 0 6px rgba(192,130,144,0.2)");
+    };
+    const drive = () => {
+      if (running || !drawn) return;
+      running = true;
+      car.style.opacity = "1";
+      glow(0, true);
+      const t0 = performance.now(), dur = 2600;
+      const step = (now) => {
+        const t = Math.min(1, (now - t0) / dur);
+        const pt = line.getPointAtLength(L * ease(t));
+        car.style.left = pt.x / 10 + "%";
+        car.style.top = pt.y / 2 + "%";
+        if (t > 0.15) glow(0, false);
+        if (t < 1) { requestAnimationFrame(step); return; }
+        glow(1, true);
+        setTimeout(() => { glow(1, false); car.style.opacity = "0"; running = false; }, 900);
+      };
+      requestAnimationFrame(step);
+    };
+    const io = new IntersectionObserver((es) => {
+      if (!es[0].isIntersecting) return;
+      io.disconnect();
+      line.style.transition = "stroke-dashoffset 2.2s cubic-bezier(.5,.08,.35,1) .35s";
+      line.style.strokeDashoffset = "0";
+      setTimeout(() => { drawn = true; drive(); }, 2400);
+    }, { threshold: 0.45 });
+    io.observe(box);
+    box.addEventListener("mouseenter", drive);
+    box.addEventListener("click", (ev) => { if (!ev.target.closest("a")) drive(); });
+    const venues = Array.from(document.querySelectorAll("#where [data-zoom-group] > div"));
+    venues.forEach((v, i) => {
+      v.addEventListener("mouseenter", () => glow(i, true));
+      v.addEventListener("mouseleave", () => glow(i, false));
+    });
+    pins.forEach((p, i) => {
+      p.addEventListener("mouseenter", () => { glow(i, true); if (venues[i]) venues[i].style.borderColor = "#C08290"; });
+      p.addEventListener("mouseleave", () => { glow(i, false); if (venues[i]) venues[i].style.borderColor = ""; });
+    });
   }
   componentDidMount() {
     this.sound();
     this.preloader();
     this.reveal();
     this.tick();
-    this.initRsvp();
     this.timer = setInterval(() => this.tick(), 1000);
     this.motion();
     this.gallery();
     this.attireSlider();
+    this.scratch();
+    this.chapters();
+    this.pin();
+    this.route();
     this.film();
     setTimeout(() => this.placeholders(), 400);
     setTimeout(() => this.placeholders(), 1400);
@@ -1018,6 +1442,7 @@ class Component extends DCLogic {
     if (this.io) this.io.disconnect();
     if (this.navIo) this.navIo.disconnect();
     if (this.onScroll) window.removeEventListener("scroll", this.onScroll);
+    if (this.onPin) window.removeEventListener("scroll", this.onPin);
   }
   attireSlider() {
     const root = document.getElementById("v2-attire-slider");
@@ -1046,11 +1471,6 @@ class Component extends DCLogic {
     const stub = document.getElementById("v2-std-stub");
     const audio = document.getElementById("v2-audio");
     if (!v || !btn) return;
-    // only attach the film once the file is actually in the project
-    const probe = v.dataset.src;
-    if (probe) {
-      fetch(probe, { method: "HEAD" }).then((r) => { if (r.ok) v.src = probe; }).catch(() => {});
-    }
     const ready = () => {
       if (stub) stub.remove();
       btn.style.display = "flex";
@@ -1508,6 +1928,23 @@ class Component extends DCLogic {
       dot.style.cssText = "position:fixed;left:0;top:0;z-index:501;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:#F6EDE9;pointer-events:none;opacity:0;transition:opacity .3s ease;will-change:transform";
       document.body.appendChild(ring);
       document.body.appendChild(dot);
+      let lastSpark = 0, lsx = 0, lsy = 0;
+      document.addEventListener("mousemove", (ev) => {
+        const now = performance.now();
+        const dx = ev.clientX - lsx, dy = ev.clientY - lsy;
+        if (now - lastSpark < 38 || dx * dx + dy * dy < 140) return;
+        if (document.getElementById("v2-lb") && document.getElementById("v2-lb").style.display === "flex") return;
+        lastSpark = now; lsx = ev.clientX; lsy = ev.clientY;
+        const sp = document.createElement("div");
+        const sz = 2.5 + Math.random() * 3;
+        sp.style.cssText = "position:fixed;left:" + ev.clientX + "px;top:" + ev.clientY + "px;width:" + sz + "px;height:" + sz + "px;margin:-" + sz / 2 + "px;border-radius:50%;pointer-events:none;z-index:499;background:#F4DDE2;box-shadow:0 0 8px 2px rgba(192,130,144,0.55)";
+        document.body.appendChild(sp);
+        const an = sp.animate([
+          { transform: "translate(0,0) scale(1)", opacity: 0.85 },
+          { transform: "translate(" + (Math.random() * 16 - 8).toFixed(1) + "px," + (10 + Math.random() * 16).toFixed(1) + "px) scale(.2)", opacity: 0 },
+        ], { duration: 800 + Math.random() * 400, easing: "ease-out" });
+        an.onfinish = () => sp.remove();
+      }, { passive: true });
       let mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my;
       const loop = () => {
         rx += (mx - rx) * 0.18;
@@ -1708,195 +2145,13 @@ class Component extends DCLogic {
       this.io.observe(el);
     });
   }
-  initRsvp() {
-    const input = document.getElementById("rsvpQuery");
-    const btn = document.getElementById("rsvpFindBtn");
-    const out = document.getElementById("rsvpDynamic");
-    if (!input || !btn || !out) return;
-
-    const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
-    }[c]));
-
-    const api = (params, method) => {
-      if (method === "POST") {
-        return fetch(this.RSVP_API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(params),
-        }).then((r) => r.json());
-      }
-      return fetch(this.RSVP_API_URL + "?" + new URLSearchParams(params).toString()).then((r) => r.json());
-    };
-
-    const setOut = (html) => { out.innerHTML = html; };
-    const msgBox = (text) => `<p style="margin:18px 0 0;font-size:18px;line-height:1.7;font-weight:300;color:rgba(246,237,233,0.78);text-align:center">${esc(text)}</p>`;
-
-    const renderForm = (household, prefill) => {
-      input.style.display = "none";
-      btn.style.display = "none";
-      const members = household.members || [];
-      const saved = prefill || {};
-      const attending = new Set(saved.attendingMembers && saved.attendingMembers.length ? saved.attendingMembers : members);
-
-      const memberRows = members.length > 1
-        ? `<p style="margin:0 0 8px;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6">Who's coming?</p>` +
-          members.map((m) => `
-            <label style="display:flex;align-items:center;gap:12px;font-size:17px;font-weight:300;padding:9px 0">
-              <input type="checkbox" data-member="${esc(m)}" ${attending.has(m) ? "checked" : ""}>
-              ${esc(m)}
-            </label>`).join("")
-        : "";
-
-      const plusOneBlock = household.plusOneAllowed ? `
-        <label style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:300;padding:8px 0">
-          <input type="checkbox" id="rsvpPlusOneToggle" ${saved.plusOneName ? "checked" : ""}>
-          I'll be bringing a plus one
-        </label>
-        <input id="rsvpPlusOneName" type="text" placeholder="Plus one's full name" value="${esc(saved.plusOneName || "")}" style="width:100%;box-sizing:border-box;background:transparent;color:#F6EDE9;border:none;border-bottom:1px solid rgba(246,237,233,0.35);padding:8px 0;margin:6px 0 14px;display:${saved.plusOneName ? "block" : "none"}">
-      ` : "";
-
-      setOut(`
-        <div>
-          <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#C08290;text-align:center">We found you</p>
-          <p style="margin:0 0 18px;font-size:18px;font-weight:300;opacity:0.85;text-align:center">${esc(members.join(", "))}</p>
-          <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6">Attending the church ceremony?</p>
-          <div style="display:flex;gap:10px;margin-bottom:18px">
-            <button type="button" data-yn="church" data-val="Yes" class="rsvp-dyn-toggle${saved.attendingChurch === "Yes" ? " is-active" : ""}">Yes</button>
-            <button type="button" data-yn="church" data-val="No" class="rsvp-dyn-toggle${saved.attendingChurch === "No" ? " is-active" : ""}">No</button>
-          </div>
-          <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6">Attending the reception?</p>
-          <div style="display:flex;gap:10px;margin-bottom:18px">
-            <button type="button" data-yn="reception" data-val="Yes" class="rsvp-dyn-toggle${saved.attendingReception === "Yes" ? " is-active" : ""}">Yes</button>
-            <button type="button" data-yn="reception" data-val="No" class="rsvp-dyn-toggle${saved.attendingReception === "No" ? " is-active" : ""}">No</button>
-          </div>
-          ${memberRows}
-          ${plusOneBlock}
-          <button type="button" id="rsvpSubmitBtn" class="rsvp-dyn-btn" style="display:block;width:100%;margin-top:20px;background:#C08290;color:#3b000a;padding:15px 20px;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer">${household.alreadyResponded ? "Update my RSVP" : "Send my RSVP"}</button>
-        </div>
-      `);
-
-      const state = { church: saved.attendingChurch || "", reception: saved.attendingReception || "" };
-      out.querySelectorAll("[data-yn]").forEach((b) => {
-        b.addEventListener("click", () => {
-          state[b.dataset.yn] = b.dataset.val;
-          out.querySelectorAll('[data-yn="' + b.dataset.yn + '"]').forEach((x) => x.classList.remove("is-active"));
-          b.classList.add("is-active");
-        });
-      });
-
-      const plusToggle = document.getElementById("rsvpPlusOneToggle");
-      const plusName = document.getElementById("rsvpPlusOneName");
-      if (plusToggle && plusName) {
-        plusToggle.addEventListener("change", () => {
-          plusName.style.display = plusToggle.checked ? "block" : "none";
-          if (!plusToggle.checked) plusName.value = "";
-        });
-      }
-
-      document.getElementById("rsvpSubmitBtn").addEventListener("click", () => {
-        const memberBoxes = Array.from(out.querySelectorAll("[data-member]"));
-        const attendingMembersNow = memberBoxes.length
-          ? memberBoxes.filter((cb) => cb.checked).map((cb) => cb.dataset.member)
-          : members.slice();
-        const payload = {
-          action: "submit",
-          householdId: household.householdId,
-          attendingChurch: state.church,
-          attendingReception: state.reception,
-          attendingMembers: attendingMembersNow,
-          plusOneName: plusToggle && plusToggle.checked ? plusName.value.trim() : "",
-        };
-        setOut(msgBox("Sending your RSVP…"));
-        api(payload, "POST").then((res) => {
-          if (res && res.ok) {
-            setOut(`
-              <div style="text-align:center">
-                <p style="margin:0;font-family:'Playfair Display',serif;font-size:32px;color:#C08290">Thank you</p>
-                <p style="margin:14px 0 0;font-size:16px;line-height:1.7;font-weight:300;opacity:0.8">We've saved your RSVP. See you on 9 January 2027.</p>
-              </div>
-            `);
-          } else {
-            setOut(msgBox("Something went wrong saving your RSVP — please try again in a moment."));
-          }
-        }).catch(() => setOut(msgBox("Something went wrong saving your RSVP — please try again in a moment.")));
-      });
-    };
-
-    const renderAlreadyResponded = (household) => {
-      input.style.display = "none";
-      btn.style.display = "none";
-      const saved = household.saved || {};
-      const statusCard = (label, value) => `
-        <div style="flex:1;border:1px solid rgba(246,237,233,0.25);padding:14px 10px">
-          <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.55">${label}</p>
-          <p style="margin:0;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;color:${value === "Yes" ? "#C08290" : "rgba(246,237,233,0.4)"}">${value === "Yes" ? "Attending" : "Not attending"}</p>
-        </div>`;
-
-      setOut(`
-        <div style="text-align:center">
-          <p style="margin:0 0 8px;font-size:15px;font-weight:300;opacity:0.7">You've already submitted an RSVP for</p>
-          <div style="margin:0 0 24px">
-            ${household.members.map((m) => `<p style="margin:0 0 4px;font-size:19px;font-family:'Playfair Display',serif;color:#F6EDE9">${esc(m)}</p>`).join("")}
-          </div>
-          <div style="display:flex;gap:10px;margin:0 0 ${saved.plusOneName ? "14px" : "24px"}">
-            ${statusCard("Church", saved.attendingChurch)}
-            ${statusCard("Reception", saved.attendingReception)}
-          </div>
-          ${saved.plusOneName ? `<p style="margin:0 0 24px;font-size:15px;font-weight:300;opacity:0.75">Plus one: <span style="color:#F6EDE9">${esc(saved.plusOneName)}</span></p>` : ""}
-          <p style="margin:0 0 14px;font-size:14px;font-weight:300;opacity:0.85">Want to make changes?</p>
-          <div style="display:flex;gap:10px">
-            <button type="button" id="rsvpEditYes" class="rsvp-dyn-toggle">Yes, update it</button>
-            <button type="button" id="rsvpEditNo" class="rsvp-dyn-toggle">No, that's correct</button>
-          </div>
-        </div>
-      `);
-      document.getElementById("rsvpEditYes").addEventListener("click", () => renderForm(household, saved));
-      document.getElementById("rsvpEditNo").addEventListener("click", () => {
-        setOut(`
-          <div style="text-align:center">
-            <p style="margin:0;font-family:'Playfair Display',serif;font-size:32px;color:#C08290">Good to know</p>
-            <p style="margin:14px 0 0;font-size:16px;line-height:1.7;font-weight:300;opacity:0.8">See you on 9 January 2027.</p>
-          </div>
-        `);
-      });
-    };
-
-    const runLookup = () => {
-      const q = input.value.trim();
-      if (!q) return;
-      btn.style.opacity = "0.6";
-      btn.style.pointerEvents = "none";
-      setOut(msgBox("Looking up your invitation…"));
-      api({ action: "lookup", query: q }).then((res) => {
-        btn.style.opacity = "";
-        btn.style.pointerEvents = "";
-        if (!res || !res.found) {
-          setOut(msgBox("We couldn't find that name — try typing it exactly as it appears on your invitation, or email hello@example.com."));
-          return;
-        }
-        if (res.alreadyResponded) {
-          renderAlreadyResponded(res);
-        } else {
-          renderForm(res, res.saved);
-        }
-      }).catch(() => {
-        btn.style.opacity = "";
-        btn.style.pointerEvents = "";
-        setOut(msgBox("Something went wrong — please try again in a moment."));
-      });
-    };
-
-    btn.addEventListener("click", (e) => { e.preventDefault(); runLookup(); });
-    input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); runLookup(); } });
-  }
   renderVals() {
     const d = this.d;
     const flat = [];
     d.principal.forEach((p) => { flat.push(p[0], p[1]); });
     return {
-      story: d.story,
-      ladies: d.dress.ladies, gentlemen: d.dress.gentlemen,
+      story: d.story.map((x, i) => Object.assign({}, x, { n: String(i + 1).padStart(2, "0") })),
+      ladies: d.dress.ladies, gentlemen: d.dress.gentlemen, avoid: d.dress.avoid,
       principalFlat: flat,
       secondary: d.secondary.map((s) => ({ role: s.role, list: String(s.names).split(/\s*(?:·|&|,)\s*/).filter(Boolean).map((name) => ({ name })) })),
       principalPairs: d.principal.map((p) => ({ a: p[0], b: p[1] })),
