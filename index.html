@@ -911,6 +911,39 @@ class Component extends DCLogic {
     };
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { fade(1800); return; }
     try { gl = cv.getContext("webgl", { antialias: false, alpha: true, premultipliedAlpha: false }); } catch (e) { gl = null; }
+    const isMob = window.innerWidth <= 767;
+    // Mobile: single curtain that gathers up and lifts. Desktop: two panels split from centre.
+    const VS_MOB = "precision highp float;attribute vec2 a;uniform float uSide,uT,uO;varying float vLit,vSheen,vAO,vV,vSh,vU,vCr;" +
+      "float hash(float n){return fract(sin(n)*43758.5453);}" +
+      "float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);float n=i.x+i.y*57.;return mix(mix(hash(n),hash(n+1.),f.x),mix(hash(n+57.),hash(n+58.),f.x),f.y);}" +
+      "float ease(float x){x=clamp(x,0.,1.);return x<.5?4.*x*x*x:1.-pow(-2.*x+2.,3.)/2.;}" +
+      "float crest(float p){float f=abs(fract(p)-.5)*2.;return 1.-2.*pow(f,1.4);}" +
+      "float dep(float u,float v,float g){float sk=3.;" +
+      "float w=(noise(vec2(u*2.3+sk,v*1.1))-.5)*1.7*(.2+v)+(noise(vec2(u*5.1+sk,v*2.4+uT*.04))-.5)*.32;" +
+      "float pT=u*16.+w*.25+.25;float dT=crest(pT)*.5;" +
+      "float pB=u*11.+w+(noise(vec2(u*1.7+sk,7.))-.5)*1.9;" +
+      "float dB=crest(pB)*(.6+.8*noise(vec2(pB*.55+sk,2.)));" +
+      "float pS=u*26.+w*1.8+noise(vec2(u*9.+sk,v*3.))*1.3;" +
+      "float dS=sin(pS*6.2831)*.2*smoothstep(.12,.7,v)*(.35+.65*noise(vec2(u*6.+sk,v*1.6+9.)));" +
+      "float dM=(noise(vec2(u*60.+sk,v*5.))-.5)*.12*smoothstep(.1,.6,v);" +
+      "float d=mix(dT,dB,smoothstep(.02,.4,v))+dS+dM;" +
+      "float am=(.55+.75*v)*(1.+1.2*g)*mix(.3,1.,smoothstep(0.,.05,v));return d*am;}" +
+      "void main(){float u=a.x,v=a.y;" +
+      "float G=uO<0.?0.:ease(uO/1.7);float F=uO<0.?0.:ease((uO-1.15)/1.1);" +
+      "float H=1.-.8*G;float sc=pow(sin(u*9.42478),2.);" +
+      "float d=dep(u,v,G);float e=.0016;float sl=(dep(u+e,v,G)-d)/e;float sv=(dep(u,v+.004,G)-d)/.004;" +
+      "float bn=sin(v*110.+u*3.+noise(vec2(u*4.,v*8.))*2.4);float bw=G*(.35+.65*sc)*smoothstep(.05,.5,v);" +
+      "float sag=G*.17*sc*pow(v,2.6);" +
+      "float pinch=-G*.03*v*v*sin(u*18.8496);" +
+      "float id=v*v*(.006*sin(uT*.8+u*2.6)+.004*sin(uT*1.7+u*5.+v*3.));" +
+      "float tt=max(uO,0.);float sw=uO<0.?0.:v*v*.035*sin(tt*5.2)*exp(-tt*1.3);" +
+      "float x=-1.02+u*2.04+d*.004+id+sw*sin(u*3.1416)+pinch;" +
+      "float hem=(noise(vec2(u*12.,1.))-.5)*.01*smoothstep(.97,1.,v);" +
+      "gl_Position=vec4(x,1.02-v*H*2.06-sag+hem+F*1.3,0.,1.);" +
+      "float k=clamp(sl*.017,-14.,14.);vec3 n=normalize(vec3(-k,-.15*v-clamp(sv*.04,-.6,.6)+bn*bw*.9,1.));" +
+      "vec3 L=normalize(vec3(-.3,.5,.8));vLit=max(dot(n,L),0.);vSheen=pow(1.-abs(n.z),1.5);" +
+      "vAO=(.5+.5*smoothstep(-1.5,1.1,d/(1.+1.2*G)))*mix(1.,.6+.4*(bn*.5+.5),bw);" +
+      "vV=v;vU=u;vCr=d/((.55+.75*v)*(1.+1.2*G)+.001);vSh=1.-.3*G*(1.-sc)*smoothstep(.75,1.,v);}";
     const VS = "precision highp float;attribute vec2 a;uniform float uSide,uT,uO;varying float vLit,vSheen,vAO,vV,vSh,vU,vCr;" +
       "float hash(float n){return fract(sin(n)*43758.5453);}" +
       "float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);float n=i.x+i.y*57.;return mix(mix(hash(n),hash(n+1.),f.x),mix(hash(n+57.),hash(n+58.),f.x),f.y);}" +
@@ -963,10 +996,11 @@ class Component extends DCLogic {
       "float sx=h(vec2(floor(uF/3.),9.));float sc=step(.82,h(vec2(floor(uF/3.),4.)))*smoothstep(.0016,0.,abs(q.x-sx))*(.5+.5*h(vec2(q.y*40.,uF)));c+=sc*.05;" +
       "float dust=step(.9985,h(floor(gl_FragCoord.xy/3.)+vec2(floor(uF)*13.1,floor(uF)*7.7)));c=mix(c,vec3(.02,0.,.005),dust*.5);" +
       "gl_FragColor=vec4(max(c,0.),1.);}";
+    const activeVS = isMob ? VS_MOB : VS;
     let prog = null, uSide, uT, uO, nIdx = 0;
     if (gl) {
       const mk = (type, src) => { const sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh); if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(sh)); return null; } return sh; };
-      const vs = mk(gl.VERTEX_SHADER, VS), fs = mk(gl.FRAGMENT_SHADER, FS);
+      const vs = mk(gl.VERTEX_SHADER, activeVS), fs = mk(gl.FRAGMENT_SHADER, FS);
       if (vs && fs) {
         prog = gl.createProgram();
         gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
@@ -982,7 +1016,7 @@ class Component extends DCLogic {
       if (seenF) setTimeout(goF, 3300);
       return;
     }
-    const C = 360, R = 96, verts = [], idx = [];
+    const C = isMob ? 240 : 360, R = isMob ? 180 : 96, verts = [], idx = [];
     for (let j = 0; j <= R; j++) for (let i = 0; i <= C; i++) verts.push(i / C, j / R);
     for (let j = 0; j < R; j++) for (let i = 0; i < C; i++) {
       const p = j * (C + 1) + i;
@@ -1024,7 +1058,7 @@ class Component extends DCLogic {
       if (fr % 2 === 0) cv.style.transform = "translate(" + ((Math.random() - 0.5) * 1.2).toFixed(2) + "px," + ((Math.random() - 0.5) * 1.6).toFixed(2) + "px) scale(1.01)";
       gl.uniform1f(uO, openAt < 0 ? -1 : (now - openAt) / 1000);
       gl.uniform1f(uSide, 0); gl.drawElements(gl.TRIANGLES, nIdx, gl.UNSIGNED_SHORT, 0);
-      gl.uniform1f(uSide, 1); gl.drawElements(gl.TRIANGLES, nIdx, gl.UNSIGNED_SHORT, 0);
+      if (!isMob) { gl.uniform1f(uSide, 1); gl.drawElements(gl.TRIANGLES, nIdx, gl.UNSIGNED_SHORT, 0); }
       if (first) { first = false; cv.style.background = "transparent"; }
       raf = requestAnimationFrame(frame);
     };
