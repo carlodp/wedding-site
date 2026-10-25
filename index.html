@@ -85,10 +85,10 @@
     #hero-content { padding:0 20px calc(116px + env(safe-area-inset-bottom,0px)) !important; transform:translate3d(0,calc(var(--p,0) * -20vh),0) !important; }
     #hero-h1 { font-size:19vw !important; line-height:0.9 !important; }
     #hero-alex { padding-left:0 !important; }
-    #film { height:230vh !important; }
-    #film-sticky { display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; gap:24px !important; padding-bottom:calc(60px + env(safe-area-inset-bottom,0px)) !important; box-sizing:border-box !important; }
-    #film-bg-text { font-size:42vw !important; top:14% !important; transform:translate3d(calc(var(--p,0) * -120vw + 10vw),0,0) !important; }
-    #film-video-wrap { position:relative !important; inset:auto !important; clip-path:none !important; width:calc(62vw + min(1,var(--p,0) * 2.4) * 38vw) !important; max-width:100% !important; aspect-ratio:16/9; overflow:hidden !important; box-shadow:0 30px 70px rgba(0,0,0,0.6); background:#000 !important; }
+    #film { height:auto !important; }
+    #film-sticky { position:relative !important; display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; gap:24px !important; padding:60px 20px calc(60px + env(safe-area-inset-bottom,0px)) !important; box-sizing:border-box !important; }
+    #film-bg-text { display:none !important; }
+    #film-video-wrap { position:relative !important; inset:auto !important; clip-path:none !important; width:100% !important; max-width:100% !important; aspect-ratio:16/9; overflow:hidden !important; box-shadow:0 30px 70px rgba(0,0,0,0.6); background:#000 !important; }
     #film-ui { position:relative !important; inset:auto !important; width:calc(100% - 40px) !important; padding:0 !important; height:auto !important; justify-content:flex-start !important; flex-direction:column !important; align-items:flex-start !important; gap:14px !important; text-align:left !important; }
     #film-ui > p { opacity:1 !important; }
     #film-ui button { opacity:1 !important; pointer-events:auto !important; margin-top:0 !important; }
@@ -98,6 +98,9 @@
     #where > div > div:last-of-type, #reception > div > div:last-of-type { padding-bottom:calc(108px + env(safe-area-inset-bottom,0px)) !important; }
     footer { padding-bottom:calc(130px + env(safe-area-inset-bottom,0px)) !important; }
     #faq-head, #day-head { position:relative !important; top:auto !important; }
+    #rsvp-search-row { flex-direction:column !important; }
+    #rsvp-search-row #rsvpQuery { border-right:1px solid rgba(42,0,8,0.4) !important; border-bottom:none !important; }
+    #rsvp-search-row #rsvpFindBtn { width:100% !important; justify-content:center !important; }
   }
   /* Lightbox */
   #lb { position:fixed;inset:0;z-index:300;background:rgba(7,1,2,0.96);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s ease; }
@@ -573,7 +576,7 @@
         <div style="flex:999 1 420px;min-width:0;padding:clamp(26px,4vw,52px)">
           <p style="margin:0 0 10px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#8C2338">Kindly reply by {{ deadline }}</p>
           <p style="margin:0 0 22px;max-width:52ch;font-size:15px;line-height:1.7;font-weight:400;color:rgba(42,0,8,0.72);text-wrap:pretty">Type your name as it appears on your invitation — your entry already knows whether you have a plus one.</p>
-          <div style="display:flex">
+          <div id="rsvp-search-row" style="display:flex">
             <input id="rsvpQuery" type="text" placeholder="Your full name" aria-label="Your full name" style="flex:1;min-width:0;box-sizing:border-box;height:54px;padding:0 18px;background:transparent;border:1px solid rgba(42,0,8,0.4);border-right:none;color:#2a0008;font:inherit;font-size:16px;outline:none">
             <a id="rsvpFindBtn" href="#rsvp" style="flex:0 0 auto;display:flex;align-items:center;gap:14px;height:54px;padding:0 22px;background:#650015;color:#F6EDE9;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;white-space:nowrap;transition:background .3s ease" style-hover="background:#8C2338;color:#F6EDE9">Find my invitation <span aria-hidden="true">→</span></a>
           </div>
@@ -806,6 +809,8 @@ class Component extends DCLogic {
     const v = document.getElementById("c-film");
     const sec = document.getElementById("film");
     if (!v || !sec) return;
+    const isTouch = 'ontouchstart' in window || window.innerWidth < 768;
+    if (isTouch) { v.controls = true; }
     const upd = () => this.setState({ fT: v.currentTime || 0, fD: v.duration || 0, fPaused: v.paused, fMuted: v.muted });
     ["timeupdate", "loadedmetadata", "play", "pause", "volumechange"].forEach((e) => v.addEventListener(e, upd));
     v.addEventListener("ended", () => this.filmStop());
@@ -1252,47 +1257,50 @@ class Component extends DCLogic {
     window.addEventListener("resize", sizeStory, { passive: true });
     setTimeout(sizeStory, 800);
     setTimeout(sizeStory, 2500);
+    const isTouch = 'ontouchstart' in window;
     let tx = 0, ty = 0, mx = 0, my = 0;
-    window.addEventListener("mousemove", (e) => { tx = e.clientX / window.innerWidth - 0.5; ty = e.clientY / window.innerHeight - 0.5; }, { passive: true });
+    if (!isTouch) { window.addEventListener("mousemove", (e) => { tx = e.clientX / window.innerWidth - 0.5; ty = e.clientY / window.innerHeight - 0.5; }, { passive: true }); }
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let lastScrollY = -1;
+    // Cache element lists — avoids querySelectorAll on every frame
+    let pinEls = q("[data-pin]"), cEls = q("[data-c]"), unmaskEls = q("[data-unmask]"), focusEls = q("[data-focus]"), hcEls = q("[data-hc]");
+    window.addEventListener("resize", () => { pinEls = q("[data-pin]"); cEls = q("[data-c]"); unmaskEls = q("[data-unmask]"); focusEls = q("[data-focus]"); hcEls = q("[data-hc]"); }, { passive: true });
     const frame = () => {
       const vh = window.innerHeight, vw = window.innerWidth;
-      mx += (tx - mx) * 0.06; my += (ty - my) * 0.06;
-      if (hero) { set(hero, "--mx", reduce ? 0 : mx); set(hero, "--my", reduce ? 0 : my); }
-      q("[data-pin]").forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.bottom < -vh || r.top > vh * 2) return;
-        const p = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);
-        set(el, "--p", p);
-        if (el.id === "vow") {
-          const ws = words(), n = ws.length;
-          ws.forEach((w, i) => { const o = 0.14 + 0.86 * clamp(p * 1.3 * n - i, 0, 1); const s = o.toFixed(3); if (w._o !== s) { w._o = s; w.style.opacity = s; } });
-        }
-      });
-      q("[data-c]").forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.bottom < -vh || r.top > vh * 2) return;
-        set(el, "--c", clamp((r.top + r.height / 2 - vh / 2) / vh, -1.5, 1.5));
-      });
-      q("[data-unmask]").forEach((el) => {
-        const r = el.parentElement.getBoundingClientRect();
-        const own = el.getBoundingClientRect();
-        const top = own.top;
-        if (r.bottom < -vh || r.top > vh * 2) return;
-        set(el, "--q", clamp((vh - top) / (vh * 0.75), 0, 1));
-      });
-      q("[data-focus]").forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.bottom < -vh || r.top > vh * 2) return;
-        const c = Math.abs((r.top + r.height / 2 - vh * 0.5) / vh);
-        const o = (0.3 + 0.7 * (1 - clamp((c - 0.18) * 2.2, 0, 1))).toFixed(3);
-        if (el._o !== o) { el._o = o; el.style.opacity = o; }
-      });
-      q("[data-hc]").forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.right < -vw || r.left > vw * 2) return;
-        set(el, "--h", clamp((r.left + r.width / 2 - vw / 2) / vw, -1.5, 1.5));
-      });
+      const sy = window.scrollY;
+      const didScroll = sy !== lastScrollY;
+      lastScrollY = sy;
+      if (!isTouch) {
+        mx += (tx - mx) * 0.06; my += (ty - my) * 0.06;
+        if (hero) { set(hero, "--mx", reduce ? 0 : mx); set(hero, "--my", reduce ? 0 : my); }
+      }
+      if (didScroll) {
+        // Batch ALL reads first (one layout flush), then all writes — prevents layout thrashing
+        const pinR = pinEls.map(el => el.getBoundingClientRect());
+        const cR = cEls.map(el => el.getBoundingClientRect());
+        const umR = unmaskEls.map(el => ({ p: el.parentElement.getBoundingClientRect(), t: el.getBoundingClientRect().top }));
+        const fcR = focusEls.map(el => el.getBoundingClientRect());
+        const hcR = hcEls.map(el => el.getBoundingClientRect());
+        // Writes
+        pinEls.forEach((el, i) => {
+          const r = pinR[i]; if (r.bottom < -vh || r.top > vh * 2) return;
+          const p = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);
+          set(el, "--p", p);
+          if (el.id === "vow") {
+            const ws = words(), n = ws.length;
+            ws.forEach((w, j) => { const o = 0.14 + 0.86 * clamp(p * 1.3 * n - j, 0, 1); const s = o.toFixed(3); if (w._o !== s) { w._o = s; w.style.opacity = s; } });
+          }
+        });
+        cEls.forEach((el, i) => { const r = cR[i]; if (r.bottom < -vh || r.top > vh * 2) return; set(el, "--c", clamp((r.top + r.height / 2 - vh / 2) / vh, -1.5, 1.5)); });
+        unmaskEls.forEach((el, i) => { const { p, t } = umR[i]; if (p.bottom < -vh || p.top > vh * 2) return; set(el, "--q", clamp((vh - t) / (vh * 0.75), 0, 1)); });
+        focusEls.forEach((el, i) => {
+          const r = fcR[i]; if (r.bottom < -vh || r.top > vh * 2) return;
+          const c = Math.abs((r.top + r.height / 2 - vh * 0.5) / vh);
+          const o = (0.3 + 0.7 * (1 - clamp((c - 0.18) * 2.2, 0, 1))).toFixed(3);
+          if (el._o !== o) { el._o = o; el.style.opacity = o; }
+        });
+        hcEls.forEach((el, i) => { const r = hcR[i]; if (r.right < -vw || r.left > vw * 2) return; set(el, "--h", clamp((r.left + r.width / 2 - vw / 2) / vw, -1.5, 1.5)); });
+      }
       this.fxRaf = requestAnimationFrame(frame);
     };
     this.fxRaf = requestAnimationFrame(frame);
