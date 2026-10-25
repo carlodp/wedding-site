@@ -89,10 +89,9 @@
     #film-sticky { position:relative !important; display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; gap:24px !important; padding:60px 20px calc(60px + env(safe-area-inset-bottom,0px)) !important; box-sizing:border-box !important; }
     #film-bg-text { display:none !important; }
     #film-video-wrap { position:relative !important; inset:auto !important; clip-path:none !important; width:100% !important; max-width:100% !important; aspect-ratio:16/9; overflow:hidden !important; box-shadow:0 30px 70px rgba(0,0,0,0.6); background:#000 !important; }
-    #film-ui { position:relative !important; inset:auto !important; width:calc(100% - 40px) !important; padding:0 !important; height:auto !important; justify-content:flex-start !important; flex-direction:column !important; align-items:flex-start !important; gap:14px !important; text-align:left !important; }
-    #film-ui > p { opacity:1 !important; }
-    #film-ui button { opacity:1 !important; pointer-events:auto !important; margin-top:0 !important; }
-    #film-ctl { position:relative !important; inset:auto !important; left:auto !important; right:auto !important; bottom:auto !important; width:calc(100% - 40px) !important; }
+    #c-film { display:none !important; }
+    #film-yt { display:block !important; }
+    #film-ui, #film-ctl { display:none !important; }
     #header-count { display:none !important; }
     #hero-btm { display:none !important; }
     #where > div > div:last-of-type, #reception > div > div:last-of-type { padding-bottom:calc(108px + env(safe-area-inset-bottom,0px)) !important; }
@@ -240,6 +239,7 @@
 
       <div id="film-video-wrap" style="position:absolute;inset:0;background:#000;clip-path:inset(max(9%,calc(50% - 28.125vw),calc((1 - var(--p,0) * 2.2) * 30%)) max(0%,calc((1 - var(--p,0) * 2.2) * 24%)))">
         <video id="c-film" src="https://github.com/carlodp/wedding-site/releases/download/assets/1.9.27.Carlo.-.Alexandra.STD.Revised.1.mp4" autoplay="autoplay" muted="muted" playsinline="playsinline" loop="loop" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:scale(calc(1.25 - min(1,var(--p,0) * 2.2) * 0.25))"></video>
+        <iframe id="film-yt" data-src="https://www.youtube.com/embed/ym-TQJea7IA?autoplay=1&mute=1&playsinline=1&loop=1&playlist=ym-TQJea7IA&controls=1&rel=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;display:none"></iframe>
         <sc-if value="{{ filmMissing }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a0307,#3b000a)"></div>
         </sc-if>
@@ -812,12 +812,10 @@ class Component extends DCLogic {
     if (!v || !sec) return;
     const isTouch = 'ontouchstart' in window || window.innerWidth < 768;
     if (isTouch) {
-      v.controls = true;
-      // Remove the dim overlay and start playing — on desktop filmDim=1 until user clicks sound,
-      // but on mobile we just show the video with native controls from the start.
-      this.setState({ fSound: true });
-      v.muted = true;
-      v.play().catch(() => {});
+      // Mobile: YouTube iframe handles everything — load it and bail out
+      const yt = document.getElementById("film-yt");
+      if (yt && yt.dataset.src) { yt.src = yt.dataset.src; }
+      return;
     }
     const upd = () => this.setState({ fT: v.currentTime || 0, fD: v.duration || 0, fPaused: v.paused, fMuted: v.muted });
     ["timeupdate", "loadedmetadata", "play", "pause", "volumechange"].forEach((e) => v.addEventListener(e, upd));
@@ -826,11 +824,8 @@ class Component extends DCLogic {
 
     new IntersectionObserver((es) => {
       const vis = es[0].isIntersecting;
-      if (vis) {
-        if (isTouch) { this.setState({ fSound: true }); v.muted = true; v.play().catch(() => {}); }
-        else if (v.paused && !this.state.fSound) { v.muted = true; v.play().catch(() => {}); }
-      }
-      else if (this.state.fSound && !isTouch) { v.pause(); this.filmStop(); }
+      if (vis) { if (v.paused && !this.state.fSound) { v.muted = true; v.play().catch(() => {}); } }
+      else if (this.state.fSound) { v.pause(); this.filmStop(); }
       else v.pause();
     }, { threshold: 0.15 }).observe(sec);
   }
