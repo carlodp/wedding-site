@@ -848,18 +848,51 @@ class Component extends DCLogic {
           .catch(() => err("Could not reach the server. Please check your connection."));
       });
     };
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const name = inp.value.trim();
-      if (!name) { err("Please enter your name as it appears on your invitation."); return; }
+    const showSuggestions = (suggestions) => {
+      let html = `<div style="border-top:1px solid rgba(42,0,8,0.15);padding-top:14px">`;
+      html += `<p style="margin:0 0 12px;font-size:13px;color:#8C2338">We couldn't find that exact name. Did you mean one of these?</p>`;
+      suggestions.forEach(name => {
+        html += `<button class="rsvp-suggest-btn" data-name="${name.replace(/"/g,'&quot;')}" style="display:block;width:100%;text-align:left;background:transparent;border:1px solid rgba(42,0,8,0.25);color:#2a0008;font:inherit;font-size:13px;padding:11px 14px;margin-bottom:8px;cursor:pointer;transition:border-color .2s,background .2s">${name}</button>`;
+      });
+      html += `<p style="margin:10px 0 0;font-size:12px;color:rgba(42,0,8,0.5)">Still can't find yourself? Try your email address, or contact us.</p>`;
+      html += `</div>`;
+      show(html);
+      dyn.querySelectorAll(".rsvp-suggest-btn").forEach(b => {
+        b.addEventListener("mouseenter", () => { b.style.background = "rgba(42,0,8,0.06)"; b.style.borderColor = "rgba(42,0,8,0.5)"; });
+        b.addEventListener("mouseleave", () => { b.style.background = "transparent"; b.style.borderColor = "rgba(42,0,8,0.25)"; });
+        b.addEventListener("click", () => {
+          inp.value = b.dataset.name;
+          btn.click();
+        });
+      });
+    };
+    const doLookup = (name) => {
       show(`<p style="margin:0;padding:14px 0;font-size:13px;color:rgba(42,0,8,0.7)">Looking you up…</p>`);
       fetch(`${this.RSVP_API_URL}?action=lookup&name=${encodeURIComponent(name)}`)
         .then(r => r.json())
         .then(row => {
-          if (!row || row.error || row.found === false) { err("We couldn't find your name. Please check the spelling and try again."); return; }
+          if (!row || row.error || row.found === false) {
+            fetch(`${this.RSVP_API_URL}?action=suggest&q=${encodeURIComponent(name)}`)
+              .then(r => r.json())
+              .then(res => {
+                if (res.suggestions && res.suggestions.length) {
+                  showSuggestions(res.suggestions);
+                } else {
+                  err("We couldn't find your name. Try your email address, or check the spelling.");
+                }
+              })
+              .catch(() => err("We couldn't find your name. Try your email address, or check the spelling."));
+            return;
+          }
           renderForm(row, !!row._responded);
         })
         .catch(() => err("Could not reach the server. Please check your connection."));
+    };
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const name = inp.value.trim();
+      if (!name) { err("Please enter your name as it appears on your invitation."); return; }
+      doLookup(name);
     });
     inp.addEventListener("keydown", (e) => { if (e.key === "Enter") btn.click(); });
   }
