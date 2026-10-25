@@ -834,9 +834,9 @@ class Component extends DCLogic {
         const attending = dyn.querySelector('[data-key="attend"]').classList.contains("is-active");
         const attendingMembers = members.length > 1 ? members.filter((m, i) => dyn.querySelector(`[data-member="${i}"]`).checked) : members;
         const plusName = hasPlus ? (document.getElementById("rsvpPlusName") || {}).value || "" : "";
-        const payload = { name: row.name, church: attending, reception: attending, attending: attendingMembers.join(","), plusName };
         const sb = document.getElementById("rsvpSubmit");
         if (sb) { sb.textContent = "Saving…"; sb.disabled = true; }
+        const payload = { action: "submit", householdId: row.householdId, attendingChurch: attending ? "Yes" : "No", attendingReception: attending ? "Yes" : "No", attendingMembers: attendingMembers, plusOneName: plusName };
         fetch(this.RSVP_API_URL, { method: "POST", body: JSON.stringify(payload) })
           .then(r => r.json())
           .then(res => {
@@ -901,7 +901,19 @@ class Component extends DCLogic {
             });
             return;
           }
-          renderForm(row, !!row._responded);
+          const saved = row.saved || {};
+          const normalized = {
+            name: row.members && row.members[0] || name,
+            members: row.members || [],
+            plusOne: row.plusOneAllowed,
+            householdId: row.householdId,
+            _responded: row.alreadyResponded,
+            _church: row.alreadyResponded ? saved.attendingChurch === "Yes" : undefined,
+            _reception: row.alreadyResponded ? saved.attendingReception === "Yes" : undefined,
+            _plusName: saved.plusOneName || "",
+            _attending: saved.attendingMembers || [],
+          };
+          renderForm(normalized, !!normalized._responded);
         })
         .catch(() => err("Could not reach the server. Please check your connection."));
     };
