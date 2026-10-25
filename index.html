@@ -417,25 +417,31 @@
         </div>
         <p style="margin:0;font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:#E5B7C2">Dress code · Guests</p>
       </div>
-      <div style="margin-top:clamp(28px,3.6vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:2px">
+      <div style="margin-top:clamp(28px,3.6vw,44px);display:grid;gap:2px">
         <div style="background:#F6EDE9;color:#2a0008;padding:clamp(26px,3.4vw,48px)">
-          <p style="margin:0 0 26px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#8C2338">Yes — please wear</p>
-          <p style="margin:0 0 12px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:26px;color:#650015">Ladies</p>
-          <img src="assets/attire-women.jpg" alt="Ladies attire guide" style="width:100%;aspect-ratio:2000/1116;object-fit:cover;display:block;margin-bottom:20px;cursor:pointer" onclick="window._lbOpen(['assets/attire-women.jpg','assets/attire-men.jpg'],0)">
-          <ul style="margin:0 0 34px;padding:0;list-style:none;display:grid;gap:14px">
-            <sc-for list="{{ ladies }}" as="l" hint-placeholder-count="1"><li style="font-size:18px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:14px;text-wrap:pretty">{{ l }}</li></sc-for>
-          </ul>
-          <p style="margin:0 0 12px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:26px;color:#650015">Gentlemen</p>
-          <img src="assets/attire-men.jpg" alt="Gentlemen attire guide" style="width:100%;aspect-ratio:2000/1116;object-fit:cover;display:block;margin-bottom:20px;cursor:pointer" onclick="window._lbOpen(['assets/attire-men.jpg','assets/attire-women.jpg'],0)">
-          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:14px">
-            <sc-for list="{{ gentlemen }}" as="g" hint-placeholder-count="1"><li style="font-size:18px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:14px;text-wrap:pretty">{{ g }}</li></sc-for>
-          </ul>
+          <p style="margin:0 0 28px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#8C2338">Yes — please wear</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(28px,5vw,64px)">
+            <div>
+              <p style="margin:0 0 10px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:26px;color:#650015">Ladies</p>
+              <ul style="margin:0 0 20px;padding:0;list-style:none;display:grid;gap:10px">
+                <sc-for list="{{ ladies }}" as="l" hint-placeholder-count="1"><li style="font-size:17px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:12px;text-wrap:pretty">{{ l }}</li></sc-for>
+              </ul>
+              <img src="assets/attire-women.jpg" alt="Ladies attire guide" style="width:100%;aspect-ratio:2000/1116;object-fit:cover;display:block;cursor:pointer" onclick="window._lbOpen(['assets/attire-women.jpg','assets/attire-men.jpg'],0)">
+            </div>
+            <div>
+              <p style="margin:0 0 10px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:26px;color:#650015">Gentlemen</p>
+              <ul style="margin:0 0 20px;padding:0;list-style:none;display:grid;gap:10px">
+                <sc-for list="{{ gentlemen }}" as="g" hint-placeholder-count="1"><li style="font-size:17px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:12px;text-wrap:pretty">{{ g }}</li></sc-for>
+              </ul>
+              <img src="assets/attire-men.jpg" alt="Gentlemen attire guide" style="width:100%;aspect-ratio:2000/1116;object-fit:cover;display:block;cursor:pointer" onclick="window._lbOpen(['assets/attire-men.jpg','assets/attire-women.jpg'],0)">
+            </div>
+          </div>
         </div>
         <div style="background:#1a0307;padding:clamp(26px,3.4vw,48px)">
           <p style="margin:0 0 26px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#C08290">No — please avoid</p>
-          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:22px">
+          <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:clamp(20px,3vw,40px)">
             <sc-for list="{{ avoid }}" as="x" hint-placeholder-count="3">
-              <li style="display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start"><span aria-hidden="true" style="font-family:'Bodoni Moda',serif;font-size:24px;color:#C08290;line-height:1">✕</span><span><span style="display:block;font-family:'Bodoni Moda',serif;font-size:clamp(22px,2.2vw,27px);line-height:1.25">{{ x.t }}</span><span style="display:block;margin-top:5px;font-size:14px;font-weight:300;color:rgba(246,237,233,0.66)">{{ x.why }}</span></span></li>
+              <li style="display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start"><span aria-hidden="true" style="font-family:'Bodoni Moda',serif;font-size:22px;color:#C08290;line-height:1">✕</span><span><span style="display:block;font-family:'Bodoni Moda',serif;font-size:clamp(20px,2vw,24px);line-height:1.25">{{ x.t }}</span><span style="display:block;margin-top:5px;font-size:13px;font-weight:300;color:rgba(246,237,233,0.66)">{{ x.why }}</span></span></li>
             </sc-for>
           </ul>
         </div>
