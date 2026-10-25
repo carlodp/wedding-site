@@ -809,11 +809,11 @@ class Component extends DCLogic {
     const upd = () => this.setState({ fT: v.currentTime || 0, fD: v.duration || 0, fPaused: v.paused, fMuted: v.muted });
     ["timeupdate", "loadedmetadata", "play", "pause", "volumechange"].forEach((e) => v.addEventListener(e, upd));
     v.addEventListener("ended", () => this.filmStop());
-    v.addEventListener("error", () => {});
+    v.addEventListener("error", () => { v.load(); });
 
     new IntersectionObserver((es) => {
       const vis = es[0].isIntersecting;
-      if (vis) { if (v.paused && !this.state.fSound) v.play().catch(() => {}); }
+      if (vis) { if (v.paused && !this.state.fSound) { v.muted = true; v.play().catch(() => {}); } }
       else if (this.state.fSound) { v.pause(); this.filmStop(); }
       else v.pause();
     }, { threshold: 0.15 }).observe(sec);
@@ -1342,11 +1342,23 @@ class Component extends DCLogic {
         const v = film(); if (!v) return;
         const a = document.getElementById("c-audio");
         if (a && !a.paused) { this.musicWas = true; a.pause(); this.setState({ playing: false }); }
-        v.loop = false; v.currentTime = 0; v.muted = false; v.volume = 1;
-        const pr = v.play();
-        if (pr && pr.then) {
-          pr.then(() => this.setState({ fSound: true })).catch(() => { v.muted = true; v.loop = true; v.play().catch(() => {}); });
-        } else { this.setState({ fSound: true }); }
+        const start = () => {
+          v.loop = false; v.currentTime = 0; v.muted = false; v.volume = 1;
+          const pr = v.play();
+          if (!pr || !pr.then) { this.setState({ fSound: true }); return; }
+          pr.then(() => this.setState({ fSound: true })).catch(() => {
+            // Unmuted play failed — try iOS native fullscreen player, else fall back to muted loop
+            if (v.webkitEnterFullscreen) { v.muted = false; v.webkitEnterFullscreen(); }
+            else { v.muted = true; v.loop = true; v.play().catch(() => {}); }
+          });
+        };
+        // If video hasn't loaded at all, trigger load then play
+        if (v.readyState < 1) {
+          v.load();
+          v.addEventListener('loadedmetadata', start, { once: true });
+        } else {
+          start();
+        }
       },
       toggleFilm: () => { const v = film(); if (!v) return; if (v.paused) v.play().catch(() => {}); else v.pause(); },
       seekFilm: (e) => { const v = film(); if (!v || !v.duration) return; const r = e.currentTarget.getBoundingClientRect(); v.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * v.duration; },
