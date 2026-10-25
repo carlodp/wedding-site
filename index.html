@@ -103,8 +103,9 @@
     #faq-head, #day-head { position:relative !important; top:auto !important; }
     #hero-carlo, #hero-alex, #hero-content { will-change: transform; }
     #rsvp-search-row { flex-direction:column !important; gap:10px !important; }
-    #rsvp-search-row #rsvpQuery { border-right:1px solid rgba(42,0,8,0.4) !important; height:60px !important; padding:0 20px !important; font-size:17px !important; }
-    #rsvp-search-row #rsvpFindBtn { width:100% !important; box-sizing:border-box !important; justify-content:center !important; flex:none !important; height:60px !important; }
+    #rsvp-search-row #rsvpQuery { border-right:1px solid rgba(42,0,8,0.4) !important; height:64px !important; padding:20px 20px !important; font-size:17px !important; text-align:center !important; }
+    #rsvp-search-row #rsvpQuery::placeholder { text-align:center; }
+    #rsvp-search-row #rsvpFindBtn { width:100% !important; box-sizing:border-box !important; justify-content:center !important; flex:none !important; height:56px !important; }
   }
   /* Lightbox */
   #lb { position:fixed;inset:0;z-index:300;background:rgba(7,1,2,0.96);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s ease; }
