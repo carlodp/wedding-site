@@ -449,7 +449,11 @@
       <h2 data-focus style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(46px,8vw,120px);line-height:0.96">The wedding <span style="font-style:italic;color:#E5B7C2">entourage</span></h2>
 
       <div data-focus style="margin-top:clamp(80px,10vw,130px)">
-        <p style="margin:0 0 28px;font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#C08290">Principal sponsors</p>
+        <div style="display:flex;align-items:center;gap:clamp(16px,3vw,36px);margin-bottom:clamp(36px,5vw,56px)">
+          <div style="flex:1;height:1px;background:rgba(192,130,144,0.25)"></div>
+          <p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(18px,2vw,26px);color:#C08290;white-space:nowrap">Principal sponsors</p>
+          <div style="flex:1;height:1px;background:rgba(192,130,144,0.25)"></div>
+        </div>
         <div style="display:grid;gap:14px">
           <sc-for list="{{ principalPairs }}" as="p" hint-placeholder-count="12">
             <sc-if value="{{ p.b }}" hint-placeholder-val="{{ true }}">
@@ -467,39 +471,55 @@
       </div>
 
       <div data-focus style="margin-top:clamp(80px,10vw,130px)">
-        <p style="margin:0 0 28px;font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#C08290">Secondary sponsors</p>
-        <div style="display:grid;gap:clamp(40px,5vw,64px)">
+        <div style="display:flex;align-items:center;gap:clamp(16px,3vw,36px);margin-bottom:clamp(36px,5vw,56px)">
+          <div style="flex:1;height:1px;background:rgba(192,130,144,0.25)"></div>
+          <p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(18px,2vw,26px);color:#C08290;white-space:nowrap">Secondary sponsors</p>
+          <div style="flex:1;height:1px;background:rgba(192,130,144,0.25)"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,4vw,48px);text-align:center">
           <sc-for list="{{ secondarySponsors }}" as="g" hint-placeholder-count="3">
-            <div data-focus style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,4vw,56px);align-items:baseline">
-              <p style="margin:0;text-align:right;font-size:11px;letter-spacing:0.32em;line-height:2;text-transform:uppercase;color:#C08290">{{ g.role }}</p>
-              <div style="text-align:left;display:grid;gap:6px">
-                <sc-for list="{{ g.names }}" as="n" hint-placeholder-count="2"><span style="font-family:'Bodoni Moda',serif;font-size:clamp(17px,2.1vw,24px);line-height:1.3">{{ n }}</span></sc-for>
+            <div data-focus>
+              <p style="margin:0 0 12px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:#C08290;line-height:1.6">{{ g.role }}</p>
+              <div style="display:grid;gap:4px">
+                <sc-for list="{{ g.names }}" as="n" hint-placeholder-count="2"><span style="font-family:'Bodoni Moda',serif;font-size:clamp(15px,1.8vw,20px);line-height:1.4">{{ n }}</span></sc-for>
               </div>
             </div>
           </sc-for>
         </div>
       </div>
 
-      <div style="margin-top:clamp(80px,10vw,130px);display:grid;gap:clamp(40px,5vw,64px)">
-        <sc-for list="{{ credits }}" as="g" hint-placeholder-count="12">
-          <div data-focus style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,4vw,56px);align-items:baseline">
-            <p style="margin:0;text-align:right;font-size:11px;letter-spacing:0.32em;line-height:2;text-transform:uppercase;color:#C08290">{{ g.role }}</p>
-            <div style="text-align:left;display:grid;gap:6px">
-              <sc-for list="{{ g.names }}" as="n" hint-placeholder-count="2"><span style="font-family:'Bodoni Moda',serif;font-size:clamp(17px,2.1vw,24px);line-height:1.3">{{ n }}</span></sc-for>
+      <div style="margin-top:clamp(80px,10vw,130px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,72px) clamp(24px,6vw,80px);text-align:center">
+        <sc-for list="{{ credits }}" as="g" hint-placeholder-count="4">
+          <div data-focus>
+            <p style="margin:0 0 12px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:#C08290;line-height:1.6">{{ g.role }}</p>
+            <div style="display:grid;gap:4px">
+              <sc-for list="{{ g.names }}" as="n" hint-placeholder-count="2"><span style="font-family:'Bodoni Moda',serif;font-size:clamp(15px,1.8vw,20px);line-height:1.4">{{ n }}</span></sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:clamp(36px,5vw,64px);text-align:center">
+        <sc-for list="{{ flowerCredits }}" as="g" hint-placeholder-count="1">
+          <div data-focus>
+            <p style="margin:0 0 12px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:#C08290;line-height:1.6">{{ g.role }}</p>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px 28px">
+              <sc-for list="{{ g.names }}" as="n" hint-placeholder-count="4"><span style="font-family:'Bodoni Moda',serif;font-size:clamp(15px,1.8vw,20px);line-height:1.6">{{ n }}</span></sc-for>
             </div>
           </div>
         </sc-for>
       </div>
 
       <div data-focus style="margin-top:clamp(80px,10vw,130px)">
-        <p style="margin:0 0 28px;font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#C08290">The sacred symbols</p>
-        <div style="display:grid;gap:clamp(40px,5vw,64px)">
+        <div style="display:flex;align-items:center;gap:clamp(16px,3vw,36px);margin-bottom:clamp(36px,5vw,56px)">
+          <div style="flex:1;height:1px;background:rgba(192,130,144,0.25)"></div>
+          <p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(18px,2vw,26px);color:#C08290;white-space:nowrap">The sacred symbols</p>
+          <div style="flex:1;height:1px;background:rgba(192,130,144,0.25)"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,4vw,48px);text-align:center">
           <sc-for list="{{ sacred }}" as="g" hint-placeholder-count="3">
-            <div data-focus style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,4vw,56px);align-items:baseline">
-              <p style="margin:0;text-align:right;font-size:11px;letter-spacing:0.32em;line-height:2;text-transform:uppercase;color:#C08290">{{ g.role }}</p>
-              <div style="text-align:left;display:grid;gap:6px">
-                <sc-for list="{{ g.names }}" as="n" hint-placeholder-count="1"><span style="font-family:'Bodoni Moda',serif;font-size:clamp(17px,2.1vw,24px);line-height:1.3">{{ n }}</span></sc-for>
-              </div>
+            <div data-focus>
+              <p style="margin:0 0 12px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:#C08290;line-height:1.6">{{ g.role }}</p>
+              <span style="font-family:'Bodoni Moda',serif;font-size:clamp(15px,1.8vw,20px);line-height:1.4">{{ g.names[0] }}</span>
             </div>
           </sc-for>
         </div>
@@ -546,10 +566,12 @@
       <div style="display:flex;flex-wrap:wrap;background:#F6EDE9;color:#2a0008;box-shadow:0 40px 90px rgba(7,1,2,0.5);transform:rotate(calc(var(--c,0) * -2deg))">
         <div style="flex:999 1 420px;min-width:0;padding:clamp(26px,4vw,52px)">
           <p style="margin:0 0 10px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#8C2338">Kindly reply by {{ deadline }}</p>
-          <p style="margin:0 0 26px;max-width:52ch;font-size:16px;line-height:1.75;font-weight:400;text-wrap:pretty">Search for your name exactly as it appears on your invitation. Your entry already knows whether you have a plus one.</p>
-          <input id="rsvpQuery" type="text" placeholder="Your full name" aria-label="Your full name" style="width:100%;box-sizing:border-box;height:56px;padding:0 18px;background:transparent;border:1px solid rgba(42,0,8,0.4);color:#2a0008;font:inherit;font-size:16px;outline:none;margin-bottom:12px">
-          <a id="rsvpFindBtn" href="#rsvp" style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 22px;background:#650015;color:#F6EDE9;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;transition:background .3s ease" style-hover="background:#8C2338;color:#F6EDE9">Find my invitation <span aria-hidden="true">→</span></a>
-          <div id="rsvpDynamic" style="margin-top:14px"></div>
+          <p style="margin:0 0 22px;max-width:52ch;font-size:15px;line-height:1.7;font-weight:400;color:rgba(42,0,8,0.72);text-wrap:pretty">Type your name as it appears on your invitation — your entry already knows whether you have a plus one.</p>
+          <div style="display:flex">
+            <input id="rsvpQuery" type="text" placeholder="Your full name" aria-label="Your full name" style="flex:1;min-width:0;box-sizing:border-box;height:54px;padding:0 18px;background:transparent;border:1px solid rgba(42,0,8,0.4);border-right:none;color:#2a0008;font:inherit;font-size:16px;outline:none">
+            <a id="rsvpFindBtn" href="#rsvp" style="flex:0 0 auto;display:flex;align-items:center;gap:14px;height:54px;padding:0 22px;background:#650015;color:#F6EDE9;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;white-space:nowrap;transition:background .3s ease" style-hover="background:#8C2338;color:#F6EDE9">Find my invitation <span aria-hidden="true">→</span></a>
+          </div>
+          <div id="rsvpDynamic" style="margin-top:16px"></div>
           <div style="margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:16px">
             <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
               <div style="border-top:1px solid rgba(42,0,8,0.2);padding-top:12px"><span style="font-family:'Bodoni Moda',serif;font-size:18px;color:#8C2338">{{ st.n }}</span><p style="margin:6px 0 0;font-size:13px;line-height:1.6">{{ st.text }}</p></div>
@@ -597,7 +619,7 @@ class Component extends DCLogic {
     ],
     principal: [
       ["Mr. Orlando Dela Paz", "Mrs. Elizabeth Dela Paz"], ["Engr. Jesus Jessie Concepcion", "Engr. Aida Concepcion"], ["Mr. Ruben Lucena", "Mrs. Zenaida Lucena"],
-      ["Mr. Fernando T. Concepcion", "Mrs. Adelaida L. Del Mundo"], ["Mr. Lazaro Santos Jr.", "Mrs. Macrina Santos"], ["Mr. Arthur Cabantug", "Mrs. Cristy Cabantug"],
+      ["Mr. Fernando Concepcion", "Mrs. Adelaida Del Mundo"], ["Mr. Lazaro Santos Jr.", "Mrs. Macrina Santos"], ["Mr. Arthur Cabantug", "Mrs. Cristy Cabantug"],
       ["Engr. Joey Guerrero", "Mrs. Alice Guerrero"], ["Mr. Ariel Dones", "Mrs. Fleurdeliza Dones"], ["Mr. Enrique Balano", "Mrs. Elizabeth Balano"],
       ["Mr. Resorte Medina Jr.", "Mrs. Virgina Medina"], ["Mr. Arlie Calera Arillo", "Mrs. Edwina Nolasco"], ["Mr. Eduardo Rongavilla", "Mrs. Imelda Rongavilla"],
       ["Mrs. Cynthia Concepcion Naoe"],
@@ -822,27 +844,29 @@ class Component extends DCLogic {
         ? [wasAttending ? "Attending ✦" : "Not attending", ...(row._plusName ? [`+1 · ${row._plusName}`] : [])]
         : ["Responding now"];
       setTicket(row.name, ticketLines);
-      let html = `<div style="border-top:1px solid rgba(42,0,8,0.15);padding-top:18px">`;
-      if (isEdit) html += `<p style="margin:0 0 14px;font-size:13px;color:#8C2338">Already responded — you can update below.</p>`;
-      html += `<p style="margin:0 0 14px;font-size:13px;font-weight:500;color:#2a0008">Hello, ${row.name}.</p>`;
+      let html = `<div style="border-top:1px solid rgba(42,0,8,0.15);padding-top:20px">`;
+      if (isEdit) html += `<p style="margin:0 0 10px;font-size:12px;color:#8C2338;letter-spacing:0.1em;text-transform:uppercase">Already responded — you can update below.</p>`;
+      html += `<p style="margin:0 0 18px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(20px,2.2vw,26px);color:#650015;line-height:1.2">Hello, ${row.name}.</p>`;
       if (isGroup) {
-        html += `<p style="margin:0 0 10px;font-size:12px;color:rgba(42,0,8,0.7)">Who from your group will be attending?</p>`;
+        html += `<p style="margin:0 0 12px;font-size:12px;color:rgba(42,0,8,0.65);letter-spacing:0.05em">Who from your group will be attending?</p>`;
+        html += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-bottom:6px">`;
         members.forEach((m, i) => {
           const chk = row._attending && row._attending.length ? row._attending.includes(m) : wasAttending;
-          html += `<label style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;cursor:pointer"><input type="checkbox" data-member="${i}" ${chk ? 'checked' : ''}> ${m}</label>`;
+          html += `<label style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(42,0,8,0.04);font-size:13px;cursor:pointer;line-height:1.4"><input type="checkbox" data-member="${i}" ${chk ? 'checked' : ''}> ${m}</label>`;
         });
+        html += `</div>`;
       } else {
-        html += `<p style="margin:0 0 10px;font-size:12px;color:rgba(42,0,8,0.7)">Will you be attending?</p>`;
+        html += `<p style="margin:0 0 10px;font-size:12px;color:rgba(42,0,8,0.65)">Will you be attending?</p>`;
         html += `<div style="display:flex;gap:0;margin-bottom:14px">`;
         html += `<button class="rsvp-dyn-toggle${wasAttending ? ' is-active' : ''}" data-key="attend" style="${cs}">Yes</button>`;
         html += `<button class="rsvp-dyn-toggle${!wasAttending ? ' is-active' : ''}" data-key="decline" style="${cs}">Unable to attend</button>`;
         html += `</div>`;
       }
       if (hasPlus) {
-        html += `<div style="margin-top:14px"><p style="margin:0 0 8px;font-size:12px;color:rgba(42,0,8,0.7)">Your plus one's name (if attending):</p>`;
-        html += `<input type="text" id="rsvpPlusName" placeholder="Full name" value="${row._plusName || ''}" style="width:100%;box-sizing:border-box;height:44px;padding:0 14px;background:transparent;border:1px solid rgba(42,0,8,0.35);color:#2a0008;font:inherit;font-size:14px;outline:none"></div>`;
+        html += `<div style="margin-top:14px"><p style="margin:0 0 8px;font-size:12px;color:rgba(42,0,8,0.65)">Your plus one's name (if attending):</p>`;
+        html += `<input type="text" id="rsvpPlusName" placeholder="Full name" value="${row._plusName || ''}" style="width:100%;box-sizing:border-box;height:46px;padding:0 14px;background:transparent;border:1px solid rgba(42,0,8,0.35);color:#2a0008;font:inherit;font-size:14px;outline:none"></div>`;
       }
-      html += `<button id="rsvpSubmit" class="rsvp-dyn-btn" style="${cs}margin-top:16px;width:100%;height:50px;background:#650015;color:#F6EDE9;border:0;cursor:pointer;transition:background .3s ease,color .3s ease">Confirm RSVP →</button>`;
+      html += `<button id="rsvpSubmit" class="rsvp-dyn-btn" style="${cs}margin-top:16px;width:100%;height:52px;background:#650015;color:#F6EDE9;border:0;cursor:pointer;transition:background .3s ease,color .3s ease">Confirm RSVP →</button>`;
       html += `</div>`;
       show(html);
       dyn.querySelectorAll(".rsvp-dyn-toggle").forEach(b => {
@@ -1281,7 +1305,8 @@ class Component extends DCLogic {
     const roman = ["I", "II", "III", "IV"];
     const words = "From an unexpected beginning to an".split(" ").map((t) => ({ t, fs: "normal", col: "#F6EDE9" }));
     "intentional forever.".split(" ").forEach(t => words.push({ t, fs: "italic", col: "#E5B7C2" }));
-    const credits = d.groups.map((g) => ({ role: g.role, names: g.names }));
+    const credits = d.groups.slice(0, 4).map((g) => ({ role: g.role, names: g.names }));
+    const flowerCredits = d.groups.slice(4).map((g) => ({ role: g.role, names: g.names }));
     const secondarySponsors = d.secondary.map((s) => ({ role: s.role, names: s.names.split(" · ") }));
     const sacred = d.sacred.map((s) => ({ role: s.role, names: [s.names] }));
     const nav = [["Opening", "#top"], ["Our film", "#film"], ["Our story", "#story"], ["Snaps", "#gallery"], ["The ceremony", "#where"], ["The reception", "#reception"], ["Program details", "#day"], ["Wardrobe", "#guide"], ["Entourage", "#entourage"], ["Questions", "#faq"], ["RSVP", "#rsvp"]]
@@ -1331,7 +1356,7 @@ class Component extends DCLogic {
       timeline: d.timeline.map((t) => { const [h, m] = t.time.split(" "); return { ...t, hour: h, mer: m }; }),
       ladies: d.ladies, gentlemen: d.gentlemen, avoid: d.avoid,
       principalPairs: d.principal.map(([a, b]) => ({ a: a || '', b: b || '' })),
-      credits, secondarySponsors, sacred,
+      credits, flowerCredits, secondarySponsors, sacred,
       entourageNote: d.note,
       giftBody: d.gift.body, giftEmphasis: d.gift.emphasis, giftNote: d.gift.note,
       faqs: d.faqs,
