@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "static-site",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-l", "8934", "--no-clipboard"],
+      "runtimeExecutable": "/bin/bash",
+      "runtimeArgs": ["-c", "cd /Users/carlo/Documents/GitHub/wedding-site && /usr/bin/python3 -m http.server 8934"],
       "port": 8934
     }
   ]
