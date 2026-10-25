@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script>history.scrollRestoration = 'manual'; window.scrollTo(0, 0);</script>
 </head>
 <body>
 <x-dc>
@@ -172,7 +173,7 @@
     <div style="width:100%;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0 clamp(24px,5vw,80px)">
       <sc-for list="{{ nav }}" as="n" hint-placeholder-count="9">
         <a href="{{ n.href }}" onClick="{{ closeMenu }}" style="display:grid;grid-template-columns:52px 1fr;align-items:baseline;gap:12px;padding:clamp(12px,1.8vh,18px) 0;border-top:1px solid rgba(246,237,233,0.14);color:#F6EDE9;transition:color .3s ease,padding-left .4s cubic-bezier(.22,1,.36,1)" style-hover="color:#E5B7C2;padding-left:10px">
-          <span style="font-size:10px;letter-spacing:0.3em;color:#C08290">SC. {{ n.n }}</span>
+          <span style="font-size:10px;letter-spacing:0.3em;color:#C08290">{{ n.n }}</span>
           <span style="font-family:'Bodoni Moda',serif;font-size:clamp(26px,3.4vw,42px);line-height:1.1;white-space:nowrap">{{ n.label }}</span>
         </a>
       </sc-for>
@@ -234,7 +235,7 @@
       <div id="film-bg-text" aria-hidden="true" style="position:absolute;left:0;top:50%;white-space:nowrap;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(140px,26vw,420px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(192,130,144,0.2);transform:translate3d(calc(var(--p,0) * -60vw + 10vw),-50%,0);pointer-events:none">Our film · Our film · Our film</div>
 
       <div id="film-video-wrap" style="position:absolute;inset:0;background:#000;clip-path:inset(max(9%,calc(50% - 28.125vw),calc((1 - var(--p,0) * 2.2) * 30%)) max(0%,calc((1 - var(--p,0) * 2.2) * 24%)))">
-        <video id="c-film" src="https://github.com/carlodp/wedding-site/releases/download/assets/1.9.27.Carlo.-.Alexandra.STD.Revised.1.mp4" muted="muted" playsinline="playsinline" loop="loop" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:scale(calc(1.25 - min(1,var(--p,0) * 2.2) * 0.25))"></video>
+        <video id="c-film" src="https://github.com/carlodp/wedding-site/releases/download/assets/1.9.27.Carlo.-.Alexandra.STD.Revised.1.mp4" autoplay="autoplay" muted="muted" playsinline="playsinline" loop="loop" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:scale(calc(1.25 - min(1,var(--p,0) * 2.2) * 0.25))"></video>
         <sc-if value="{{ filmMissing }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a0307,#3b000a)"></div>
         </sc-if>
@@ -242,7 +243,7 @@
       </div>
 
       <div id="film-ui" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,3vh,30px);text-align:center;padding:0 20px;opacity:{{ filmUiOp }};pointer-events:{{ filmUiPe }};transition:opacity .6s ease">
-        <p style="margin:0;font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#E5B7C2;opacity:calc((var(--p,0) - 0.3) * 4)">The premiere — Save the date</p>
+        <p style="margin:0;font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#E5B7C2;opacity:calc((var(--p,0) - 0.3) * 4)">Save the date</p>
         <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(52px,9vw,150px);line-height:0.9;text-shadow:0 6px 40px rgba(7,1,2,0.6);transform:scale(calc(1.25 - min(1,var(--p,0) * 2) * 0.25))">Our <span style="font-style:italic;color:#E5B7C2">film</span></h2>
         <sc-if value="{{ filmMissing }}" hint-placeholder-val="{{ false }}">
           <p style="margin:clamp(6px,2vh,18px) 0 0;font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(246,237,233,0.7);opacity:calc((var(--p,0) - 0.35) * 4)">Premiering soon</p>
@@ -270,7 +271,7 @@
       <div aria-hidden="true" style="position:absolute;left:0;top:clamp(80px,13vh,120px);white-space:nowrap;font-family:'Bodoni Moda',serif;font-size:clamp(90px,16vw,240px);line-height:1;color:rgba(246,237,233,0.04);transform:translate3d(calc(var(--p,0) * -40vw),0,0);pointer-events:none">Our story in chapters · Our story in chapters</div>
       <div id="c-track" style="position:relative;display:flex;align-items:center;gap:clamp(40px,7vw,120px);width:max-content;padding:0 clamp(20px,7vw,110px);transform:translate3d(calc(var(--p,0) * var(--dx,0) * -1px),0,0);will-change:transform">
         <div style="flex:0 0 auto;width:min(78vw,560px)">
-          <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Sc. 02 — Our story</p>
+          <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">02 — Our story</p>
           <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(48px,7.4vw,112px);line-height:0.95">Our story in <span style="font-style:italic;color:#E5B7C2">chapters</span></h2>
           <div style="margin-top:34px;display:flex;align-items:center;gap:16px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(246,237,233,0.7)"><span style="width:60px;height:1px;background:#C08290"></span>Keep scrolling</div>
         </div>
@@ -310,7 +311,7 @@
     <div data-c style="position:relative;max-width:1400px;margin:0 auto">
       <div data-c style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(40px,6vw,80px);padding:0 clamp(6px,2vw,24px)">
         <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(64px,13vw,200px);line-height:0.86;transform:translate3d(calc(var(--c,0) * -14vw),0,0)">Snaps</h2>
-        <p style="margin:0;max-width:30ch;font-size:11px;letter-spacing:0.3em;line-height:2;text-transform:uppercase;color:#C08290">Sc. 03 — Snaps</p>
+        <p style="margin:0;max-width:30ch;font-size:11px;letter-spacing:0.3em;line-height:2;text-transform:uppercase;color:#C08290">03 — Snaps</p>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,2vw,28px);align-items:start">
         <div style="display:grid;gap:clamp(8px,2vw,28px);transform:translate3d(0,calc(var(--c,0) * 120px),0)">
@@ -351,7 +352,7 @@
         <span style="font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(40px,7vw,110px);line-height:1;color:#E5B7C2">3:30</span>
       </div>
       <div style="position:absolute;left:0;right:0;bottom:0;padding:0 clamp(20px,5vw,72px) clamp(100px,14vh,140px);opacity:calc((var(--p,0) - 0.5) * 4);transform:translate3d(0,calc((1 - min(1,max(0,(var(--p,0) - 0.5) * 3))) * 40px),0)">
-        <p style="margin:0 0 16px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">Sc. 04 — The ceremony · 3:30 PM</p>
+        <p style="margin:0 0 16px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">04 — The ceremony · 3:30 PM</p>
         <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(46px,8vw,124px);line-height:0.94">Barasoain<br><span style="font-style:italic">Church</span></h2>
         <p style="margin:20px 0 0;max-width:44ch;font-size:16px;line-height:1.75;font-weight:300;color:rgba(246,237,233,0.86);text-wrap:pretty">Our Lady of Mount Carmel Parish, Paseo del Congreso, Malolos. Please be seated by 3:00 PM — the processional begins promptly at half past three.</p>
         <a href="https://maps.app.goo.gl/sjGYeUagkC9sWRh8A" target="_blank" rel="noopener" style="margin-top:24px;display:inline-flex;align-items:center;gap:16px;height:48px;padding:0 22px;border:1px solid rgba(246,237,233,0.6);color:#F6EDE9;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;transition:background .35s ease,color .35s ease" style-hover="background:#F6EDE9;color:#0E0305">Directions <span aria-hidden="true">→</span></a>
@@ -370,7 +371,7 @@
         <span style="font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(40px,7vw,110px);line-height:1;color:#E5B7C2">5:30</span>
       </div>
       <div style="position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:flex-end;text-align:right;padding:0 clamp(20px,5vw,72px) clamp(100px,14vh,140px);opacity:calc((var(--p,0) - 0.5) * 4);transform:translate3d(0,calc((1 - min(1,max(0,(var(--p,0) - 0.5) * 3))) * 40px),0)">
-        <p style="margin:0 0 16px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">Sc. 05 — The reception · 5:30 PM</p>
+        <p style="margin:0 0 16px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">05 — The reception · 5:30 PM</p>
         <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(46px,8vw,124px);line-height:0.94">Placida<br><span style="font-style:italic">Pavillion</span></h2>
         <p style="margin:20px 0 0;max-width:44ch;font-size:16px;line-height:1.75;font-weight:300;color:rgba(246,237,233,0.86);text-wrap:pretty">Events Place, Malolos — twenty minutes from the church. Doors open at half past five, dinner and programme to follow. Parking on site.</p>
         <a href="https://maps.app.goo.gl/JYPcoUsfDagVbKRMA" target="_blank" rel="noopener" style="margin-top:24px;display:inline-flex;align-items:center;gap:16px;height:48px;padding:0 22px;border:1px solid rgba(246,237,233,0.6);color:#F6EDE9;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;transition:background .35s ease,color .35s ease" style-hover="background:#F6EDE9;color:#0E0305">Directions <span aria-hidden="true">→</span></a>
@@ -381,7 +382,7 @@
   <section id="day" style="position:relative;background:#0E0305;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px)">
     <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(40px,6vw,100px);align-items:start">
       <div id="day-head" style="position:sticky;top:110px">
-        <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Sc. 06 — Running order</p>
+        <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">06 — Program details</p>
         <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:0.96">How the ninth <span style="font-style:italic;color:#E5B7C2">unfolds</span></h2>
         <div style="margin-top:clamp(30px,4vw,48px);display:grid;gap:22px">
           <sc-for list="{{ travel }}" as="v" hint-placeholder-count="3">
@@ -411,7 +412,7 @@
     <div style="position:relative;max-width:1200px;margin:0 auto">
       <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;padding-bottom:24px;border-bottom:2px solid #C08290">
         <div>
-          <p style="margin:0 0 18px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">Sc. 07 — Wardrobe</p>
+          <p style="margin:0 0 18px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">07 — Wardrobe</p>
           <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(40px,6vw,90px);line-height:0.98">The dress code, <span style="font-style:italic;color:#E5B7C2">semi formal</span></h2>
         </div>
         <p style="margin:0;font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:#E5B7C2">Dress code · Guests</p>
@@ -419,32 +420,24 @@
       <div style="margin-top:clamp(28px,3.6vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:2px">
         <div style="background:#F6EDE9;color:#2a0008;padding:clamp(26px,3.4vw,48px)">
           <p style="margin:0 0 26px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#8C2338">Yes — please wear</p>
-          <p style="margin:0 0 8px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:26px;color:#650015">Ladies</p>
-          <ul style="margin:0 0 30px;padding:0;list-style:none;display:grid;gap:14px">
-            <sc-for list="{{ ladies }}" as="l" hint-placeholder-count="3"><li style="font-size:18px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:14px;text-wrap:pretty">{{ l }}</li></sc-for>
+          <p style="margin:0 0 12px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:26px;color:#650015">Ladies</p>
+          <img src="assets/attire-women.jpg" alt="Ladies attire guide" style="width:100%;aspect-ratio:2000/1116;object-fit:cover;display:block;margin-bottom:20px;cursor:pointer" onclick="window._lbOpen(['assets/attire-women.jpg','assets/attire-men.jpg'],0)">
+          <ul style="margin:0 0 34px;padding:0;list-style:none;display:grid;gap:14px">
+            <sc-for list="{{ ladies }}" as="l" hint-placeholder-count="1"><li style="font-size:18px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:14px;text-wrap:pretty">{{ l }}</li></sc-for>
           </ul>
-          <p style="margin:0 0 8px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:26px;color:#650015">Gentlemen</p>
+          <p style="margin:0 0 12px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:26px;color:#650015">Gentlemen</p>
+          <img src="assets/attire-men.jpg" alt="Gentlemen attire guide" style="width:100%;aspect-ratio:2000/1116;object-fit:cover;display:block;margin-bottom:20px;cursor:pointer" onclick="window._lbOpen(['assets/attire-men.jpg','assets/attire-women.jpg'],0)">
           <ul style="margin:0;padding:0;list-style:none;display:grid;gap:14px">
-            <sc-for list="{{ gentlemen }}" as="g" hint-placeholder-count="3"><li style="font-size:18px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:14px;text-wrap:pretty">{{ g }}</li></sc-for>
+            <sc-for list="{{ gentlemen }}" as="g" hint-placeholder-count="1"><li style="font-size:18px;line-height:1.5;font-weight:300;border-top:1px solid rgba(42,0,8,0.18);padding-top:14px;text-wrap:pretty">{{ g }}</li></sc-for>
           </ul>
         </div>
-        <div style="background:#1a0307;padding:clamp(26px,3.4vw,48px);display:flex;flex-direction:column">
+        <div style="background:#1a0307;padding:clamp(26px,3.4vw,48px)">
           <p style="margin:0 0 26px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#C08290">No — please avoid</p>
           <ul style="margin:0;padding:0;list-style:none;display:grid;gap:22px">
             <sc-for list="{{ avoid }}" as="x" hint-placeholder-count="3">
               <li style="display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start"><span aria-hidden="true" style="font-family:'Bodoni Moda',serif;font-size:24px;color:#C08290;line-height:1">✕</span><span><span style="display:block;font-family:'Bodoni Moda',serif;font-size:clamp(22px,2.2vw,27px);line-height:1.25">{{ x.t }}</span><span style="display:block;margin-top:5px;font-size:14px;font-weight:300;color:rgba(246,237,233,0.66)">{{ x.why }}</span></span></li>
             </sc-for>
           </ul>
-          <div style="margin-top:auto;padding-top:34px">
-            <div id="attire-slider" style="position:relative;aspect-ratio:2000/1116;width:100%;overflow:hidden">
-              <div style="position:absolute;inset:0;transition:opacity 1.1s ease;opacity:{{ a0 }}"><image-slot id="v2-g1" shape="rect" fit="cover" placeholder="Gentlemen" src="assets/attire-men.jpg"></image-slot></div>
-              <div style="position:absolute;inset:0;transition:opacity 1.1s ease;opacity:{{ a1 }}"><image-slot id="v2-g2" shape="rect" fit="cover" placeholder="Ladies" src="assets/attire-women.jpg"></image-slot></div>
-              <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:linear-gradient(180deg,rgba(7,1,2,0) 0%,rgba(7,1,2,0.86) 72%);display:flex;align-items:flex-end;justify-content:space-between;gap:14px;pointer-events:none">
-                <span style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#F6EDE9">{{ attireCap }}</span>
-                <span style="display:flex;gap:7px"><span style="width:22px;height:2px;background:#C08290;opacity:{{ d0 }};transition:opacity .6s ease"></span><span style="width:22px;height:2px;background:#C08290;opacity:{{ d1 }};transition:opacity .6s ease"></span></span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -452,7 +445,7 @@
 
   <section id="entourage" style="position:relative;background:#070102;padding:clamp(100px,14vw,180px) clamp(20px,5vw,72px);text-align:center">
     <div style="max-width:980px;margin:0 auto">
-      <p style="margin:0 0 22px;font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#C08290">Sc. 08 — The cast</p>
+      <p style="margin:0 0 22px;font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#C08290">08 — Entourage</p>
       <h2 data-focus style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(46px,8vw,120px);line-height:0.96">The wedding <span style="font-style:italic;color:#E5B7C2">entourage</span></h2>
 
       <div data-focus style="margin-top:clamp(80px,10vw,130px)">
@@ -473,6 +466,20 @@
         </div>
       </div>
 
+      <div data-focus style="margin-top:clamp(80px,10vw,130px)">
+        <p style="margin:0 0 28px;font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#C08290">Secondary sponsors</p>
+        <div style="display:grid;gap:clamp(40px,5vw,64px)">
+          <sc-for list="{{ secondarySponsors }}" as="g" hint-placeholder-count="3">
+            <div data-focus style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,4vw,56px);align-items:baseline">
+              <p style="margin:0;text-align:right;font-size:11px;letter-spacing:0.32em;line-height:2;text-transform:uppercase;color:#C08290">{{ g.role }}</p>
+              <div style="text-align:left;display:grid;gap:6px">
+                <sc-for list="{{ g.names }}" as="n" hint-placeholder-count="2"><span style="font-family:'Bodoni Moda',serif;font-size:clamp(17px,2.1vw,24px);line-height:1.3">{{ n }}</span></sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
       <div style="margin-top:clamp(80px,10vw,130px);display:grid;gap:clamp(40px,5vw,64px)">
         <sc-for list="{{ credits }}" as="g" hint-placeholder-count="12">
           <div data-focus style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,4vw,56px);align-items:baseline">
@@ -483,6 +490,21 @@
           </div>
         </sc-for>
       </div>
+
+      <div data-focus style="margin-top:clamp(80px,10vw,130px)">
+        <p style="margin:0 0 28px;font-size:11px;letter-spacing:0.44em;text-transform:uppercase;color:#C08290">The sacred symbols</p>
+        <div style="display:grid;gap:clamp(40px,5vw,64px)">
+          <sc-for list="{{ sacred }}" as="g" hint-placeholder-count="3">
+            <div data-focus style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,4vw,56px);align-items:baseline">
+              <p style="margin:0;text-align:right;font-size:11px;letter-spacing:0.32em;line-height:2;text-transform:uppercase;color:#C08290">{{ g.role }}</p>
+              <div style="text-align:left;display:grid;gap:6px">
+                <sc-for list="{{ g.names }}" as="n" hint-placeholder-count="1"><span style="font-family:'Bodoni Moda',serif;font-size:clamp(17px,2.1vw,24px);line-height:1.3">{{ n }}</span></sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
       <p style="margin:clamp(60px,8vw,90px) 0 0;font-size:12px;font-weight:300;color:rgba(246,237,233,0.6)">{{ entourageNote }}</p>
     </div>
   </section>
@@ -490,7 +512,7 @@
   <section id="notes" style="position:relative;background:#0E0305;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px)">
     <div style="max-width:1200px;margin:0 auto">
       <div data-c style="padding-bottom:clamp(70px,9vw,120px)">
-        <p style="margin:0 0 22px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Sc. 09 — A note on gifts</p>
+        <p style="margin:0 0 22px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">09 — A note on gifts</p>
         <p style="margin:0;max-width:24ch;font-family:'Bodoni Moda',serif;font-size:clamp(32px,4.8vw,70px);line-height:1.1;text-wrap:balance">{{ giftBody }}</p>
         <div style="margin-top:clamp(30px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,4vw,60px);border-top:1px solid rgba(246,237,233,0.2);padding-top:26px">
           <p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(20px,2.2vw,27px);line-height:1.45;color:#E5B7C2;text-wrap:pretty">{{ giftEmphasis }}</p>
@@ -499,8 +521,8 @@
       </div>
       <div id="faq" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(30px,5vw,90px);align-items:start">
         <div id="faq-head" style="position:sticky;top:110px">
-          <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Sc. 10 — Questions</p>
-          <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:0.96">Before you <span style="font-style:italic;color:#E5B7C2">ask</span></h2>
+          <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">10 — Questions</p>
+          <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:0.96">Things to <span style="font-style:italic;color:#E5B7C2">note</span></h2>
         </div>
         <div style="border-top:2px solid rgba(246,237,233,0.85)">
           <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="8">
@@ -519,7 +541,7 @@
   <section id="rsvp" data-c style="position:relative;overflow:hidden;background:#3b000a;padding:clamp(100px,13vw,170px) clamp(20px,5vw,72px)">
     <div aria-hidden="true" style="position:absolute;left:0;bottom:4%;white-space:nowrap;font-family:'Bodoni Moda',serif;font-size:clamp(110px,20vw,320px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(246,237,233,0.1);transform:translate3d(calc(var(--c,0) * -30vw),0,0);pointer-events:none">Admit one · Admit one · Admit one</div>
     <div style="position:relative;max-width:1100px;margin:0 auto">
-      <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">Sc. 11 — RSVP</p>
+      <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#E5B7C2">11 — RSVP</p>
       <h2 style="margin:0 0 clamp(36px,5vw,60px);font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(44px,7vw,108px);line-height:0.96">Reserve your <span style="font-style:italic;color:#E5B7C2">seat</span></h2>
       <div style="display:flex;flex-wrap:wrap;background:#F6EDE9;color:#2a0008;box-shadow:0 40px 90px rgba(7,1,2,0.5);transform:rotate(calc(var(--c,0) * -2deg))">
         <div style="flex:999 1 420px;min-width:0;padding:clamp(26px,4vw,52px)">
@@ -534,18 +556,7 @@
             </sc-for>
           </div>
         </div>
-        <div style="flex:1 1 220px;border-left:2px dashed rgba(42,0,8,0.3);padding:clamp(26px,4vw,52px) clamp(22px,3vw,36px);display:flex;flex-direction:column;justify-content:space-between;gap:28px;background:#EBD5DA">
-          <div>
-            <p style="margin:0;font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:#8C2338">Admit</p>
-            <p style="margin:6px 0 0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:40px;line-height:1;color:#650015">By name</p>
-          </div>
-          <div id="rsvpTicket" style="flex:1;padding:8px 0"></div>
-          <div style="display:grid;gap:12px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase">
-            <div style="display:flex;justify-content:space-between;gap:10px;border-top:1px solid rgba(42,0,8,0.2);padding-top:10px"><span style="color:#8C2338">Date</span><span>09 · 01 · 27</span></div>
-            <div style="display:flex;justify-content:space-between;gap:10px;border-top:1px solid rgba(42,0,8,0.2);padding-top:10px"><span style="color:#8C2338">Doors</span><span>3:00 PM</span></div>
-            <div style="display:flex;justify-content:space-between;gap:10px;border-top:1px solid rgba(42,0,8,0.2);padding-top:10px"><span style="color:#8C2338">Venue</span><span>Barasoain</span></div>
-          </div>
-        </div>
+        <div id="rsvpTicket" style="display:none"></div>
       </div>
     </div>
   </section>
@@ -554,7 +565,7 @@
     <div aria-label="Alexandra and Carlo" style="width:clamp(80px,10vw,120px);aspect-ratio:1/1;margin:0 auto;background:#C08290;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center"></div>
     <p style="margin:34px 0 0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(48px,9vw,140px);line-height:1">Until the ninth.</p>
     <p style="margin:26px 0 0;font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:#C08290">Alexandra &amp; Carlo · 09 · 01 · 2027 · Malolos, Bulacan</p>
-    <p style="margin:20px 0 0;font-size:14px;font-weight:300;color:rgba(246,237,233,0.7)">Anything we have not answered — <a href="mailto:hello@example.com">hello@example.com</a></p>
+    <p style="margin:20px 0 0;font-size:14px;font-weight:300;color:rgba(246,237,233,0.7)">Anything we have not answered — message us directly in our social media account</p>
   </footer>
 
   <!-- Lightbox -->
@@ -570,7 +581,7 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   RSVP_API_URL = "https://script.google.com/macros/s/AKfycbzhYELePTkAJVZAzLkE3ImwiE19hg9brShLqEPgUmp3AZ6FnNGkNix5NXzrFTcU0RfB/exec";
-  state = { hin: false, menu: false, playing: false, ai: 0, now: Date.now() };
+  state = { hin: false, menu: false, playing: false, now: Date.now() };
   d = {
     story: [
       { year: "2012", title: "How we met", body: "We met in college at FEU East Asia. We started talking because our peers kept teasing the two of us — ironically, that is exactly how it began." },
@@ -596,13 +607,15 @@ class Component extends DCLogic {
       { role: "Maid of Honour", names: ["Claudine Villa", "Keynan Sheen Malaran"] },
       { role: "Groomsmen", names: ["Karl Anthony Sulit", "Justin Evangelista", "Zian Paulo Concepcion", "Richard Martin Santos", "Bobby Bryan Jallores", "Francis Daniele Decano", "John Paul Favoreal"] },
       { role: "Bridesmaids", names: ["April Hernandez", "Jenny Cristel Estrella", "Mika Hara", "Joanna Rose Estrella", "Christine Lunzaga Gonzales", "Princess Orveen Calderon", "Micah Morta"] },
+      { role: "Flower Girls", names: ["Freya Jane Dones", "Ryelin Crishelle Gonzales", "Caira Yzabelle Gonzales", "Aryanna Caitleen Gonzales"] },
     ],
     secondary: [
-      { role: "Flower Girls", names: "Freya Jane Dones · Ryelin Crishelle Gonzales · Caira Yzabelle Gonzales · Aryanna Caitleen Gonzales" },
-      { role: "Ring Bearer", names: "Bryana Cailee Gonzales" },
       { role: "Cord Sponsors", names: "Joie Alanah Guerrero · Ernest John Balano" },
       { role: "Candle Sponsors", names: "Joie Alyssa Guerrero · Rianne Johann Umali" },
       { role: "Veil Sponsors", names: "Julie Anne Cristino · Dennis John Cristino" },
+    ],
+    sacred: [
+      { role: "Ring Bearer", names: "Bryana Cailee Gonzales" },
       { role: "Bible Bearer", names: "Peyton Maximus Lucena" },
       { role: "Arras Bearer", names: "Angelus Ichiro Mendoza" },
     ],
@@ -616,26 +629,25 @@ class Component extends DCLogic {
       { time: "10:00 PM", label: "Last song", note: "Safe drive home" },
     ],
     travel: [
-      { title: "Parking", kicker: "On the day", body: "Street and lot parking near Barasoain Church, and on-site parking at Placida Pavillion." },
+      { title: "Parking", kicker: "On the day", body: "On-site parking near Barasoain Church, and on-site parking at Placida Pavillion." },
     ],
     gift: {
-      body: "Your presence is the gift — you travelling to Malolos to stand with us.",
-      emphasis: "If you would like to give something, we would genuinely prefer a cash gift over a physical one.",
+      body: "Your presence is our greatest gift.",
+      emphasis: "Should you wish to honor us further, a monetary gift would be warmly appreciated. Your kindness and thoughtfulness mean so much to us as we begin this beautiful new chapter of our lives.",
       note: "We are building our first home together, and a contribution towards it goes further than anything we could unwrap. A card box will be waiting near the entrance at Placida Pavillion — no envelope is ever expected, and none will be counted.",
     },
     faqs: [
-      { q: "What is the dress code?", a: "Semi-formal, in our palette — soft and dusty rose for ladies, choco brown for gentlemen. Burgundy, mauve and gray are reserved for the wedding party, and please leave white, ivory and cream to the bride." },
+      { q: "What is the dress code?", a: "Semi-formal, in our palette — soft and dusty rose for ladies, choco brown for gentlemen. Burgundy, olive green and gray are reserved for the wedding party, and please leave white, ivory and cream to the bride." },
       { q: "Can I bring my children?", a: "We adore your little ones, but this is an adults-only celebration, with the exception of the children in our entourage. Please arrange care for the evening so you can enjoy it fully." },
       { q: "Can I bring a plus one?", a: "Only if your invitation and your RSVP entry say so. Our guest list is at capacity, so a plus one can only be confirmed through the name on your invitation." },
       { q: "Can I bring someone who wasn't invited?", a: "Respectfully, no. Every seat is assigned by name, and guests who are not on the list cannot be accommodated at the church or the reception." },
       { q: "When should I arrive?", a: "Please be at Barasoain Church by 3:00 PM. The reception at Placida Pavillion opens at 5:30 PM." },
-      { q: "Is there a gift registry?", a: "No registry. If you would like to give something, we would honestly prefer a cash gift over a physical one — it goes towards our first home. A card box will be waiting near the entrance at the reception." },
-      { q: "Can I take photos?", a: "Yes, after the ceremony. We are keeping the processional and the vows unplugged so everyone sees it with their own eyes. Please share anything you take with us afterwards." },
+      { q: "Can I take photos during the ceremony?", a: "Yes, but please stay seated and keep the aisles clear so our team can capture every moment uninterrupted." },
       { q: "What if my plans change?", a: "Let us know by November 28, 2026 so we can adjust the seating. After that date we can no longer make changes with the venue." },
     ],
-    steps: ["Type your full name as printed on the invitation", "Confirm whether you'll attend", "Add your plus one only if your entry allows it"],
+    steps: ["Type your full name", "Confirm whether you'll attend", "Add your plus one only if your entry allows it"],
     deadline: "28 November 2026",
-    note: "* Names marked with an asterisk are still to be confirmed.",
+    note: "",
     iso: "2027-01-09T15:30:00+08:00",
   };
 
@@ -647,7 +659,6 @@ class Component extends DCLogic {
     this.filmSetup();
     this.initRsvp();
     this.tick = setInterval(() => this.setState({ now: Date.now() }), 1000);
-    this.slide = setInterval(() => this.setState((s) => ({ ai: (s.ai + 1) % 2 })), 4000);
     // Sound FAB: scroll-hide label + hide during film section + animated equalizer when playing
     window.addEventListener("scroll", () => {
       document.body.classList.toggle("sc-scrolled", window.scrollY > 60);
@@ -755,23 +766,9 @@ class Component extends DCLogic {
       });
     };
     initGalleryLightbox();
-    // Attire slider lightbox
-    const attireSrcs = ['assets/attire-men.jpg', 'assets/attire-women.jpg'];
-    const initAttireSlider = () => {
-      const g1 = document.getElementById('v2-g1');
-      if (!g1) { setTimeout(initAttireSlider, 400); return; }
-      const sliderWrap = g1.closest('[style*="position:relative;height"]');
-      if (!sliderWrap) return;
-      sliderWrap.style.cursor = 'pointer';
-      sliderWrap.addEventListener('click', () => {
-        const ai = parseFloat(window.getComputedStyle(g1.parentElement).opacity) > 0.5 ? 0 : 1;
-        window._lbOpen(attireSrcs, ai);
-      });
-    };
-    initAttireSlider();
   }
   componentWillUnmount() {
-    clearInterval(this.tick); clearInterval(this.slide); clearInterval(this.grainT);
+    clearInterval(this.tick); clearInterval(this.grainT);
     cancelAnimationFrame(this.fxRaf);
   }
 
@@ -1284,10 +1281,10 @@ class Component extends DCLogic {
     const roman = ["I", "II", "III", "IV"];
     const words = "From an unexpected beginning to an".split(" ").map((t) => ({ t, fs: "normal", col: "#F6EDE9" }));
     "intentional forever.".split(" ").forEach(t => words.push({ t, fs: "italic", col: "#E5B7C2" }));
-    const caps = ["Gentlemen", "Ladies"];
-    const credits = d.groups.map((g) => ({ role: g.role, names: g.names }))
-      .concat(d.secondary.map((s) => ({ role: s.role, names: s.names.split(" · ") })));
-    const nav = [["Opening", "#top"], ["Our film", "#film"], ["Our story", "#story"], ["Snaps", "#gallery"], ["The ceremony", "#where"], ["The reception", "#reception"], ["Running order", "#day"], ["Wardrobe", "#guide"], ["The cast", "#entourage"], ["Questions", "#faq"], ["RSVP", "#rsvp"]]
+    const credits = d.groups.map((g) => ({ role: g.role, names: g.names }));
+    const secondarySponsors = d.secondary.map((s) => ({ role: s.role, names: s.names.split(" · ") }));
+    const sacred = d.sacred.map((s) => ({ role: s.role, names: [s.names] }));
+    const nav = [["Opening", "#top"], ["Our film", "#film"], ["Our story", "#story"], ["Snaps", "#gallery"], ["The ceremony", "#where"], ["The reception", "#reception"], ["Program details", "#day"], ["Wardrobe", "#guide"], ["Entourage", "#entourage"], ["Questions", "#faq"], ["RSVP", "#rsvp"]]
       .map((x, i) => ({ label: x[0], href: x[1], n: pad(i + 1) }));
     const on = st.playing;
     const fmt = (t) => { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0"); };
@@ -1333,11 +1330,8 @@ class Component extends DCLogic {
       travel: d.travel,
       timeline: d.timeline.map((t) => { const [h, m] = t.time.split(" "); return { ...t, hour: h, mer: m }; }),
       ladies: d.ladies, gentlemen: d.gentlemen, avoid: d.avoid,
-      a0: st.ai === 0 ? 1 : 0, a1: st.ai === 1 ? 1 : 0,
-      d0: st.ai === 0 ? 1 : 0.3, d1: st.ai === 1 ? 1 : 0.3,
-      attireCap: caps[st.ai] || caps[0],
       principalPairs: d.principal.map(([a, b]) => ({ a: a || '', b: b || '' })),
-      credits,
+      credits, secondarySponsors, sacred,
       entourageNote: d.note,
       giftBody: d.gift.body, giftEmphasis: d.gift.emphasis, giftNote: d.gift.note,
       faqs: d.faqs,
