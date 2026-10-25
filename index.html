@@ -59,6 +59,20 @@
   @keyframes v2monodrift { 0%, 100% { transform: translate3d(0,0,0) rotate(-3.5deg) scale(1); } 50% { transform: translate3d(0,-26px,0) rotate(3.5deg) scale(1.05); } }
   @keyframes v2monobreathe { 0%, 100% { opacity: 0.035; } 50% { opacity: 0.085; } }
   @keyframes v2monoturn { from { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.06); } to { transform: rotate(360deg) scale(1); } }
+  @keyframes eq-b1 { 0%,100%{height:3px} 50%{height:12px} }
+  @keyframes eq-b2 { 0%,100%{height:11px} 35%{height:3px} 75%{height:8px} }
+  @keyframes eq-b3 { 0%,100%{height:5px} 30%{height:12px} 65%{height:3px} }
+  #sound-fab { position:fixed; bottom:clamp(20px,3vh,36px); left:clamp(18px,3vw,36px); z-index:70; display:flex; align-items:center; gap:10px; height:44px; padding:0 16px; background:rgba(14,3,5,0.45); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(246,237,233,0.28); color:#F6EDE9; cursor:pointer; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; transition:border-color .3s ease, gap .4s ease, opacity .4s ease; }
+  body.sc-scrolled #sound-fab { gap: 0; }
+  body.film-active #sound-fab, body.film-active #c-rsvp-btn { opacity:0 !important; pointer-events:none !important; }
+  #sound-fab:hover { border-color:#C08290; }
+  #sound-fab .sfab-label { max-width:80px; overflow:hidden; white-space:nowrap; opacity:1; transition:max-width .4s ease, opacity .3s ease; }
+  body.sc-scrolled #sound-fab .sfab-label { max-width:0; opacity:0; }
+  #sound-fab .sfab-bar { background:#C08290; width:2px; height:3px; }
+  #sound-fab.snd-on .sfab-bar1 { animation:eq-b1 .9s ease-in-out infinite; }
+  #sound-fab.snd-on .sfab-bar2 { animation:eq-b2 .75s ease-in-out infinite .12s; }
+  #sound-fab.snd-on .sfab-bar3 { animation:eq-b3 1.05s ease-in-out infinite .22s; }
+  @media (max-width:767px) { #sound-fab { bottom:calc(76px + env(safe-area-inset-bottom,0px)); left:12px; padding:0 12px; } }
   #rsvpDynamic .rsvp-dyn-toggle { flex: 1; background: transparent; color: #2a0008; border: 1px solid rgba(42,0,8,0.35); padding: 12px 16px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: background .3s ease, color .3s ease, border-color .3s ease; }
   #rsvpDynamic .rsvp-dyn-toggle:hover { border-color: #C08290; }
   #rsvpDynamic .rsvp-dyn-toggle.is-active { background: #C08290; color: #3b000a; border-color: #C08290; }
@@ -76,7 +90,8 @@
     #film-video-wrap { position:relative !important; inset:auto !important; clip-path:none !important; width:calc(62vw + min(1,var(--p,0) * 2.4) * 38vw) !important; max-width:100% !important; aspect-ratio:16/9; overflow:hidden !important; box-shadow:0 30px 70px rgba(0,0,0,0.6); background:#000 !important; }
     #film-ui { position:relative !important; inset:auto !important; width:calc(100% - 40px) !important; padding:0 !important; height:auto !important; justify-content:flex-start !important; flex-direction:row !important; }
     #film-ctl { position:relative !important; inset:auto !important; left:auto !important; right:auto !important; bottom:auto !important; width:calc(100% - 40px) !important; }
-    #count-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+    #header-count { display:none !important; }
+    #hero-btm { display:none !important; }
     #where > div > div:last-of-type, #reception > div > div:last-of-type { padding-bottom:calc(108px + env(safe-area-inset-bottom,0px)) !important; }
     footer { padding-bottom:calc(130px + env(safe-area-inset-bottom,0px)) !important; }
     #faq-head, #day-head { position:relative !important; top:auto !important; }
@@ -110,14 +125,14 @@
   <header style="position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(14px,2.4vw,24px) clamp(18px,3vw,36px);pointer-events:none">
     <a href="#top" aria-label="Back to top" style="pointer-events:auto;display:block;width:42px;height:42px;background:#F6EDE9;-webkit-mask-image:url('assets/monogram.svg');mask-image:url('assets/monogram.svg');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center"></a>
     <div style="display:flex;align-items:center;gap:12px;pointer-events:auto">
-      <button onClick="{{ toggleSound }}" aria-label="{{ soundLabel }}" style="height:44px;display:flex;align-items:center;gap:10px;padding:0 16px;background:rgba(14,3,5,0.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(246,237,233,0.28);color:#F6EDE9;cursor:pointer;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;transition:border-color .3s ease" style-hover="border-color:#C08290">
-        <span style="display:flex;align-items:flex-end;gap:2px;height:12px">
-          <span style="width:2px;height:{{ eq1 }};background:#C08290;transition:height .4s ease"></span>
-          <span style="width:2px;height:{{ eq2 }};background:#C08290;transition:height .4s ease"></span>
-          <span style="width:2px;height:{{ eq3 }};background:#C08290;transition:height .4s ease"></span>
-        </span>
-        <span>{{ soundText }}</span>
-      </button>
+      <div id="header-count" aria-label="Days until the wedding" style="height:44px;display:flex;align-items:center;gap:10px;padding:0 16px;background:rgba(14,3,5,0.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(246,237,233,0.28);font-variant-numeric:tabular-nums">
+        <sc-for list="{{ countShort }}" as="c" hint-placeholder-count="4">
+          <span style="display:flex;align-items:baseline;gap:3px">
+            <span style="font-family:'Bodoni Moda',serif;font-size:15px;line-height:1;letter-spacing:0">{{ c.v }}</span>
+            <span style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#C08290">{{ c.l }}</span>
+          </span>
+        </sc-for>
+      </div>
       <button onClick="{{ toggleMenu }}" aria-label="Open menu" style="height:44px;display:flex;align-items:center;gap:12px;padding:0 16px;background:rgba(14,3,5,0.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(246,237,233,0.28);color:#F6EDE9;cursor:pointer;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;transition:border-color .3s ease" style-hover="border-color:#C08290">
         <span>{{ menuText }}</span>
         <span style="display:flex;flex-direction:column;gap:5px"><span style="width:18px;height:1px;background:#F6EDE9"></span><span style="width:12px;height:1px;background:#F6EDE9;align-self:flex-end"></span></span>
@@ -136,7 +151,7 @@
     </div>
   </nav>
 
-  <a id="c-rsvp-btn" href="#rsvp" style="position:fixed;right:clamp(16px,3vw,34px);bottom:clamp(16px,3vw,30px);z-index:60;display:flex;align-items:center;gap:14px;height:50px;padding:0 22px;background:#C08290;color:#0E0305;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;box-shadow:0 14px 40px rgba(0,0,0,0.45);transition:background .3s ease,opacity .4s ease;opacity:{{ rsvpBtnOp }};pointer-events:{{ rsvpBtnPe }}" style-hover="background:#F6EDE9;color:#0E0305">Reserve a seat <span aria-hidden="true" style="font-family:'Bodoni Moda',serif;font-size:18px;letter-spacing:0">→</span></a>
+  <a id="c-rsvp-btn" href="#rsvp" style="position:fixed;right:clamp(16px,3vw,34px);bottom:clamp(16px,3vw,30px);z-index:60;display:flex;align-items:center;gap:14px;height:50px;padding:0 22px;background:#C08290;color:#0E0305;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;box-shadow:0 14px 40px rgba(0,0,0,0.45);transition:background .3s ease,opacity .4s ease;opacity:{{ rsvpBtnOp }};pointer-events:{{ rsvpBtnPe }}" style-hover="background:#F6EDE9;color:#0E0305">RSVP <span aria-hidden="true" style="font-family:'Bodoni Moda',serif;font-size:18px;letter-spacing:0">→</span></a>
 
   <div id="m-bar" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px)) 18px;background:rgba(7,1,2,0.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(246,237,233,0.12)">
     <div style="display:grid;gap:3px;min-width:0">
@@ -145,6 +160,15 @@
     </div>
     <a href="#rsvp" style="flex:0 0 auto;display:flex;align-items:center;gap:12px;height:48px;padding:0 18px;background:#C08290;color:#0E0305;font-size:10px;letter-spacing:0.26em;text-transform:uppercase;font-weight:500">RSVP <span aria-hidden="true" style="font-family:'Bodoni Moda',serif;font-size:17px;letter-spacing:0">→</span></a>
   </div>
+
+  <button id="sound-fab" onClick="{{ toggleSound }}" aria-label="{{ soundLabel }}">
+    <span style="display:flex;align-items:flex-end;gap:2px;height:12px">
+      <span class="sfab-bar sfab-bar1"></span>
+      <span class="sfab-bar sfab-bar2"></span>
+      <span class="sfab-bar sfab-bar3"></span>
+    </span>
+    <span class="sfab-label">{{ soundText }}</span>
+  </button>
 
   <section id="top" data-pin style="position:relative;height:190vh;background:#070102">
     <div style="position:sticky;top:0;height:100vh;height:100svh;overflow:hidden">
@@ -165,7 +189,7 @@
       <div aria-hidden="true" style="position:absolute;left:-10%;top:-20%;width:60%;height:70%;pointer-events:none;background:radial-gradient(closest-side,rgba(229,140,120,0.22),rgba(229,140,120,0));transform:translate3d(calc(var(--mx,0) * -60px),calc(var(--my,0) * -40px + var(--p,0) * -30vh),0)"></div>
       <div aria-hidden="true" style="position:absolute;right:-12%;bottom:-25%;width:55%;height:70%;pointer-events:none;background:radial-gradient(closest-side,rgba(192,130,144,0.24),rgba(192,130,144,0));transform:translate3d(calc(var(--mx,0) * -80px),calc(var(--my,0) * -50px + var(--p,0) * -45vh),0)"></div>
 
-      <div style="position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 28px;padding:0 clamp(20px,5vw,72px) clamp(84px,11vh,110px);opacity:calc(1 - var(--p,0) * 2.4)">
+      <div id="hero-btm" style="position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 28px;padding:0 clamp(20px,5vw,72px) clamp(84px,11vh,110px);opacity:calc(1 - var(--p,0) * 2.4)">
         <div style="display:flex;flex-wrap:wrap;gap:8px 28px;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(246,237,233,0.84);opacity:{{ ho }};transition:opacity 1.4s ease 1s">
           <span>Saturday · 09 · 01 · 2027</span>
           <span style="color:#C08290">Malolos, Bulacan</span>
@@ -213,25 +237,6 @@
     </div>
   </section>
 
-  <section id="date" data-c style="position:relative;overflow:hidden;padding:clamp(90px,14vw,170px) clamp(20px,5vw,72px);background:#070102">
-    <div aria-hidden="true" style="position:absolute;left:0;top:50%;white-space:nowrap;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(160px,30vw,460px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(192,130,144,0.22);transform:translate3d(calc(var(--c,0) * 34vw - 10vw),-50%,0);pointer-events:none">09.01.27</div>
-    <div style="position:relative;max-width:1200px;margin:0 auto">
-      <p style="margin:0 0 20px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">Opening night · Barasoain Church · 3:30 PM</p>
-      <h2 style="margin:0;max-width:14ch;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(40px,6.4vw,96px);line-height:0.98">Until we say <span style="font-style:italic;color:#E5B7C2">I do</span></h2>
-      <div id="count-grid" style="margin-top:clamp(44px,6vw,80px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid rgba(246,237,233,0.85)">
-        <sc-for list="{{ count }}" as="c" hint-placeholder-count="4">
-          <div style="padding:clamp(16px,2.4vw,28px) clamp(6px,1.4vw,20px) 0 0;border-right:1px solid rgba(246,237,233,0.14)">
-            <div style="font-family:'Bodoni Moda',serif;font-size:clamp(40px,9vw,140px);line-height:1.15;font-variant-numeric:tabular-nums;letter-spacing:-0.02em">{{ c.v }}</div>
-            <div style="margin-top:14px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:#C08290">{{ c.l }}</div>
-          </div>
-        </sc-for>
-      </div>
-      <div style="margin-top:clamp(36px,5vw,56px);display:flex;flex-wrap:wrap;gap:14px">
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Carlo+%26+Alexandra+%E2%80%94+Wedding&amp;dates=20270109T073000Z/20270109T140000Z&amp;location=Barasoain+Church,+Malolos,+Bulacan" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:18px;height:52px;padding:0 24px;border:1px solid rgba(246,237,233,0.5);color:#F6EDE9;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;transition:background .35s ease,color .35s ease" style-hover="background:#F6EDE9;color:#0E0305">Add to calendar <span aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </section>
-
   <section id="story" data-pin style="position:relative;height:420vh;background:#0E0305">
     <div style="position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center">
       <div aria-hidden="true" style="position:absolute;left:0;top:clamp(80px,13vh,120px);white-space:nowrap;font-family:'Bodoni Moda',serif;font-size:clamp(90px,16vw,240px);line-height:1;color:rgba(246,237,233,0.04);transform:translate3d(calc(var(--p,0) * -40vw),0,0);pointer-events:none">Our story in three acts · Our story in three acts</div>
@@ -275,29 +280,33 @@
 
   <section id="gallery" style="position:relative;padding:clamp(90px,12vw,150px) clamp(14px,3vw,48px) clamp(60px,8vw,110px);background:#0E0305;overflow:hidden">
     <div data-c style="position:relative;max-width:1400px;margin:0 auto">
-      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(40px,6vw,80px);padding:0 clamp(6px,2vw,24px)">
+      <div data-c style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(40px,6vw,80px);padding:0 clamp(6px,2vw,24px)">
         <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(64px,13vw,200px);line-height:0.86;transform:translate3d(calc(var(--c,0) * -14vw),0,0)">Stills</h2>
         <p style="margin:0;max-width:30ch;font-size:11px;letter-spacing:0.3em;line-height:2;text-transform:uppercase;color:#C08290">Sc. 03 — Frames from thirteen years</p>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,2vw,28px);align-items:start">
         <div style="display:grid;gap:clamp(8px,2vw,28px);transform:translate3d(0,calc(var(--c,0) * 120px),0)">
-          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-1" shape="rect" fit="cover" placeholder="Still 1" src="assets/still-01.jpg"></image-slot></div></div>
-          <div data-unmask style="position:relative;aspect-ratio:2/3;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-2" shape="rect" fit="cover" placeholder="Still 2" src="assets/still-04.jpg"></image-slot></div></div>
-          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-3" shape="rect" fit="cover" placeholder="Still 3" src="assets/still-07.jpg"></image-slot></div></div>
-          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-4" shape="rect" fit="cover" placeholder="Still 4" src="assets/still-10.jpg"></image-slot></div></div>
-          <div data-unmask style="position:relative;aspect-ratio:1/1;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-5" shape="rect" fit="cover" placeholder="Still 5" src="assets/still-13.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-1" shape="rect" fit="cover" placeholder="Still 1" src="assets/still-15.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:2/3;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-2" shape="rect" fit="cover" placeholder="Still 2" src="assets/still-07.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-3" shape="rect" fit="cover" placeholder="Still 3" src="assets/still-14.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-4" shape="rect" fit="cover" placeholder="Still 4" src="assets/still-03.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:1/1;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-5" shape="rect" fit="cover" placeholder="Still 5" src="assets/still-11.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-6" shape="rect" fit="cover" placeholder="Still 6" src="assets/still-05.jpg"></image-slot></div></div>
         </div>
         <div style="display:grid;gap:clamp(8px,2vw,28px);margin-top:clamp(60px,12vw,180px);transform:translate3d(0,calc(var(--c,0) * -160px),0)">
-          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-6" shape="rect" fit="cover" placeholder="Still 6" src="assets/still-02.jpg"></image-slot></div></div>
-          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-7" shape="rect" fit="cover" placeholder="Still 7" src="assets/still-05.jpg"></image-slot></div></div>
-          <div data-unmask style="position:relative;aspect-ratio:1/1;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-8" shape="rect" fit="cover" placeholder="Still 8" src="assets/still-08.jpg"></image-slot></div></div>
-          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-9" shape="rect" fit="cover" placeholder="Still 9" src="assets/still-11.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-7" shape="rect" fit="cover" placeholder="Still 7" src="assets/still-17.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-8" shape="rect" fit="cover" placeholder="Still 8" src="assets/still-01.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:1/1;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-9" shape="rect" fit="cover" placeholder="Still 9" src="assets/still-09.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-10" shape="rect" fit="cover" placeholder="Still 10" src="assets/still-13.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-11" shape="rect" fit="cover" placeholder="Still 11" src="assets/still-06.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:2/3;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-12" shape="rect" fit="cover" placeholder="Still 12" src="assets/still-16.jpg"></image-slot></div></div>
         </div>
         <div style="display:grid;gap:clamp(8px,2vw,28px);margin-top:clamp(20px,5vw,70px);transform:translate3d(0,calc(var(--c,0) * 60px),0)">
-          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-10" shape="rect" fit="cover" placeholder="Still 10" src="assets/still-03.jpg"></image-slot></div></div>
-          <div data-unmask style="position:relative;aspect-ratio:1/1;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-11" shape="rect" fit="cover" placeholder="Still 11" src="assets/still-06.jpg"></image-slot></div></div>
-          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-12" shape="rect" fit="cover" placeholder="Still 12" src="assets/still-09.jpg"></image-slot></div></div>
-          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-13" shape="rect" fit="cover" placeholder="Still 13" src="assets/still-12.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-13" shape="rect" fit="cover" placeholder="Still 13" src="assets/still-10.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:1/1;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-14" shape="rect" fit="cover" placeholder="Still 14" src="assets/still-02.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-15" shape="rect" fit="cover" placeholder="Still 15" src="assets/still-12.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-16" shape="rect" fit="cover" placeholder="Still 16" src="assets/still-08.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-17" shape="rect" fit="cover" placeholder="Still 17" src="assets/still-04.jpg"></image-slot></div></div>
         </div>
       </div>
     </div>
@@ -601,6 +610,43 @@ class Component extends DCLogic {
     this.initRsvp();
     this.tick = setInterval(() => this.setState({ now: Date.now() }), 1000);
     this.slide = setInterval(() => this.setState((s) => ({ ai: (s.ai + 1) % 3 })), 3000);
+    // Sound FAB: scroll-hide label + hide during film section + animated equalizer when playing
+    window.addEventListener("scroll", () => {
+      document.body.classList.toggle("sc-scrolled", window.scrollY > 60);
+      const film = document.getElementById("film");
+      if (film) {
+        const r = film.getBoundingClientRect();
+        document.body.classList.toggle("film-active", r.top <= 0 && r.bottom >= window.innerHeight);
+      }
+    }, { passive: true });
+    const syncFab = () => {
+      const a = document.getElementById("c-audio");
+      const fab = document.getElementById("sound-fab");
+      if (fab && a) fab.classList.toggle("snd-on", !a.paused);
+    };
+    const ca = document.getElementById("c-audio");
+    if (ca) { ca.addEventListener("play", syncFab); ca.addEventListener("pause", syncFab); }
+    // Proposal video: inject directly into #c-act-3 slot and play/pause via --p
+    const storyEl = document.getElementById("story");
+    const injectProposal = () => {
+      const slot = document.getElementById("c-act-3");
+      if (!slot) { setTimeout(injectProposal, 300); return; }
+      const vid = document.createElement("video");
+      vid.src = "assets/proposal.mp4";
+      vid.muted = true;
+      vid.loop = true;
+      vid.playsInline = true;
+      vid.setAttribute("playsinline", "");
+      vid.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block";
+      slot.parentNode.replaceChild(vid, slot);
+      setInterval(() => {
+        if (!storyEl) return;
+        const p = parseFloat(storyEl.style.getPropertyValue("--p") || "0");
+        if (p > 0.58) { if (vid.paused) vid.play().catch(() => {}); }
+        else { if (!vid.paused) { vid.pause(); vid.currentTime = 0; } }
+      }, 250);
+    };
+    injectProposal();
   }
   componentWillUnmount() {
     clearInterval(this.tick); clearInterval(this.slide); clearInterval(this.grainT);
@@ -1035,6 +1081,7 @@ class Component extends DCLogic {
       filmMuteText: st.fMuted ? "Sound off" : "Sound on",
       filmMuteShort: st.fMuted ? "OFF" : "ON",
       daysLeft: String(Math.floor(left / 864e5)),
+      countShort: [{ v: count[0].v, l: "D" }, { v: count[1].v, l: "H" }, { v: count[2].v, l: "M" }, { v: count[3].v, l: "S" }],
       playFilm: () => {
         const v = film(); if (!v) return;
         const a = document.getElementById("c-audio");
