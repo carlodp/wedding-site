@@ -5,8 +5,8 @@ function doGet(e) {
   if (action === "lookup") {
     return respond(lookupGuest(e.parameter.name || e.parameter.query || ""));
   }
-  if (action === "suggest") {
-    return respond(suggestGuests(e.parameter.q || e.parameter.name || ""));
+  if (action === "names") {
+    return respond(getAllNames());
   }
   return respond({ error: "Unknown action" });
 }
@@ -137,45 +137,21 @@ function submitRsvp(data) {
   }
 }
 
-function suggestGuests(query) {
-  const q = normalize(query);
-  if (q.length < 2) return { suggestions: [] };
-
-  const qTokens = q.split(/\s+/).filter(t => t.length > 1);
-  if (!qTokens.length) return { suggestions: [] };
-
+function getAllNames() {
   const sheet = getSheet();
   const headers = getHeaders(sheet);
   const idx = headerIndex(headers);
   const lastRow = sheet.getLastRow();
-  if (lastRow < 2) return { suggestions: [] };
-
+  if (lastRow < 2) return { names: [] };
   const rows = sheet.getRange(2, 1, lastRow - 1, sheet.getLastColumn()).getValues();
-  const scored = [];
+  const names = [];
   const seen = new Set();
-
-  for (let r = 0; r < rows.length; r++) {
-    const members = splitList(rows[r][idx.Members]);
-    members.forEach(name => {
-      if (seen.has(name)) return;
-      const norm = normalize(name);
-      if (norm === q) return; // exact match handled by lookup
-      const nTokens = norm.split(/\s+/).filter(t => t.length > 1);
-
-      // count how many query tokens appear (substring) in name tokens and vice versa
-      const qHits = qTokens.filter(qt => nTokens.some(nt => nt.includes(qt) || qt.includes(nt))).length;
-      const nHits = nTokens.filter(nt => qTokens.some(qt => qt.includes(nt) || nt.includes(qt))).length;
-
-      const score = (qHits / qTokens.length) + (nHits / nTokens.length);
-      if (score >= 0.8) {
-        scored.push({ name, score });
-        seen.add(name);
-      }
+  rows.forEach(row => {
+    splitList(row[idx.Members]).forEach(name => {
+      if (name && !seen.has(name)) { names.push(name); seen.add(name); }
     });
-  }
-
-  scored.sort((a, b) => b.score - a.score);
-  return { suggestions: scored.slice(0, 5).map(s => s.name) };
+  });
+  return { names };
 }
 
 function test_lookupKnownGuest() {
@@ -186,6 +162,6 @@ function test_lookupUnknownGuest() {
   Logger.log(JSON.stringify(lookupGuest("Nobody Here")));
 }
 
-function test_suggestGuests() {
-  Logger.log(JSON.stringify(suggestGuests("Carlo Santos")));
+function test_getAllNames() {
+  Logger.log(JSON.stringify(getAllNames()));
 }

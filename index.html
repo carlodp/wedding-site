@@ -848,22 +848,44 @@ class Component extends DCLogic {
           .catch(() => err("Could not reach the server. Please check your connection."));
       });
     };
+    let guestNames = null;
+    const loadNames = () => {
+      if (guestNames) return Promise.resolve(guestNames);
+      return fetch(`${this.RSVP_API_URL}?action=names`)
+        .then(r => r.json())
+        .then(res => { guestNames = res.names || []; return guestNames; })
+        .catch(() => { guestNames = []; return []; });
+    };
+    const normStr = s => String(s || "").trim().toLowerCase();
+    const fuzzyMatch = (query, names) => {
+      const q = normStr(query);
+      const qToks = q.split(/\s+/).filter(t => t.length > 1);
+      if (!qToks.length) return [];
+      const scored = names.map(name => {
+        const n = normStr(name);
+        if (n === q) return null; // exact match handled by lookup
+        const nToks = n.split(/\s+/).filter(t => t.length > 1);
+        const qHits = qToks.filter(qt => nToks.some(nt => nt.includes(qt) || qt.includes(nt))).length;
+        const nHits = nToks.filter(nt => qToks.some(qt => qt.includes(nt) || nt.includes(qt))).length;
+        const score = (qHits / qToks.length) + (nHits / nToks.length);
+        return score >= 0.8 ? { name, score } : null;
+      }).filter(Boolean);
+      scored.sort((a, b) => b.score - a.score);
+      return scored.slice(0, 5).map(s => s.name);
+    };
     const showSuggestions = (suggestions) => {
       let html = `<div style="border-top:1px solid rgba(42,0,8,0.15);padding-top:14px">`;
       html += `<p style="margin:0 0 12px;font-size:13px;color:#8C2338">We couldn't find that exact name. Did you mean one of these?</p>`;
       suggestions.forEach(name => {
         html += `<button class="rsvp-suggest-btn" data-name="${name.replace(/"/g,'&quot;')}" style="display:block;width:100%;text-align:left;background:transparent;border:1px solid rgba(42,0,8,0.25);color:#2a0008;font:inherit;font-size:13px;padding:11px 14px;margin-bottom:8px;cursor:pointer;transition:border-color .2s,background .2s">${name}</button>`;
       });
-      html += `<p style="margin:10px 0 0;font-size:12px;color:rgba(42,0,8,0.5)">Still can't find yourself? Try your email address, or contact us.</p>`;
+      html += `<p style="margin:10px 0 0;font-size:12px;color:rgba(42,0,8,0.5)">Still can't find yourself? Try your email address, or contact us directly.</p>`;
       html += `</div>`;
       show(html);
       dyn.querySelectorAll(".rsvp-suggest-btn").forEach(b => {
         b.addEventListener("mouseenter", () => { b.style.background = "rgba(42,0,8,0.06)"; b.style.borderColor = "rgba(42,0,8,0.5)"; });
         b.addEventListener("mouseleave", () => { b.style.background = "transparent"; b.style.borderColor = "rgba(42,0,8,0.25)"; });
-        b.addEventListener("click", () => {
-          inp.value = b.dataset.name;
-          btn.click();
-        });
+        b.addEventListener("click", () => { inp.value = b.dataset.name; btn.click(); });
       });
     };
     const doLookup = (name) => {
@@ -872,22 +894,18 @@ class Component extends DCLogic {
         .then(r => r.json())
         .then(row => {
           if (!row || row.error || row.found === false) {
-            fetch(`${this.RSVP_API_URL}?action=suggest&q=${encodeURIComponent(name)}`)
-              .then(r => r.json())
-              .then(res => {
-                if (res.suggestions && res.suggestions.length) {
-                  showSuggestions(res.suggestions);
-                } else {
-                  err("We couldn't find your name. Try your email address, or check the spelling.");
-                }
-              })
-              .catch(() => err("We couldn't find your name. Try your email address, or check the spelling."));
+            loadNames().then(names => {
+              const suggestions = fuzzyMatch(name, names);
+              if (suggestions.length) showSuggestions(suggestions);
+              else err("We couldn't find your name. Try your email address, or check the spelling.");
+            });
             return;
           }
           renderForm(row, !!row._responded);
         })
         .catch(() => err("Could not reach the server. Please check your connection."));
     };
+    loadNames(); // pre-fetch names list in background
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       const name = inp.value.trim();
