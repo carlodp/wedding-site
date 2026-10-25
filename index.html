@@ -844,7 +844,7 @@ class Component extends DCLogic {
         const plusName = hasPlus ? (document.getElementById("rsvpPlusName") || {}).value || "" : "";
         const sb = document.getElementById("rsvpSubmit");
         if (sb) { sb.textContent = "Saving…"; sb.disabled = true; }
-        const payload = { action: "submit", householdId: row.householdId, attendingChurch: attending ? "Yes" : "No", attendingReception: attending ? "Yes" : "No", attendingMembers: attendingMembers, plusOneName: plusName };
+        const payload = { action: "submit", householdId: row.householdId, attending: attending ? "Yes" : "No", attendingMembers: attendingMembers, plusOneName: plusName };
         fetch(this.RSVP_API_URL, { method: "POST", body: JSON.stringify(payload) })
           .then(r => r.json())
           .then(res => {
@@ -910,14 +910,15 @@ class Component extends DCLogic {
             return;
           }
           const saved = row.saved || {};
+          const didAttend = row.alreadyResponded ? saved.attending === "Yes" : undefined;
           const normalized = {
             name: name,
             members: row.members || [],
             plusOne: row.plusOneAllowed,
             householdId: row.householdId,
             _responded: row.alreadyResponded,
-            _church: row.alreadyResponded ? saved.attendingChurch === "Yes" : undefined,
-            _reception: row.alreadyResponded ? saved.attendingReception === "Yes" : undefined,
+            _church: didAttend,
+            _reception: didAttend,
             _plusName: saved.plusOneName || "",
             _attending: saved.attendingMembers || [],
           };

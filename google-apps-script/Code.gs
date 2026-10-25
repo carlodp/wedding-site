@@ -75,10 +75,7 @@ function lookupGuest(query) {
   for (let r = 0; r < rows.length; r++) {
     const row = rows[r];
     const members = splitList(row[idx.Members]);
-    const emails = splitList(row[idx.Emails]);
-    const matched =
-      members.some((m) => normalize(m) === q) ||
-      emails.some((em) => normalize(em) === q);
+    const matched = members.some((m) => normalize(m) === q);
     if (!matched) continue;
 
     const respondedAt = row[idx.RespondedAt];
@@ -92,8 +89,7 @@ function lookupGuest(query) {
     };
     if (alreadyResponded) {
       result.saved = {
-        attendingChurch: ynString(row[idx.AttendingChurch]),
-        attendingReception: ynString(row[idx.AttendingReception]),
+        attending: ynString(row[idx.Attending]),
         attendingMembers: splitList(row[idx.AttendingMembers]),
         plusOneName: row[idx.PlusOneName] || "",
       };
@@ -122,8 +118,7 @@ function submitRsvp(data) {
       sheet.getRange(targetRow, idx[name] + 1).setValue(value);
     };
 
-    setCol("AttendingChurch", data.attendingChurch === "Yes");
-    setCol("AttendingReception", data.attendingReception === "Yes");
+    setCol("Attending", data.attending === "Yes");
     setCol(
       "AttendingMembers",
       Array.isArray(data.attendingMembers) ? data.attendingMembers.join(", ") : (data.attendingMembers || "")
