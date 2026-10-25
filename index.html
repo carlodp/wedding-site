@@ -96,6 +96,17 @@
     footer { padding-bottom:calc(130px + env(safe-area-inset-bottom,0px)) !important; }
     #faq-head, #day-head { position:relative !important; top:auto !important; }
   }
+  @keyframes act2-fade {
+    0%,100% { opacity:0; }
+    2.2%    { opacity:1; }
+    14.4%   { opacity:1; }
+    16.67%  { opacity:0; }
+  }
+  .act2-slide {
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    animation:act2-fade 9s linear infinite;
+    opacity:0;
+  }
 </style>
 </helmet>
 <div id="c-root" style="position:relative;max-width:100%;overflow-x:clip;background:#0E0305;font-family:'Jost',system-ui,sans-serif;color:#F6EDE9">
@@ -647,6 +658,31 @@ class Component extends DCLogic {
       }, 250);
     };
     injectProposal();
+    // Act II slideshow: 6 beach/car photos fade in/out at 1.5s per frame
+    const act2Imgs = [
+      "assets/act2-IMG_0035.jpg",
+      "assets/act2-IMG_4074.jpg",
+      "assets/act2-IMG_4308.jpg",
+      "assets/act2-IMG_4715.jpg",
+      "assets/act2-IMG_6290.jpg",
+      "assets/act2-IMG_6724.jpg",
+    ];
+    const injectAct2 = () => {
+      const slot = document.getElementById("c-act-2");
+      if (!slot) { setTimeout(injectAct2, 300); return; }
+      const wrap = document.createElement("div");
+      wrap.style.cssText = "position:absolute;inset:0;width:100%;height:100%";
+      act2Imgs.forEach((src, i) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "act2-slide";
+        img.style.animationDelay = (i * 1.5) + "s";
+        img.alt = "";
+        wrap.appendChild(img);
+      });
+      slot.parentNode.replaceChild(wrap, slot);
+    };
+    injectAct2();
   }
   componentWillUnmount() {
     clearInterval(this.tick); clearInterval(this.slide); clearInterval(this.grainT);
