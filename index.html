@@ -98,6 +98,7 @@
     #where > div > div:last-of-type, #reception > div > div:last-of-type { padding-bottom:calc(108px + env(safe-area-inset-bottom,0px)) !important; }
     footer { padding-bottom:calc(130px + env(safe-area-inset-bottom,0px)) !important; }
     #faq-head, #day-head { position:relative !important; top:auto !important; }
+    #hero-carlo, #hero-alex, #hero-content { will-change: transform; }
     #rsvp-search-row { flex-direction:column !important; gap:10px !important; }
     #rsvp-search-row #rsvpQuery { border-right:1px solid rgba(42,0,8,0.4) !important; }
     #rsvp-search-row #rsvpFindBtn { width:100% !important; justify-content:center !important; flex:none !important; }
@@ -1275,45 +1276,55 @@ class Component extends DCLogic {
     // Cache element lists — avoids querySelectorAll on every frame
     let pinEls = q("[data-pin]"), cEls = q("[data-c]"), unmaskEls = q("[data-unmask]"), focusEls = q("[data-focus]"), hcEls = q("[data-hc]");
     window.addEventListener("resize", () => { pinEls = q("[data-pin]"); cEls = q("[data-c]"); unmaskEls = q("[data-unmask]"); focusEls = q("[data-focus]"); hcEls = q("[data-hc]"); }, { passive: true });
-    const frame = () => {
+    // Scroll calculation — all reads before all writes to avoid layout thrashing
+    const doScrollUpdate = () => {
       const vh = window.innerHeight, vw = window.innerWidth;
       const sy = window.scrollY;
-      const didScroll = sy !== lastScrollY;
+      if (sy === lastScrollY) return;
       lastScrollY = sy;
-      if (!isTouch) {
+      const pinR = pinEls.map(el => el.getBoundingClientRect());
+      const cR = cEls.map(el => el.getBoundingClientRect());
+      const umR = unmaskEls.map(el => ({ p: el.parentElement.getBoundingClientRect(), t: el.getBoundingClientRect().top }));
+      const fcR = focusEls.map(el => el.getBoundingClientRect());
+      const hcR = hcEls.map(el => el.getBoundingClientRect());
+      pinEls.forEach((el, i) => {
+        const r = pinR[i]; if (r.bottom < -vh || r.top > vh * 2) return;
+        const p = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);
+        set(el, "--p", p);
+        if (el.id === "vow") {
+          const ws = words(), n = ws.length;
+          ws.forEach((w, j) => { const o = 0.14 + 0.86 * clamp(p * 1.3 * n - j, 0, 1); const s = o.toFixed(3); if (w._o !== s) { w._o = s; w.style.opacity = s; } });
+        }
+      });
+      cEls.forEach((el, i) => { const r = cR[i]; if (r.bottom < -vh || r.top > vh * 2) return; set(el, "--c", clamp((r.top + r.height / 2 - vh / 2) / vh, -1.5, 1.5)); });
+      unmaskEls.forEach((el, i) => { const { p, t } = umR[i]; if (p.bottom < -vh || p.top > vh * 2) return; set(el, "--q", clamp((vh - t) / (vh * 0.75), 0, 1)); });
+      focusEls.forEach((el, i) => {
+        const r = fcR[i]; if (r.bottom < -vh || r.top > vh * 2) return;
+        const c = Math.abs((r.top + r.height / 2 - vh * 0.5) / vh);
+        const o = (0.3 + 0.7 * (1 - clamp((c - 0.18) * 2.2, 0, 1))).toFixed(3);
+        if (el._o !== o) { el._o = o; el.style.opacity = o; }
+      });
+      hcEls.forEach((el, i) => { const r = hcR[i]; if (r.right < -vw || r.left > vw * 2) return; set(el, "--h", clamp((r.left + r.width / 2 - vw / 2) / vw, -1.5, 1.5)); });
+    };
+    if (isTouch) {
+      // On touch/Safari: trigger from scroll events — iOS 14+ fires these during
+      // momentum scroll too, so animations update through the whole inertial phase.
+      // One rAF per scroll event keeps updates aligned with the render pipeline.
+      let rafPending = false;
+      window.addEventListener("scroll", () => {
+        if (!rafPending) { rafPending = true; requestAnimationFrame(() => { doScrollUpdate(); rafPending = false; }); }
+      }, { passive: true });
+      requestAnimationFrame(doScrollUpdate); // initial sync
+    } else {
+      // Desktop: continuous rAF needed for smooth mouse parallax lerp
+      const frame = () => {
         mx += (tx - mx) * 0.06; my += (ty - my) * 0.06;
         if (hero) { set(hero, "--mx", reduce ? 0 : mx); set(hero, "--my", reduce ? 0 : my); }
-      }
-      if (didScroll) {
-        // Batch ALL reads first (one layout flush), then all writes — prevents layout thrashing
-        const pinR = pinEls.map(el => el.getBoundingClientRect());
-        const cR = cEls.map(el => el.getBoundingClientRect());
-        const umR = unmaskEls.map(el => ({ p: el.parentElement.getBoundingClientRect(), t: el.getBoundingClientRect().top }));
-        const fcR = focusEls.map(el => el.getBoundingClientRect());
-        const hcR = hcEls.map(el => el.getBoundingClientRect());
-        // Writes
-        pinEls.forEach((el, i) => {
-          const r = pinR[i]; if (r.bottom < -vh || r.top > vh * 2) return;
-          const p = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);
-          set(el, "--p", p);
-          if (el.id === "vow") {
-            const ws = words(), n = ws.length;
-            ws.forEach((w, j) => { const o = 0.14 + 0.86 * clamp(p * 1.3 * n - j, 0, 1); const s = o.toFixed(3); if (w._o !== s) { w._o = s; w.style.opacity = s; } });
-          }
-        });
-        cEls.forEach((el, i) => { const r = cR[i]; if (r.bottom < -vh || r.top > vh * 2) return; set(el, "--c", clamp((r.top + r.height / 2 - vh / 2) / vh, -1.5, 1.5)); });
-        unmaskEls.forEach((el, i) => { const { p, t } = umR[i]; if (p.bottom < -vh || p.top > vh * 2) return; set(el, "--q", clamp((vh - t) / (vh * 0.75), 0, 1)); });
-        focusEls.forEach((el, i) => {
-          const r = fcR[i]; if (r.bottom < -vh || r.top > vh * 2) return;
-          const c = Math.abs((r.top + r.height / 2 - vh * 0.5) / vh);
-          const o = (0.3 + 0.7 * (1 - clamp((c - 0.18) * 2.2, 0, 1))).toFixed(3);
-          if (el._o !== o) { el._o = o; el.style.opacity = o; }
-        });
-        hcEls.forEach((el, i) => { const r = hcR[i]; if (r.right < -vw || r.left > vw * 2) return; set(el, "--h", clamp((r.left + r.width / 2 - vw / 2) / vw, -1.5, 1.5)); });
-      }
+        doScrollUpdate();
+        this.fxRaf = requestAnimationFrame(frame);
+      };
       this.fxRaf = requestAnimationFrame(frame);
-    };
-    this.fxRaf = requestAnimationFrame(frame);
+    }
   }
 
   renderVals() {
