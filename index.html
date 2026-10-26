@@ -1005,9 +1005,22 @@ class Component extends DCLogic {
                 list.appendChild(li);
               }
               modal.classList.add('rcm-open');
-              const closeModal = () => { modal.classList.remove('rcm-open'); dyn.style.minHeight = ''; };
+              const closeModal = () => {
+                modal.classList.remove('rcm-open');
+                // Re-render the edit form with the just-submitted state so they can update
+                const updatedRow = Object.assign({}, row, {
+                  _responded: true,
+                  _church: attending,
+                  _reception: attending,
+                  _plusName: plusName,
+                  _attending: isGroup ? attendingMembers : (attending ? members : []),
+                });
+                renderForm(updatedRow, true);
+                dyn.style.minHeight = '';
+              };
               document.getElementById('rsvp-confirm-close').onclick = closeModal;
-              modal.addEventListener('click', e => { if (e.target === modal) closeModal(); }, { once: false });
+              // Use once:true so each submission only adds one backdrop listener
+              modal.addEventListener('click', e => { if (e.target === modal) closeModal(); }, { once: true });
             } else err("Something went wrong. Please try again.");
           })
           .catch(() => err("Could not reach the server. Please check your connection."));
