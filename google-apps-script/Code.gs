@@ -50,8 +50,8 @@ function normalize(s) {
 }
 
 function ynString(v) {
-  if (v === true) return "Yes";
-  if (v === false) return "No";
+  if (v === true || (typeof v === "string" && v.toUpperCase() === "TRUE")) return "Yes";
+  if (v === false || (typeof v === "string" && v.toUpperCase() === "FALSE")) return "No";
   return v || "";
 }
 
@@ -88,9 +88,15 @@ function lookupGuest(query) {
       alreadyResponded: alreadyResponded,
     };
     if (alreadyResponded) {
+      const attendingMems = splitList(row[idx.AttendingMembers]);
+      const rawAttending = ynString(idx.Attending !== undefined ? row[idx.Attending] : "");
+      // Fall back to AttendingMembers presence if Attending column is missing/empty
+      const attendingVal = rawAttending === "Yes" || rawAttending === "No"
+        ? rawAttending
+        : attendingMems.length > 0 ? "Yes" : "No";
       result.saved = {
-        attending: ynString(row[idx.Attending]),
-        attendingMembers: splitList(row[idx.AttendingMembers]),
+        attending: attendingVal,
+        attendingMembers: attendingMems,
         plusOneName: row[idx.PlusOneName] || "",
       };
     }
@@ -118,7 +124,7 @@ function submitRsvp(data) {
       sheet.getRange(targetRow, idx[name] + 1).setValue(value);
     };
 
-    setCol("Attending", data.attending === "Yes");
+    setCol("Attending", data.attending === "Yes" ? "Yes" : "No");
     setCol(
       "AttendingMembers",
       Array.isArray(data.attendingMembers) ? data.attendingMembers.join(", ") : (data.attendingMembers || "")
