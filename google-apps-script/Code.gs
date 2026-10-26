@@ -120,11 +120,22 @@ function submitRsvp(data) {
       sheet.getRange(targetRow, idx[name] + 1).setValue(value);
     };
 
-    setCol(
-      "AttendingMembers",
-      Array.isArray(data.attendingMembers) ? data.attendingMembers.join(", ") : (data.attendingMembers || "")
-    );
-    setCol("PlusOneName", data.plusOneName || "");
+    const attendingList = Array.isArray(data.attendingMembers)
+      ? data.attendingMembers.filter(Boolean)
+      : [];
+    const plusOneName = data.plusOneName || "";
+    const plusOneComing = data.attending === "Yes" && !!plusOneName;
+    const attendanceCount = attendingList.length + (plusOneComing ? 1 : 0);
+
+    // Read TotalGuest from the row to derive NotAttending
+    const rowVals = sheet.getRange(targetRow, 1, 1, sheet.getLastColumn()).getValues()[0];
+    const totalGuest = idx.TotalGuest !== undefined ? (Number(rowVals[idx.TotalGuest]) || 0) : 0;
+    const notAttending = Math.max(0, totalGuest - attendanceCount);
+
+    setCol("AttendingMembers", attendingList.join(", "));
+    setCol("AttendanceCount", attendanceCount);
+    setCol("NotAttending", notAttending);
+    setCol("PlusOneName", plusOneName);
     setCol("RespondedAt", new Date());
 
     return { ok: true };
