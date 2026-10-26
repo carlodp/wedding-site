@@ -89,13 +89,9 @@ function lookupGuest(query) {
     };
     if (alreadyResponded) {
       const attendingMems = splitList(row[idx.AttendingMembers]);
-      const rawAttending = ynString(idx.Attending !== undefined ? row[idx.Attending] : "");
-      // Fall back to AttendingMembers presence if Attending column is missing/empty
-      const attendingVal = rawAttending === "Yes" || rawAttending === "No"
-        ? rawAttending
-        : attendingMems.length > 0 ? "Yes" : "No";
+      const attendanceCount = Number(row[idx.AttendanceCount]) || 0;
       result.saved = {
-        attending: attendingVal,
+        attending: attendanceCount > 0 ? "Yes" : "No",
         attendingMembers: attendingMems,
         plusOneName: row[idx.PlusOneName] || "",
       };
@@ -124,7 +120,6 @@ function submitRsvp(data) {
       sheet.getRange(targetRow, idx[name] + 1).setValue(value);
     };
 
-    setCol("Attending", data.attending === "Yes" ? "Yes" : "No");
     setCol(
       "AttendingMembers",
       Array.isArray(data.attendingMembers) ? data.attendingMembers.join(", ") : (data.attendingMembers || "")
