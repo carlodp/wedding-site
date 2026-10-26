@@ -63,6 +63,7 @@
   @keyframes eq-b1 { 0%,100%{height:3px} 50%{height:12px} }
   @keyframes eq-b2 { 0%,100%{height:11px} 35%{height:3px} 75%{height:8px} }
   @keyframes eq-b3 { 0%,100%{height:5px} 30%{height:12px} 65%{height:3px} }
+  #film-yt-link { display:none; }
   #sound-fab { position:fixed; bottom:clamp(20px,3vh,36px); left:clamp(18px,3vw,36px); z-index:70; display:flex; align-items:center; gap:10px; height:44px; padding:0 16px; background:rgba(14,3,5,0.45); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(246,237,233,0.28); color:#F6EDE9; cursor:pointer; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; transition:border-color .3s ease, gap .4s ease, opacity .4s ease; }
   body.sc-scrolled #sound-fab { gap: 0; }
   body.film-active #sound-fab, body.film-active #c-rsvp-btn { opacity:0 !important; pointer-events:none !important; }
@@ -96,6 +97,7 @@
     #film-ui > p { opacity:1 !important; }
     #film-ui h2 { transform:none !important; font-size:clamp(40px,11vw,64px) !important; }
     #film-ui button { display:none !important; }
+    #film-yt-link { display:flex !important; }
     #header-count { display:none !important; }
     #hero-btm { display:none !important; }
     #where > div > div:last-of-type, #reception > div > div:last-of-type { padding-bottom:calc(108px + env(safe-area-inset-bottom,0px)) !important; }
@@ -255,7 +257,7 @@
 
       <div id="film-video-wrap" style="position:absolute;inset:0;background:#000;clip-path:inset(max(9%,calc(50% - 28.125vw),calc((1 - var(--p,0) * 2.2) * 30%)) max(0%,calc((1 - var(--p,0) * 2.2) * 24%)))">
         <video id="c-film" src="https://github.com/carlodp/wedding-site/releases/download/assets/1.9.27.Carlo.-.Alexandra.STD.Revised.1.mp4" autoplay="autoplay" muted="muted" playsinline="playsinline" loop="loop" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:scale(calc(1.25 - min(1,var(--p,0) * 2.2) * 0.25))"></video>
-        <iframe id="film-yt" data-src="https://www.youtube.com/embed/ym-TQJea7IA?autoplay=1&mute=1&playsinline=1&loop=1&playlist=ym-TQJea7IA&controls=1&rel=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;display:none"></iframe>
+        <iframe id="film-yt" data-src="https://www.youtube.com/embed/ym-TQJea7IA?autoplay=1&mute=1&playsinline=1&loop=1&playlist=ym-TQJea7IA&controls=0&rel=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;display:none"></iframe>
         <sc-if value="{{ filmMissing }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a0307,#3b000a)"></div>
         </sc-if>
@@ -272,6 +274,10 @@
           <span style="width:clamp(72px,8vw,96px);height:clamp(72px,8vw,96px);border-radius:50%;border:1px solid rgba(246,237,233,0.7);display:flex;align-items:center;justify-content:center;background:rgba(7,1,2,0.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .35s ease,border-color .35s ease" style-hover="background:#C08290;border-color:#C08290"><span aria-hidden="true" style="width:0;height:0;margin-left:5px;border-left:16px solid #F6EDE9;border-top:10px solid transparent;border-bottom:10px solid transparent"></span></span>
           <span style="display:grid;gap:6px;text-align:left"><span style="font-size:11px;letter-spacing:0.32em;text-transform:uppercase">Watch with sound</span><span style="font-family:'Bodoni Moda',serif;font-style:italic;font-size:18px;color:#E5B7C2">{{ filmDurText }}</span></span>
         </button>
+        <a id="film-yt-link" href="https://youtu.be/ym-TQJea7IA" target="_blank" rel="noopener" aria-label="Watch with sound on YouTube" style="align-items:center;gap:14px;margin-top:8px;padding:14px 24px;background:rgba(14,3,5,0.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(246,237,233,0.3);color:#F6EDE9;text-decoration:none;font-size:10px;letter-spacing:0.32em;text-transform:uppercase">
+          <span aria-hidden="true" style="width:0;height:0;border-left:12px solid #E5B7C2;border-top:7px solid transparent;border-bottom:7px solid transparent;flex:0 0 auto"></span>
+          Watch with sound
+        </a>
       </div>
 
       <div id="film-ctl" style="position:absolute;left:clamp(16px,4vw,56px);right:clamp(16px,4vw,56px);bottom:max(12px,calc(max(9%,calc(50% - 28.125vw)) - 62px));height:50px;display:flex;align-items:center;gap:clamp(12px,2vw,22px);opacity:{{ filmCtlOp }};pointer-events:{{ filmCtlPe }};transition:opacity .5s ease">
