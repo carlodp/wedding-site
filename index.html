@@ -958,6 +958,12 @@ class Component extends DCLogic {
         b.addEventListener("click", () => {
           dyn.querySelectorAll(".rsvp-dyn-toggle").forEach(x => x.classList.remove("is-active"));
           b.classList.add("is-active");
+          const plusWrap = dyn.querySelector("#rsvpPlusName");
+          if (plusWrap) {
+            const isAttending = b.dataset.key === "attend";
+            plusWrap.closest("div").style.display = isAttending ? "" : "none";
+            if (!isAttending) plusWrap.value = "";
+          }
         });
       });
       document.getElementById("rsvpSubmit").addEventListener("click", () => {
@@ -969,7 +975,7 @@ class Component extends DCLogic {
           attending = dyn.querySelector('[data-key="attend"]').classList.contains("is-active");
           attendingMembers = attending ? members : [];
         }
-        const plusName = hasPlus ? (document.getElementById("rsvpPlusName") || {}).value || "" : "";
+        const plusName = (hasPlus && attending) ? (document.getElementById("rsvpPlusName") || {}).value || "" : "";
         const sb = document.getElementById("rsvpSubmit");
         if (sb) { sb.textContent = "Saving…"; sb.disabled = true; }
         const payload = { action: "submit", householdId: row.householdId, attending: attending ? "Yes" : "No", attendingMembers: attendingMembers, plusOneName: plusName };
