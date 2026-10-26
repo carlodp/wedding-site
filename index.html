@@ -133,6 +133,17 @@
     animation:act2-fade 9s linear infinite;
     opacity:0;
   }
+  @keyframes act1-fade {
+    0%,100% { opacity:0; }
+    2%      { opacity:1; }
+    30%     { opacity:1; }
+    33.33%  { opacity:0; }
+  }
+  .act1-slide {
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    animation:act1-fade 9s linear infinite;
+    opacity:0;
+  }
 </style>
 </helmet>
 <div id="c-root" style="position:relative;max-width:100%;overflow-x:clip;background:#0E0305;font-family:'Jost',system-ui,sans-serif;color:#F6EDE9">
@@ -345,6 +356,7 @@
           <div data-unmask style="position:relative;aspect-ratio:3/2;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-15" shape="rect" fit="cover" placeholder="Still 15" src="assets/still-12.jpg"></image-slot></div></div>
           <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-16" shape="rect" fit="cover" placeholder="Still 16" src="assets/still-08.jpg"></image-slot></div></div>
           <div data-unmask style="position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-17" shape="rect" fit="cover" placeholder="Still 17" src="assets/still-04.jpg"></image-slot></div></div>
+          <div data-unmask style="position:relative;aspect-ratio:3/4;overflow:hidden;clip-path:inset(calc((1 - var(--q,0)) * 100%) 0 0 0)"><div style="position:absolute;inset:0;transform:scale(calc(1.3 - var(--q,0) * 0.3))"><image-slot id="c-still-18" shape="rect" fit="cover" placeholder="Still 18" src="assets/still-18.jpg"></image-slot></div></div>
         </div>
       </div>
     </div>
@@ -548,10 +560,9 @@
     <div style="max-width:1200px;margin:0 auto">
       <div data-c style="padding-bottom:clamp(70px,9vw,120px)">
         <p style="margin:0 0 22px;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:#C08290">09 — A note on gifts</p>
-        <p style="margin:0;max-width:24ch;font-family:'Bodoni Moda',serif;font-size:clamp(32px,4.8vw,70px);line-height:1.1;text-wrap:balance">{{ giftBody }}</p>
-        <div style="margin-top:clamp(30px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,4vw,60px);border-top:1px solid rgba(246,237,233,0.2);padding-top:26px">
-          <p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(20px,2.2vw,27px);line-height:1.45;color:#E5B7C2;text-wrap:pretty">{{ giftEmphasis }}</p>
-          <p style="margin:0;font-size:16px;line-height:1.8;font-weight:300;color:rgba(246,237,233,0.78);text-wrap:pretty">{{ giftNote }}</p>
+        <p style="margin:0 auto;max-width:24ch;font-family:'Bodoni Moda',serif;font-size:clamp(32px,4.8vw,70px);line-height:1.1;text-wrap:balance;text-align:center">{{ giftBody }}</p>
+        <div style="margin-top:clamp(30px,4vw,48px);border-top:1px solid rgba(246,237,233,0.2);padding-top:26px;text-align:center">
+          <p style="margin:0 auto;max-width:56ch;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(20px,2.2vw,27px);line-height:1.45;color:#E5B7C2;text-wrap:pretty">{{ giftEmphasis }}</p>
         </div>
       </div>
       <div id="faq" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(30px,5vw,90px);align-items:start">
@@ -581,7 +592,7 @@
       <div style="display:flex;flex-wrap:wrap;background:#F6EDE9;color:#2a0008;box-shadow:0 40px 90px rgba(7,1,2,0.5);transform:rotate(calc(var(--c,0) * -2deg))">
         <div style="flex:999 1 420px;min-width:0;padding:clamp(26px,4vw,52px)">
           <p style="margin:0 0 10px;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#8C2338">Kindly reply by {{ deadline }}</p>
-          <p style="margin:0 0 22px;max-width:52ch;font-size:15px;line-height:1.7;font-weight:400;color:rgba(42,0,8,0.72);text-wrap:pretty">Type your name as it appears on your invitation — your entry already knows whether you have a plus one.</p>
+          <p style="margin:0 0 22px;max-width:52ch;font-size:15px;line-height:1.7;font-weight:400;color:rgba(42,0,8,0.72);text-wrap:pretty">Kindly enter your exact name. Any additional guest invited with you has already been noted on our guest list.</p>
           <div id="rsvp-search-row" style="display:flex">
             <input id="rsvpQuery" type="text" placeholder="Your full name" aria-label="Your full name" style="flex:1;min-width:0;box-sizing:border-box;height:54px;padding:0 18px;background:transparent;border:1px solid rgba(42,0,8,0.4);border-right:none;color:#2a0008;font:inherit;font-size:16px;outline:none">
             <a id="rsvpFindBtn" href="#rsvp" style="flex:0 0 auto;display:flex;align-items:center;gap:14px;height:54px;padding:0 22px;background:#650015;color:#F6EDE9;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;white-space:nowrap;transition:background .3s ease" style-hover="background:#8C2338;color:#F6EDE9">Find my invitation <span aria-hidden="true">→</span></a>
@@ -657,13 +668,14 @@ class Component extends DCLogic {
       { role: "Arras Bearer", names: "Angelus Ichiro Mendoza" },
     ],
     timeline: [
-      { time: "3:00 PM", label: "Guests arrive", note: "Barasoain Church — ushers will seat you" },
-      { time: "3:30 PM", label: "The ceremony", note: "Processional, rites and vows" },
-      { time: "4:45 PM", label: "Photographs", note: "Family and entourage at the church" },
-      { time: "5:30 PM", label: "Reception opens", note: "Placida Pavillion — cocktails" },
-      { time: "6:15 PM", label: "Dinner & programme", note: "Toasts from the principal sponsors" },
-      { time: "8:30 PM", label: "First dance", note: "Then the floor is yours" },
-      { time: "10:00 PM", label: "Last song", note: "Safe drive home" },
+      { time: "3:00 PM", label: "Welcome & Gathering", note: "Barasoain Church — Guest arrival and seating assisted by our ushers." },
+      { time: "3:30 PM", label: "The Sacred Uniting", note: "The Holy Matrimony — Processional of the entourage, exchange of vows, and sacred rites." },
+      { time: "5:30 PM", label: "Sunset & Spirits", note: "Placida Pavilion — Garden reception and cocktail hour." },
+      { time: "7:00 PM", label: "The Grand Entrance", note: "Welcome & Opening Blessing — Welcoming the new Mr. and Mrs. alongside an opening prayer." },
+      { time: "8:00 PM", label: "Honors & Homage", note: "Entourage & Parent Recognition — Formal acknowledgment of our beloved parents and principal sponsors." },
+      { time: "8:30 PM", label: "Feasting & Harmony", note: "Dinner Service — Enjoy a feast prepared with love as we celebrate together." },
+      { time: "9:45 PM", label: "Words of Warmth", note: "Toasts & Speeches — Messages of gratitude, love, and laughter from our closest family and friends." },
+      { time: "10:00 PM", label: "Dancing & Revelry", note: "The After Party — Drinks, music, and late-night celebrations." },
     ],
     travel: [
       { title: "Parking", kicker: "On the day", body: "On-site parking near Barasoain Church, and on-site parking at Placida Pavillion." },
@@ -671,7 +683,6 @@ class Component extends DCLogic {
     gift: {
       body: "Your presence is our greatest gift.",
       emphasis: "Should you wish to honor us further, a monetary gift would be warmly appreciated. Your kindness and thoughtfulness mean so much to us as we begin this beautiful new chapter of our lives.",
-      note: "We are building our first home together, and a contribution towards it goes further than anything we could unwrap. A card box will be waiting near the entrance at Placida Pavillion — no envelope is ever expected, and none will be counted.",
     },
     faqs: [
       { q: "What is the dress code?", a: "Semi-formal, in our palette — soft and dusty rose for ladies, choco brown for gentlemen. Burgundy, olive green and gray are reserved for the wedding party, and please leave white, ivory and cream to the bride." },
@@ -733,14 +744,36 @@ class Component extends DCLogic {
       }, 250);
     };
     injectProposal();
+    // Act I slideshow: 3 "how we met" photos
+    const act1Imgs = [
+      "assets/act1-01.jpg",
+      "assets/act1-02.jpg",
+      "assets/act1-03.jpg",
+    ];
+    const injectAct1 = () => {
+      const slot = document.getElementById("c-act-1");
+      if (!slot) { setTimeout(injectAct1, 300); return; }
+      const wrap = document.createElement("div");
+      wrap.style.cssText = "position:absolute;inset:0;width:100%;height:100%";
+      act1Imgs.forEach((src, i) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "act1-slide";
+        img.style.animationDelay = (i * 3) + "s";
+        img.alt = "";
+        wrap.appendChild(img);
+      });
+      slot.parentNode.replaceChild(wrap, slot);
+    };
+    injectAct1();
     // Act II slideshow: 6 beach/car photos fade in/out at 1.5s per frame
     const act2Imgs = [
-      "assets/act2-IMG_0035.jpg",
-      "assets/act2-IMG_4074.jpg",
-      "assets/act2-IMG_4308.jpg",
-      "assets/act2-IMG_4715.jpg",
-      "assets/act2-IMG_6290.jpg",
-      "assets/act2-IMG_6724.jpg",
+      "assets/act2-03.jpg",
+      "assets/act2-04.jpg",
+      "assets/act2-05.jpg",
+      "assets/act2-06.jpg",
+      "assets/act2-07.jpg",
+      "assets/act2-08.jpg",
     ];
     const injectAct2 = () => {
       const slot = document.getElementById("c-act-2");
@@ -1405,7 +1438,7 @@ class Component extends DCLogic {
       principalPairs: d.principal.map(([a, b]) => ({ a: a || '', b: b || '' })),
       credits, flowerCredits, secondarySponsors, sacred,
       entourageNote: d.note,
-      giftBody: d.gift.body, giftEmphasis: d.gift.emphasis, giftNote: d.gift.note,
+      giftBody: d.gift.body, giftEmphasis: d.gift.emphasis,
       faqs: d.faqs,
       steps: d.steps.map((text, i) => ({ n: pad(i + 1), text })),
       deadline: d.deadline,
