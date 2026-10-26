@@ -954,18 +954,27 @@ class Component extends DCLogic {
       html += `<button id="rsvpSubmit" class="rsvp-dyn-btn" style="${cs}margin-top:16px;width:100%;height:52px;background:#650015;color:#F6EDE9;border:0;cursor:pointer;transition:background .3s ease,color .3s ease">Confirm RSVP →</button>`;
       html += `</div>`;
       show(html);
+      const syncPlusField = (anyAttending) => {
+        const plusWrap = dyn.querySelector("#rsvpPlusName");
+        if (!plusWrap) return;
+        plusWrap.closest("div").style.display = anyAttending ? "" : "none";
+        if (!anyAttending) plusWrap.value = "";
+      };
       dyn.querySelectorAll(".rsvp-dyn-toggle").forEach(b => {
         b.addEventListener("click", () => {
           dyn.querySelectorAll(".rsvp-dyn-toggle").forEach(x => x.classList.remove("is-active"));
           b.classList.add("is-active");
-          const plusWrap = dyn.querySelector("#rsvpPlusName");
-          if (plusWrap) {
-            const isAttending = b.dataset.key === "attend";
-            plusWrap.closest("div").style.display = isAttending ? "" : "none";
-            if (!isAttending) plusWrap.value = "";
-          }
+          syncPlusField(b.dataset.key === "attend");
         });
       });
+      if (isGroup) {
+        dyn.querySelectorAll("[data-member]").forEach(cb => {
+          cb.addEventListener("change", () => {
+            const anyChecked = [...dyn.querySelectorAll("[data-member]")].some(c => c.checked);
+            syncPlusField(anyChecked);
+          });
+        });
+      }
       document.getElementById("rsvpSubmit").addEventListener("click", () => {
         let attending, attendingMembers;
         if (isGroup) {
