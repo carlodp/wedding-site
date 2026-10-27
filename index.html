@@ -1386,10 +1386,15 @@ class Component extends DCLogic {
       if (!story || !track) return;
       const dx = Math.max(0, track.scrollWidth - window.innerWidth);
       story.style.setProperty("--dx", String(dx));
-      story.style.height = dx + window.innerHeight * 1.15 + "px";
+      // Use screen.height (never changes with browser chrome) to avoid layout
+      // shifts when the mobile toolbar appears/disappears on scroll direction change
+      story.style.height = dx + screen.height * 1.15 + "px";
     };
     sizeStory();
-    window.addEventListener("resize", sizeStory, { passive: true });
+    let _lastSizeW = window.innerWidth;
+    window.addEventListener("resize", () => {
+      if (window.innerWidth !== _lastSizeW) { _lastSizeW = window.innerWidth; sizeStory(); }
+    }, { passive: true });
     setTimeout(sizeStory, 800);
     setTimeout(sizeStory, 2500);
     const isTouch = 'ontouchstart' in window;
