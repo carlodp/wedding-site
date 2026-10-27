@@ -1391,24 +1391,41 @@ class Component extends DCLogic {
       // shifts when the mobile toolbar appears/disappears on scroll direction change
       story.style.height = dx + screen.height * 1.15 + "px";
     };
+    // Pin all tall vh-based sections to stable pixel heights so mobile browser
+    // chrome show/hide (which changes window.innerHeight) can't shift page layout
+    const PIN_HEIGHTS = { top: 190, film: 260, vow: 240, where: 230, reception: 230 };
+    const sizePins = () => {
+      const h = screen.height;
+      Object.entries(PIN_HEIGHTS).forEach(([id, mult]) => {
+        const el = document.getElementById(id);
+        if (el) el.style.height = (mult * h / 100) + "px";
+      });
+    };
+    sizePins();
     sizeStory();
     let _lastSizeW = window.innerWidth;
     window.addEventListener("resize", () => {
-      if (window.innerWidth !== _lastSizeW) { _lastSizeW = window.innerWidth; sizeStory(); }
+      if (window.innerWidth !== _lastSizeW) { _lastSizeW = window.innerWidth; sizePins(); sizeStory(); }
     }, { passive: true });
-    setTimeout(sizeStory, 800);
-    setTimeout(sizeStory, 2500);
+    setTimeout(() => { sizePins(); sizeStory(); }, 800);
+    setTimeout(() => { sizePins(); sizeStory(); }, 2500);
     const isTouch = 'ontouchstart' in window;
     let tx = 0, ty = 0, mx = 0, my = 0;
     if (!isTouch) { window.addEventListener("mousemove", (e) => { tx = e.clientX / window.innerWidth - 0.5; ty = e.clientY / window.innerHeight - 0.5; }, { passive: true }); }
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let lastScrollY = -1;
+    // Stable viewport height — only updated on width change so mobile browser
+    // chrome show/hide doesn't alter scroll progress calculations
+    let stableVh = window.innerHeight;
     // Cache element lists — avoids querySelectorAll on every frame
     let pinEls = q("[data-pin]"), cEls = q("[data-c]"), unmaskEls = q("[data-unmask]"), focusEls = q("[data-focus]"), hcEls = q("[data-hc]");
-    window.addEventListener("resize", () => { pinEls = q("[data-pin]"); cEls = q("[data-c]"); unmaskEls = q("[data-unmask]"); focusEls = q("[data-focus]"); hcEls = q("[data-hc]"); }, { passive: true });
+    window.addEventListener("resize", () => {
+      pinEls = q("[data-pin]"); cEls = q("[data-c]"); unmaskEls = q("[data-unmask]"); focusEls = q("[data-focus]"); hcEls = q("[data-hc]");
+      if (window.innerWidth !== _lastSizeW) stableVh = window.innerHeight;
+    }, { passive: true });
     // Scroll calculation — all reads before all writes to avoid layout thrashing
     const doScrollUpdate = () => {
-      const vh = window.innerHeight, vw = window.innerWidth;
+      const vh = stableVh, vw = window.innerWidth;
       const sy = window.scrollY;
       if (sy === lastScrollY) return;
       lastScrollY = sy;
